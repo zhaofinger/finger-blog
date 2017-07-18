@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint *.js server/**"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/sniperbo/finger-blog/issues"
   },
-  "homepage": "https://github.com/sniperbo/finger-blog#readme"
+  "homepage": "https://github.com/sniperbo/finger-blog#readme",
+  "dependencies": {
+    "koa": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.24.1",
+    "eslint": "^4.2.0",
+    "eslint-plugin-html": "^3.1.0"
+  }
 }
