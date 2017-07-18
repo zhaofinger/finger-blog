@@ -1,0 +1,22 @@
+{
+  "name": "finger-blog",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sniperbo/finger-blog.git"
+  },
+  "keywords": [
+    "blog",
+    "koa2"
+  ],
+  "author": "ZhaoFinger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sniperbo/finger-blog/issues"
+  },
+  "homepage": "https://github.com/sniperbo/finger-blog#readme"
+}
