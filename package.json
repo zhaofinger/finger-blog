@@ -20,7 +20,19 @@
   },
   "homepage": "https://github.com/sniperbo/finger-blog#readme",
   "dependencies": {
-    "koa": "^2.3.0"
+    "bcryptjs": "^2.4.3",
+    "ejs": "^2.5.6",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-logger": "^3.0.1",
+    "koa-mysql-session": "^0.0.2",
+    "koa-router": "^7.2.1",
+    "koa-session-minimal": "^3.0.4",
+    "koa-static": "^4.0.1",
+    "koa-views": "^6.0.2",
+    "mysql": "^2.13.0",
+    "validator": "^8.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
