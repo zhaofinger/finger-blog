@@ -2,6 +2,7 @@ const path = require('path');
 const Koa = require('koa');
 // const convert = require('koa-convert');
 const views = require('koa-views');
+const nunjucks = require('nunjucks');
 const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
@@ -21,10 +22,25 @@ const sessionMysqlConfig= {
 	host: config.database.HOST,
 };
 
+// cookie
+// 存放sessionId的cookie配置
+let cookie = {
+	maxAge: '', // cookie有效时长
+	expires: '',  // cookie失效时间
+	path: '', // 写cookie所在的路径
+	domain: config.database.HOST, // 写cookie所在的域名
+	httpOnly: true, // 是否只用于http请求中获取
+	overwrite: true,  // 是否允许重写
+	secure: '',
+	sameSite: '',
+	signed: '',
+};
+
 // 配置session中间件
 app.use(session({
 	key: 'USER_SID',
-	store: new MysqlStore(sessionMysqlConfig)
+	store: new MysqlStore(sessionMysqlConfig),
+	cookie: cookie
 }));
 
 // 配置控制台日志中间件
@@ -35,12 +51,20 @@ app.use(bodyParser());
 
 // 配置静态资源加载中间件
 app.use(koaStatic(
-	path.join(__dirname , './../static')
+	path.join(__dirname , '../client/static')
 ));
 
 // 配置服务端模板渲染引擎中间件
+const env = new nunjucks.Environment(
+	new nunjucks.FileSystemLoader(path.join(__dirname, '../client/views'))
+);
 app.use(views(path.join(__dirname, '../client/views'), {
-	extension: 'ejs'
+	options: {
+		nunjucksEnv: env
+	},
+	map: {
+		html: 'nunjucks'
+	}
 }));
 
 // 初始化路由中间件
