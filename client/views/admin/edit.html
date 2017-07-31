@@ -1,0 +1,20 @@
+{% extends "admin/layout.html" %}
+
+{% block style %}
+	<link rel='stylesheet' href='/lib/editormd/css/editormd.min.css'>
+{% endblock %}
+
+{% block content %}
+	<div id='editormd'>
+		<textarea style='display:none;'>### Hello Editor.md !</textarea>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script src='/lib/editormd/editormd.min.js'></script>
+	<script>
+		var editor = editormd('editormd', {
+			path : '/lib/editormd/lib/' // Autoload modules mode, codemirror, marked... dependents libs path
+		});
+	</script>
+{% endblock %}

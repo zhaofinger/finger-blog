@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+	<link rel='stylesheet' href='/style/base.css'>
+
+	{% block style %}
+	{% endblock %}
+
+</head>
+<body>
+	<header></header>
+	<div id='content'>
+		{% block content %}
+		{% endblock %}
+	</div>
+	<footer></footer>
+
+	<script src='/lib/jQuery.js'></script>
+
+	{% block script %}
+	{% endblock %}
+</body>
+</html>

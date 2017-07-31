@@ -1,0 +1,9 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+	<form action='/admin/login' method='post'>
+		<input type='text' name='username' placeholder='请输入用户名/邮箱'><br/>
+		<input type='password' name='password' placeholder='请输入密码'>
+		<button type='submit'>提交</button>
+	</form>
+{% endblock %}

@@ -7,4 +7,6 @@ const admin = require('../controllers/admin');
 
 module.exports = router
 	.get('/login', admin.login)
-	.post('/login', admin.login);
+	.post('/login', admin.login)
+	.get('/index', admin.index)
+	.get('/edit', admin.edit);
