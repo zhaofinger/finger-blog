@@ -1,20 +1,63 @@
 {% extends "admin/layout.html" %}
 
-{% block style %}
-	<link rel='stylesheet' href='/lib/editormd/css/editormd.min.css'>
+{% block content %}
+
+	<div class='edit-header'>
+		<h1>{{ title }}</h1>
+		<div  class='input-wrapper category'>
+			<label for="">选择文章分类：</label>
+			<select name="" id="">
+				<option value="">学习</option>
+				<option value="">工作</option>
+				<option value="">照片</option>
+			</select>
+		</div>
+	</div>
+
+	<div class='edit-article-message'>
+		<div class='left'>
+			<div class='input-wrapper'>
+				<input type='text' placeholder='文章标题' class='input title'>
+			</div>
+			<div class='input-wrapper'>
+				<input type='text' placeholder='文章标签' class='input label'>
+			</div>
+			<div class='input-wrapper'>
+				<textarea placeholder='描述' rows='6' class='input'></textarea>
+			</div>
+		</div>
+		<div class='right'>
+			<div class='upload-preview'>
+				<span>点击上传图片</span>
+			</div>
+			<input type='file' accept='image/jpeg, image/jpg, image/png' class='hide'>
+		</div>
+	</div>
+
+	<div class='edit-article-content'>
+		<div id='editormd'>
+			 <textarea style='display:none;'>请输入文章内容...</textarea>
+		</div>
+	</div>
+	<div>
+		<button class='btn'>保存</button>
+		<button class='btn'>发布</button>
+	</div>
 {% endblock %}
 
-{% block content %}
-	<div id='editormd'>
-		<textarea style='display:none;'>### Hello Editor.md !</textarea>
-	</div>
+{% block style %}
+	<link rel='stylesheet' href='/lib/editormd/css/editormd.min.css'>
 {% endblock %}
 
 {% block script %}
 	<script src='/lib/editormd/editormd.min.js'></script>
 	<script>
 		var editor = editormd('editormd', {
-			path : '/lib/editormd/lib/' // Autoload modules mode, codemirror, marked... dependents libs path
+			path : '/lib/editormd/lib/',
+			toolbarIcons : function() {
+				return ["undo", "redo", "|", "preview", "watch", "||", "fullscreen"]
+			},
+			watch: false
 		});
 	</script>
 {% endblock %}
