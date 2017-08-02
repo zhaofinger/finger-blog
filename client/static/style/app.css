@@ -1,0 +1,74 @@
+/* header */
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 60px;
+	background-color: #fff;
+}
+#header nav{
+	width: 1000px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+#header nav a{
+	margin-left: 40px;
+}
+/* content */
+#content {
+	width: 1000px;
+	margin: 80px auto 40px auto;
+}
+/* edit 页面 */
+.edit-header {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	margin-bottom: 20px;
+}
+.edit-header .category {
+	margin-left: 40px;
+	font-size: 16px;
+}
+
+.edit-article-message {
+	display: flex;
+}
+.edit-article-message .left {
+	width: 600px
+}
+.edit-article-message .left input, .edit-article-message .left textarea{
+	width: 100%;
+}
+.edit-article-message .input-wrapper{
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+/* .category {
+	font-size: 18px;
+} */
+
+
+.edit-article-message .right {
+	width: 380px;
+	margin-left: 20px;
+}
+.edit-article-message .right .upload-preview {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 260px;
+	border-radius: 2px;
+	cursor: pointer;
+	border: 2px dotted #ddd;
+	color: #ddd;
+}
+.edit-article-content {
+	width: 100%;
+	height: 400px;
+	margin: 20px auto;
+}

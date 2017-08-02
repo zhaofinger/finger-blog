@@ -1,16 +1,11 @@
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
-
-
 /**
  * 1. Change the default font family in all browsers (opinionated).
  * 2. Correct the line height in all browsers.
  * 3. Prevent adjustments of font size after orientation changes in
  *		IE on Windows Phone and in iOS.
  */
-
-
-/* Document
-	 ========================================================================== */
+/* Document ========================================================================== */
 html {
 	/* 1 */
 	font-size: 14px;
@@ -21,30 +16,26 @@ html {
 	-webkit-text-size-adjust: 100%;
 	/* 3 */
 	background-color: #f4f4f4;
-	color: #666666;
+	color: #333333;
 }
 
-
-/* Sections
-	 ========================================================================== */
-
-
+/* Sections ========================================================================== */
 /**
  * Remove the margin in all browsers (opinionated).
  */
-
 body {
 	margin: 0;
 	padding: 0;
 	min-width: 1160px;
-	font-family: "Helvitica Neue",Helvitica,Arial,"Hiragino Sans GB","Microsoft YaHei","Arial Regular","Microsoft JhengHei",sans-serif;
+	font-family: 'PingFang SC', 'Helvetica', 'Tahoma', 'Arial', 'Microsoft JhengHei', 'Microsoft YaHei', 'SimSun', 'sans-serif';
 }
-
+* {
+	box-sizing: border-box;
+}
 
 /**
  * Add the correct display in IE 9-.
  */
-
 article,
 aside,
 footer,
@@ -54,12 +45,10 @@ section {
 	display: block;
 }
 
-
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
  */
-
 h1,
 h2,
 h3,
@@ -72,15 +61,11 @@ h6 {
 }
 
 
-/* Grouping content
-	 ========================================================================== */
-
-
+/* Grouping content ========================================================================== */
 /**
  * Add the correct display in IE 9-.
  * 1. Add the correct display in IE.
  */
-
 figcaption,
 figure,
 main {
@@ -88,11 +73,9 @@ main {
 	display: block;
 }
 
-
 /**
  * Add the correct margin in IE 8.
  */
-
 figure {
 	margin: 1em 40px;
 }
@@ -102,7 +85,6 @@ figure {
  * 1. Add the correct box sizing in Firefox.
  * 2. Show the overflow in Edge and IE.
  */
-
 hr {
 	box-sizing: content-box;
 	/* 1 */
@@ -117,7 +99,6 @@ hr {
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
-
 pre {
 	font-family: monospace, monospace;
 	/* 1 */
@@ -125,23 +106,18 @@ pre {
 	/* 2 */
 }
 
-
-/* Text-level semantics
-	 ========================================================================== */
-
-
+/* Text-level semantics ========================================================================== */
 /**
  * 1. Remove the gray background on active links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
  */
-
 a {
 	background-color: transparent;
 	/* 1 */
 	-webkit-text-decoration-skip: objects;
 	/* 2 */
 	text-decoration: none;
-	color: #666666;
+	color: #333333;
 }
 
 
@@ -149,7 +125,6 @@ a {
  * Remove the outline on focused links when they are also active or hovered
  * in all browsers (opinionated).
  */
-
 a:active,
 a:hover {
 	outline-width: 0;
@@ -160,7 +135,6 @@ a:hover {
  * 1. Remove the bottom border in Firefox 39-.
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
-
 abbr[title] {
 	border-bottom: none;
 	/* 1 */
@@ -170,21 +144,17 @@ abbr[title] {
 	/* 2 */
 }
 
-
 /**
  * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
  */
-
 b,
 strong {
 	font-weight: inherit;
 }
 
-
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
-
 b,
 strong {
 	font-weight: bolder;
@@ -195,7 +165,6 @@ strong {
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
  */
-
 code,
 kbd,
 samp {
@@ -205,11 +174,9 @@ samp {
 	/* 2 */
 }
 
-
 /**
  * Add the correct font style in Android 4.3-.
  */
-
 dfn {
 	font-style: italic;
 }
@@ -218,17 +185,14 @@ dfn {
 /**
  * Add the correct background and color in IE 9-.
  */
-
 mark {
 	background-color: #ff0;
 	color: #000;
 }
 
-
 /**
  * Add the correct font size in all browsers.
  */
-
 small {
 	font-size: 80%;
 }
@@ -238,7 +202,6 @@ small {
  * Prevent `sub` and `sup` elements from affecting the line height in
  * all browsers.
  */
-
 sub,
 sup {
 	font-size: 75%;
@@ -246,73 +209,56 @@ sup {
 	position: relative;
 	vertical-align: baseline;
 }
-
 sub {
 	bottom: -0.25em;
 }
-
 sup {
 	top: -0.5em;
 }
 
-
-/* Embedded content
-	 ========================================================================== */
-
-
+/* Embedded content ========================================================================== */
 /**
  * Add the correct display in IE 9-.
  */
-
 audio,
 video {
 	display: inline-block;
 }
 
-
 /**
  * Add the correct display in iOS 4-7.
  */
-
 audio:not([controls]) {
 	display: none;
 	height: 0;
 }
 
-
 /**
  * Remove the border on images inside links in IE 10-.
  */
-
 img {
 	border-style: none;
 }
 
-
 /**
  * Hide the overflow in IE.
  */
-
 svg:not(:root) {
 	overflow: hidden;
 }
 
 
-/* Forms
-	 ========================================================================== */
-
-
+/* Forms ========================================================================== */
 /**
  * 1. Change the font styles in all browsers (opinionated).
  * 2. Remove the margin in Firefox and Safari.
  */
-
 button,
 input,
 optgroup,
 select,
 textarea {
-	font-family: "Helvitica Neue",Helvitica,Arial,"Microsoft JhengHei","Hiragino Sans GB","Microsoft YaHei","Arial Regular",sans-serif;
+	font-family: 'PingFang SC', 'Helvetica', 'Tahoma', 'Arial', 'Microsoft JhengHei', 'Microsoft YaHei', 'SimSun', 'sans-serif';
 	/* 1 */
 	font-size: 100%;
 	/* 1 */
@@ -323,7 +269,7 @@ textarea {
 	outline: 0;
 	border: 0;
 	padding: 0;
-	color: #666666;
+	color: #333333;
 }
 
 
@@ -586,8 +532,8 @@ li {
 }
 /* scroll-bar */
 scrollbar {
-	-moz-appearance: none !important;
-	background: #666666 !important;
+	-webkit-appearance: none !important;
+	background: #333333 !important;
 }
 scrollbarbutton {
 	display: none !important;
@@ -601,11 +547,42 @@ scrollbar[orient="vertical"] {
 	background-color: #f4f4f4;
 }
 ::-webkit-scrollbar-thumb{
-	background-color:#666666;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
+	background-color:#333333;
 	border-radius:4px
 }
 .shadow {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+}
+/* 基础样式 */
+/* 标题 */
+h1,h2,h3,h4 {
+	font-weight: bold;
+}
+h1 {
+	font-size: 24px;
+}
+h2 {
+	font-size: 20px;
+}
+h3 {
+	font-size: 18px;
+}
+h4 {
+	font-size: 16px;
+}
+/* 基础类 */
+.hide {
+	display: none;
+	opacity: 0;
+}
+.input {
+	padding: 16px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	transition: border .3s;
+	background-color: #fff;
+}
+.btn {
+	padding: 8px 16px;
+	border-radius: 4px;
 }

@@ -3,18 +3,26 @@
 <head>
 	<title>{{ title }}</title>
 	<link rel='stylesheet' href='/style/base.css'>
+	<link rel='stylesheet' href='/style/app.css'>
 
 	{% block style %}
 	{% endblock %}
 
 </head>
 <body>
-	<header></header>
+	<header id='header'>
+		<nav>
+			<h1>finger</h1>
+			<a href='/admin/list'>文章列表</a>
+			<a href='/admin/edit'>新文章</a>
+		</nav>
+	</header>
 	<div id='content'>
 		{% block content %}
 		{% endblock %}
 	</div>
-	<footer></footer>
+	<footer id='footer'>
+	</footer>
 
 	<script src='/lib/jQuery.js'></script>
 
