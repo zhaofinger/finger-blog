@@ -22,8 +22,8 @@ create table if not exists user (
 create table if not exists article_type (
 	id int unsigned not null auto_increment,	-- 文章分类id
 	name varchar(50) not null,					-- 文章分类name
-	created_at int unsigned,					-- 创建时间
-	updated_at int unsigned,					-- 最后修改时间
+	created_at bigint unsigned,					-- 创建时间
+	updated_at bigint unsigned,					-- 最后修改时间
 	primary key(id),
 	unique (name)
 )engine=InnoDB default charset=utf8mb4;
@@ -31,14 +31,17 @@ create table if not exists article_type (
 /* 文章 */
 create table if not exists article (
 	id bigint unsigned not null auto_increment,	-- 文章id
-	article_id int unsigned not null,			-- 文章分类
+	type int unsigned not null,			-- 文章分类
 	title varchar(100),							-- 文章标题
 	`desc` varchar(100),						-- 文章简介
+	label varchar(100),							-- 文章label
 	img varchar(1000),							-- 文章封面图片
+	content_md text,							-- 文章markdown内容
+	content_render text,						-- 文章渲染内容
+	is_show tinyint unsigned not null default 0,-- 是否显示文章
 	rank tinyint unsigned not null default 1,	-- 排序等级
- 	is_lunbo boolean not null default false,	-- 是否设置为轮播
-	created_at int unsigned,					-- 创建时间
-	updated_at int unsigned,					-- 修改时间
+	created_at bigint unsigned,					-- 创建时间
+	updated_at bigint unsigned,					-- 修改时间
 	primary key(id),
-	foreign key(article_id) references article_type(id) on delete restrict on update cascade
+	foreign key(type) references article_type(id) on delete restrict on update cascade
 )engine=InnoDB default charset=utf8mb4;

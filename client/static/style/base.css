@@ -573,7 +573,6 @@ h4 {
 /* 基础类 */
 .hide {
 	display: none;
-	opacity: 0;
 }
 .input {
 	padding: 16px;
@@ -581,6 +580,16 @@ h4 {
 	border-radius: 2px;
 	transition: border .3s;
 	background-color: #fff;
+}
+.input-big {
+	padding: 16px;
+}
+
+.input-medium {
+	padding: 12px;
+}
+.input-small {
+	padding: 8px;
 }
 .btn {
 	padding: 8px 16px;

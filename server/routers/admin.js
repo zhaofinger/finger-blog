@@ -9,4 +9,5 @@ module.exports = router
 	.get('/login', admin.login)
 	.post('/login', admin.login)
 	.get('/index', admin.index)
-	.get('/edit', admin.edit);
+	.get('/edit', admin.edit)
+	.post('/edit', admin.edit);
