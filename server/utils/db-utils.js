@@ -32,15 +32,23 @@ let createTable = function (sql) {
 };
 
 
-let findDataById = function (table, id, start, end) {
+let findDataById = function (table, id) {
 	let _sql = 'SELECT * FROM ?? WHERE id = ? ';
-	return query(_sql, [table, id, start, end]);
+	return query(_sql, [table, id]);
 };
 
 
-let findDataByPage = function (table, keys, start, end) {
-	let _sql = 'SELECT ?? FROM ??  LIMIT ? , ?';
-	return query(_sql, [keys, table, start, end]);
+let findDataByPage = function (table, key, sort, keys, start, end) {
+	let col = '??';
+	let queryArr = null;
+	if (keys === '*') {
+		col = '*';
+		queryArr = [table, key, start, end];
+	} else {
+		queryArr = [keys, table, key, start, end];
+	}
+	let _sql = `SELECT ${col} FROM ?? ORDER BY ?? ${sort} LIMIT ? , ?`;
+	return query(_sql, queryArr);
 };
 
 

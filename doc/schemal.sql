@@ -35,7 +35,7 @@ create table if not exists article (
 	title varchar(100),							-- 文章标题
 	`desc` varchar(100),						-- 文章简介
 	label varchar(100),							-- 文章label
-	img varchar(1000),							-- 文章封面图片
+	cover varchar(100),							-- 文章封面图片
 	content_md text,							-- 文章markdown内容
 	content_render text,						-- 文章渲染内容
 	is_show tinyint unsigned not null default 0,-- 是否显示文章

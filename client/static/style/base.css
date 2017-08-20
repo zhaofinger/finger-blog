@@ -17,6 +17,7 @@ html {
 	/* 3 */
 	background-color: #f4f4f4;
 	color: #333333;
+	height: 100%;
 }
 
 /* Sections ========================================================================== */
@@ -28,6 +29,7 @@ body {
 	padding: 0;
 	min-width: 1160px;
 	font-family: 'PingFang SC', 'Helvetica', 'Tahoma', 'Arial', 'Microsoft JhengHei', 'Microsoft YaHei', 'SimSun', 'sans-serif';
+	/* height: 100%; */
 }
 * {
 	box-sizing: border-box;
@@ -550,9 +552,6 @@ scrollbar[orient="vertical"] {
 	background-color:#333333;
 	border-radius:4px
 }
-.shadow {
-	box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-}
 /* 基础样式 */
 /* 标题 */
 h1,h2,h3,h4 {
@@ -581,6 +580,9 @@ h4 {
 	transition: border .3s;
 	background-color: #fff;
 }
+.input:-webkit-autofill {
+	box-shadow: 0 0 0px 1000px white inset;
+}
 .input-big {
 	padding: 16px;
 }
@@ -594,4 +596,8 @@ h4 {
 .btn {
 	padding: 8px 16px;
 	border-radius: 4px;
+}
+
+.shadow {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
 }

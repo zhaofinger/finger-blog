@@ -56,14 +56,17 @@ app.use(koaStatic(
 
 // 配置服务端模板渲染引擎中间件
 const env = new nunjucks.Environment(
-	new nunjucks.FileSystemLoader(path.join(__dirname, '../client/views'))
+	new nunjucks.FileSystemLoader(path.join(__dirname, '../client/views'), {
+		noCache: true
+	})
 );
 app.use(views(path.join(__dirname, '../client/views'), {
+	extension: 'nj',
 	options: {
 		nunjucksEnv: env
 	},
 	map: {
-		html: 'nunjucks'
+		nj: 'nunjucks'
 	}
 }));
 
@@ -71,5 +74,5 @@ app.use(views(path.join(__dirname, '../client/views'), {
 app.use(routers.routes()).use(routers.allowedMethods());
 
 // 监听启动端口
-app.listen( config.port );
+app.listen(config.port);
 console.log(`the server is start at port ${config.port}`);
