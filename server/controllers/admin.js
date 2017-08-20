@@ -125,7 +125,6 @@ module.exports = {
 				}
 			}
 			// 文章model
-			console.log(formData);
 			let articleModel = {
 				id: formData.id,
 				title: formData.title,
