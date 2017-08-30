@@ -5,8 +5,8 @@
 		{% for item in articleList %}
 			<li class='article-item shadow'>
 				<div class='operate'>
-					<p>是否发布：{{  "已发布" if item.is_show else "未发布" }}</p>
 					<a href='/admin/edit?id={{item.id}}'>编辑文章</a>
+					<p>是否发布：{{  "已发布" if item.is_show else "未发布" }}</p>
 				</div>
 				<div class='content'>
 					<h3>{{ item.title }}</h3>

@@ -86,7 +86,6 @@
 			});
 			// 提交文章内容
 			$('.article-operate-btn button').click(function() {
-				console.log($(this));
 				// markdown
 				editor.getMarkdown();       // 获取 Markdown 源码
 				editor.getHTML();           // 获取 Textarea 保存的 HTML 源码

@@ -63,6 +63,12 @@
 	border-radius: 4px;
 	background-color: #fff;
 }
+.article-list .article-item .operate {
+	flex: 1;
+}
+.article-list .article-item .content {
+	flex: 5;
+}
 .article-page {
 	display: flex;
 	justify-content: center;

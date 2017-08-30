@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>{{ title }}</title>
-	<link rel='stylesheet' href='/style/base.css'>
-	<link rel='stylesheet' href='/style/app.css'>
+	<link rel='shortcut icon' href='/img/finger.png'>
+	<link rel='stylesheet' href='/style/admin/base.css'>
+	<link rel='stylesheet' href='/style/admin/app.css'>
 
 	{% block style %}
 	{% endblock %}

@@ -1,0 +1,30 @@
+<ul class='base-article-list'>
+	{% for item in articleList %}
+		{# <li class='article-item shadow'>
+			<a href='detail?id={{ item.id }}' class='title'>{{ item.title }}</a>
+			<p class='label'>
+				<span>时间:</span><span>{{ item.created_at }}</span>
+				<span>分类:</span><span>{{ item.name }}</span>
+			</p>
+			<p>{{ item.desc }}</p>
+		</li> #}
+		<li class='article-item'>
+			<img src='/img/finger.png' class='logo'>
+			<a href='detail/{{ item.id }}' class='title-content'>
+				<span class='date'>{{ item.created_at }}</span>
+				<h2 class='title'>{{ item.title }}</h2>
+			</a>
+		</li>
+	{% endfor %}
+</ul>
+<div class='base-article-page'>
+	{% if nowPageIndex > 1 %}
+		<a href='/article?page={{ nowPageIndex - 1 }}'>&#60;</a>
+	{% endif %}
+	{% for item in pageArr %}
+		<a href='/article?page={{ item }}' class='page-item {{ "active" if nowPageIndex == item else "" }}'>{{ item }}</a>
+	{% endfor %}
+	{% if nowPageIndex < pageArr.length %}
+		<a href='/article?page={{ nowPageIndex - -1 }}'>&#62;</a>
+	{% endif %}
+</div>

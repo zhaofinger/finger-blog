@@ -17,11 +17,27 @@ const article = {
 		return result;
 	},
 	/**
+	 *
+	 */
+	async getArticleListWithType(page) {
+		let _sql = `
+			SELECT article.*, article_type.name AS type_name FROM article, article_type
+			WHERE article.type = article_type.id AND article.is_show = 1
+			ORDER BY article.created_at DESC
+			LIMIT ${page.start} , ${page.end}`;
+		let result = await dbUtils.query(_sql);
+		return result;
+	},
+	/**
 	 * 获取文章详情
 	 * @param {*} id 文章id
 	 */
 	async getArticleDetail(id) {
-		let result = await dbUtils.findDataById('article', id);
+		let _sql = `
+			SELECT article.*, article_type.name AS type_name FROM article, article_type
+			WHERE article.id = ${id} AND article.type = article_type.id`;
+		let result = await dbUtils.query(_sql);
+
 		if (result.length) {
 			return result[0];
 		}
@@ -32,6 +48,16 @@ const article = {
 	 */
 	async getArticleCount() {
 		let result = await dbUtils.count('article');
+		return result;
+	},
+	/**
+	 * 获取已经发布文章总数
+	 */
+	async getArticlePubCount() {
+		let _sql = `
+			SELECT COUNT(*) AS total_count FROM article
+			WHERE is_show = 1`;
+		let result = dbUtils.query(_sql);
 		return result;
 	},
 	/**

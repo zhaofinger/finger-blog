@@ -1,0 +1,219 @@
+#header {
+	width: 600px;
+	margin: 80px auto 0 auto;
+	display: flex;
+	align-items: center;
+}
+#header .logo {
+	height: 40px;
+	margin-right: 20px;
+}
+#header .word {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#header .title {
+	text-decoration: none;
+}
+#header .title h1 {
+	font-size: 28px;
+	color: #333;
+	font-weight: 350;
+	letter-spacing: 4px;
+}
+#header .menu a {
+	position: relative;
+	margin-right: 30px;
+	font-size: 14px;
+	/* font-weight: 300; */
+	text-align: center;
+	color: #1B3DCC;
+}
+/* content */
+#content {
+	width: 600px;
+	margin: 60px auto 40px auto;
+}
+/* footer */
+#footer {
+	width: 600px;
+	margin: 80px auto 40px auto;
+	display: flex;
+	align-items: center;
+	color: #bac1cc;
+}
+#footer a {
+	color: #bac1cc;
+}
+#footer .my-link span {
+	letter-spacing: 4px;
+}
+#footer .my-link a {
+	margin-left: 20px;
+}
+/* #footer .link-area .github {
+	background: url(/img/github.png) center center /contain;
+}
+#footer .link-area .zhihu {
+	background: url(/img/zhihu.png) center center /contain;
+}
+#footer .link-area .weibo {
+	background: url(/img/weibo.png) center center /contain;
+} */
+
+
+/* 文章列表页 */
+.base-article-list .article-item {
+	display: flex;
+	align-items: center;
+	margin-top: 40px;
+}
+.base-article-list .article-item .logo {
+	width: 12px;
+	margin: 0 10px 0 12px;
+}
+.base-article-list .article-item .title-content {
+	display: flex;
+	align-items: center;
+}
+.base-article-list .article-item .title {
+	max-width: 450px;
+	margin-left: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 18px;
+}
+.base-article-list .article-item .title:hover {
+	color: #1B3DCC;
+}
+.base-article-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+}
+.base-article-page a {
+	margin-left: 20px;
+}
+
+/* index */
+
+#index .index-wrapper {
+	position: relative;
+	width: 600px;
+	padding: 40px;
+	background: #fcfcfc;
+	box-shadow: 0px 34px 53px -19px rgba(13, 23, 42, 1);
+	animation: index-wrapper 2s ease-in-out forwards;
+	letter-spacing: 4px;
+	line-height: 3;
+	user-select: none;
+}
+
+@keyframes index-wrapper {
+	0% {
+		box-shadow: 0px 25px 42px -32px rgba(52, 67, 96, 0);
+		background: #ffffff;
+		opacity: .1;
+	}
+
+	100% {
+		box-shadow: 0px 25px 42px -32px rgba(52, 67, 96, 0.75);
+		background: #f7f7fa;
+		opacity: 1;
+	}
+}
+
+#index .enter-article {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 42px;
+}
+
+#index .enter-article a {
+	height: 20px;
+	line-height: 1;
+}
+
+#index .my-link a {
+	margin-right: 10px;
+}
+#index .author {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	font-size: 24px;
+}
+
+/* article */
+#detail header {
+	margin-bottom: 60px;
+}
+#detail header .article-title{
+	font-size: 30px;
+	font-weight: 400;
+}
+#detail header .article-title{
+	font-size: 30px;
+	font-weight: 400;
+}
+#detail header .article-meta {
+	margin-top: 20px;
+}
+
+/* 关于 */
+#about {}
+
+
+@media (max-width: 600px) {
+	#header, #content, #footer {
+		width: 90%;
+	}
+	#header {
+		margin-top: 40px;
+	}
+	#header .title h1 {
+		font-size: 24px;
+	}
+	#content {
+		margin: 40px auto 20px auto;
+	}
+	#footer {
+		margin: 40px auto 20px auto;
+	}
+	#index .index-wrapper {
+		width: 80%;
+		margin: 0 auto;
+		padding: 20px;
+		border-radius: 10px;
+		/* width: 100%;
+		padding: 20px;
+		background: transparent;
+		box-shadow: none;
+		animation: none;
+		line-height: 4; */
+	}
+	#index .index-wrapper .my-label, #index .index-wrapper .my-link {
+		margin-top: 40px;
+	}
+	#index .index-wrapper .enter-article {
+		margin-top: 60px;
+	}
+
+	.base-article-list .article-item .title-content {
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		margin-left: 20px;
+	}
+	.base-article-list .article-item .date {
+		font-size: 12px;
+	}
+	.base-article-list .article-item .title {
+		margin-left: 0;
+		width: 250px;
+	}
+}

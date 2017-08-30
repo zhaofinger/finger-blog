@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const user = require('../models/user');
 const article = require('../models/article');
-const calPageIndex = require('../utils/calPageIndex');
+const calPageIndex = require('../utils/cal-page-index');
 
 /**
  * 判断用户是否登录
@@ -111,6 +111,7 @@ module.exports = {
 			});
 		} else if (ctx.method === 'POST') {
 			let formData = ctx.request.body;
+			console.log(formData);
 			if (formData.newType) {
 				try {
 					// 文章type model

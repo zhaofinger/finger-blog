@@ -1,0 +1,38 @@
+{% extends "app/layout.nj" %}
+
+{% block content %}
+	<div id='about'>
+		<div class='about-me'>
+			<h2>关于我</h2>
+			<pre>
+	const me = {
+		name: '赵海波',
+		nickname: '赵的拇指',
+		sex: 'male',
+		college: '常熟理工学院(CIT)',
+		mail: '<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</a>',
+		weChat: 'little_zhao_finger',
+		introduction: '一只野生前端',
+		motto: '但行好事，莫问前程'
+	};
+			</pre>
+		</div>
+		<div class='about-site'>
+			<h2>关于网站</h2>
+			<pre>
+	const site = {
+		name: '赵的拇指',
+		language: 'JavaScript',
+		frame: 'koa2',
+		age: '1',
+		views: '1'
+	};
+			</pre>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script>
+	</script>
+{% endblock %}

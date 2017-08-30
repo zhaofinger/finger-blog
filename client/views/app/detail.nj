@@ -1,0 +1,31 @@
+{% extends "app/layout.nj" %}
+
+{% block style %}
+	<link rel='stylesheet' href='/style/app/markdown.css'>
+	<link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css'>
+{% endblock %}
+
+{% block script %}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+	<article id='detail'>
+		<header>
+			<h2 class='article-title'>{{ articleDetail.title }}</h2>
+			<div class='article-meta'>
+				<span>{{ articleDetail.created_at }}</span>
+				<span>{{ articleDetail.type_name\ }}</span>
+			</div>
+		</header>
+		<div class='markdown-body'>
+			{{ articleDetail.content_render | safe }}
+		</div>
+	</article>
+{% endblock %}

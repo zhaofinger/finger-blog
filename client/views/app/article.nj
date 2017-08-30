@@ -1,0 +1,10 @@
+{% extends "app/layout.nj" %}
+
+{% block content %}
+	{% include "app/_list.nj" %}
+{% endblock %}
+
+{% block script %}
+	<script>
+	</script>
+{% endblock %}

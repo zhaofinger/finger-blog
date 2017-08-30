@@ -17,9 +17,9 @@ const user = {
 	 */
 	async signIn(username) {
 		let _sql = `
-			SELECT * from user
-			where email="${username}" or username="${username}"
-			limit 1`;
+			SELECT * FROM user
+			WHERE email="${username}" OR username="${username}"
+			LIMIT 1`;
 		let result = await dbUtils.query(_sql);
 		if (Array.isArray(result) && result.length > 0) {
 			result = result[0];
