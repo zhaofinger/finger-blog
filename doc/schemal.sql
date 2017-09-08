@@ -11,9 +11,8 @@ create table if not exists user (
 	password varchar(100) not null, 			-- 登录密码
 	nickname varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci not null,	-- 用户昵称，可能有一些表情符啥的
 	password_reset_token varchar(100), 			-- 重置密码
-	auth_key varchar(100) not null,				-- cookie auth
-	created_at int unsigned,					-- 创建时间
-	updated_at int unsigned,					-- 最后修改时间
+	created_at bigint unsigned,					-- 创建时间
+	updated_at bigint unsigned,					-- 最后修改时间
 	primary key(id),
 	unique (username)
 )engine=InnoDB default charset=utf8mb4;
