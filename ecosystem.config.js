@@ -35,7 +35,7 @@ module.exports = {
 			ref: 'origin/master',
 			repo: 'git@github.com:zhaofinger/finger-blog.git',
 			path: '/var/www/finger-blog',
-			'post-deploy': 'yarn && pm2 reload ecosystem.config.js --env production'
+			'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production'
 		}
 	}
 };
