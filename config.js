@@ -12,7 +12,7 @@ const prodConfig = {
 	port: 1113,
 	database: {
 		DATABASE: 'finger_blog',
-		USERNAME: 'blog',
+		USERNAME: 'nodeserver',
 		PASSWORD: '',
 		PORT: '3306',
 		HOST: 'localhost'
