@@ -1,10 +1,21 @@
-module.exports = {
+const devConfig = {
 	port: 1024,
 	database: {
 		DATABASE: 'finger_blog',
-		USERNAME: 'root',
-		PASSWORD: '123456',
+		USERNAME: 'node',
+		PASSWORD: '',
 		PORT: '3306',
 		HOST: 'localhost'
 	}
 };
+const prodConfig = {
+	port: 1113,
+	database: {
+		DATABASE: 'finger_blog',
+		USERNAME: 'blog',
+		PASSWORD: '',
+		PORT: '3306',
+		HOST: 'localhost'
+	}
+};
+module.exports = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;

@@ -1,46 +1,48 @@
 {
-  "name": "finger-blog",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "lint": "eslint *.js server/**"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sniperbo/finger-blog.git"
-  },
-  "keywords": [
-    "blog",
-    "koa2"
-  ],
-  "author": "ZhaoFinger",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sniperbo/finger-blog/issues"
-  },
-  "homepage": "https://github.com/sniperbo/finger-blog#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "koa": "^2.3.0",
-    "koa-bodyparser": "^4.2.0",
-    "koa-convert": "^1.2.0",
-    "koa-ejs": "^4.1.0",
-    "koa-logger": "^3.0.1",
-    "koa-mysql-session": "^0.0.2",
-    "koa-router": "^7.2.1",
-    "koa-session-minimal": "^3.0.4",
-    "koa-static": "^4.0.1",
-    "koa-views": "^6.0.2",
-    "mysql": "^2.13.0",
-    "nunjucks": "^3.0.1",
-    "validator": "^8.0.0"
-  },
-  "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.24.1",
-    "eslint": "^4.2.0",
-    "eslint-plugin-html": "^3.1.0"
-  }
+	"name": "finger-blog",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"lint": "eslint *.js server/**",
+		"dev": "export NODE_ENV=development && nodemon --harmony ./server/app.js",
+		"deploy": "pm2 deploy ecosystem.config.js production"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sniperbo/finger-blog.git"
+	},
+	"keywords": [
+		"blog",
+		"koa2"
+	],
+	"author": "ZhaoFinger",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/sniperbo/finger-blog/issues"
+	},
+	"homepage": "https://github.com/sniperbo/finger-blog#readme",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"koa": "^2.3.0",
+		"koa-bodyparser": "^4.2.0",
+		"koa-convert": "^1.2.0",
+		"koa-ejs": "^4.1.0",
+		"koa-logger": "^3.0.1",
+		"koa-mysql-session": "^0.0.2",
+		"koa-router": "^7.2.1",
+		"koa-session-minimal": "^3.0.4",
+		"koa-static": "^4.0.1",
+		"koa-views": "^6.0.2",
+		"mysql": "^2.13.0",
+		"nunjucks": "^3.0.1",
+		"validator": "^8.0.0"
+	},
+	"devDependencies": {
+		"babel-core": "^6.25.0",
+		"babel-polyfill": "^6.23.0",
+		"babel-preset-env": "^1.6.0",
+		"babel-register": "^6.24.1",
+		"eslint": "^4.2.0",
+		"eslint-plugin-html": "^3.1.0"
+	}
 }
