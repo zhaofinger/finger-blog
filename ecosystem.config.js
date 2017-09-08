@@ -26,7 +26,7 @@ module.exports = {
 	deploy: {
 		production: {
 			user: 'node',
-			host: '67.218.154.219',
+			host: '67.218.154.219:26275',
 			ref: 'origin/master',
 			repo: 'git@github.com:zhaofinger/finger-blog.git',
 			path: '/var/www/finger-blog',
