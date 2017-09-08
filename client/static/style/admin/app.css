@@ -8,7 +8,7 @@
 	background-color: #fff;
 }
 #header nav{
-	width: 1000px;
+	width: 800px;
 	margin: 0 auto;
 	display: flex;
 	align-items: center;
@@ -19,7 +19,7 @@
 }
 /* content */
 #content {
-	width: 1000px;
+	width: 800px;
 	margin: 80px auto 40px auto;
 }
 /* 登录页 */

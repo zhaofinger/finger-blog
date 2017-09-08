@@ -1,20 +1,29 @@
 {% extends "admin/layout.nj" %}
 
 {% block content %}
-	<ul class='article-list'>
-		{% for item in articleList %}
-			<li class='article-item shadow'>
-				<div class='operate'>
-					<a href='/admin/edit?id={{item.id}}'>编辑文章</a>
-					<p>是否发布：{{  "已发布" if item.is_show else "未发布" }}</p>
-				</div>
-				<div class='content'>
-					<h3>{{ item.title }}</h3>
-					<p>{{ item.desc }}</p>
-				</div>
-			</li>
-		{% endfor %}
-	</ul>
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>标题</th>
+				<th>是否发布</th>
+				<th>浏览量</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in articleList %}
+				<tr class='article-item'>
+					<td>{{ loop.index }}</td>
+					<td>{{ item.title }}</td>
+					<td>{{  "已发布" if item.is_show else "未发布" }}</td>
+					<td></td>
+					<td><a href='/admin/edit?id={{item.id}}'>编辑文章</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 	<ul class='article-page'>
 		{% for item in pageArr %}
 			<li class='page-item'>
