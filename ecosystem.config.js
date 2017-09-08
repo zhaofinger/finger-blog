@@ -25,7 +25,7 @@ module.exports = {
 	 */
 	deploy: {
 		production: {
-			user: 'node',
+			user: 'root',
 			host: [
 				{
 					host: '67.218.154.219',
