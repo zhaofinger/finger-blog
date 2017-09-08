@@ -44,13 +44,15 @@ module.exports = {
 	},
 	// 创建用户
 	async create(ctx) {
+		let username = ctx.request.query.username || 'admin';
+		let pwd = ctx.request.query.pwd || '123456';
 		let salt = bcrypt.genSaltSync(10);
 		const userModal = {
 			id: null,
 			role: 0,
-			username: 'admin',
+			username: username,
 			email: 'zhbqsj@126.com',
-			password: bcrypt.hashSync('123456', salt),
+			password: bcrypt.hashSync(pwd, salt),
 			nickname: '赵的拇指',
 			created_at: (new Date()).getTime(),
 			updated_at: (new Date()).getTime()
