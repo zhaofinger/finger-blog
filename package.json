@@ -35,7 +35,8 @@
 		"koa-views": "^6.0.2",
 		"mysql": "^2.13.0",
 		"nunjucks": "^3.0.1",
-		"validator": "^8.0.0"
+		"validator": "^8.0.0",
+		"log4js": "^1.1.1"
 	},
 	"devDependencies": {
 		"babel-core": "^6.25.0",
