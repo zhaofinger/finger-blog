@@ -41,7 +41,8 @@
 		</footer>
 	{% endblock %}
 
-	<script src='/lib/jQuery.js'></script>
+	<script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
+
 	{% block script %}
 	{% endblock %}
 </body>
