@@ -30,6 +30,11 @@ module.exports = {
 		} else if (ctx.method === 'POST') {
 			const formData = ctx.request.body;
 			const userInfo = await user.signIn(formData.username);
+			if (!userInfo) {
+				ctx.body = '没有这个用户';
+				return;
+			}
+			// 验证用户密码
 			const result = bcrypt.compareSync(formData.password, userInfo.password);
 			if (result) {
 				let session = ctx.session;
