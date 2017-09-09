@@ -5,6 +5,7 @@
 	"scripts": {
 		"lint": "eslint *.js server/**",
 		"dev": "export NODE_ENV=development && nodemon --harmony ./server/app.js",
+		"deploy_setup": "pm2 deploy ecosystem.config.js production setup",
 		"deploy": "pm2 deploy ecosystem.config.js production"
 	},
 	"repository": {
