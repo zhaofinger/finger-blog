@@ -150,6 +150,7 @@ module.exports = {
 				await article.updateArticle(articleModel, formData.id);
 			} else {
 				// 新建
+				delete articleModel.id;
 				await article.createArticle(articleModel);
 			}
 			ctx.redirect('./list');
