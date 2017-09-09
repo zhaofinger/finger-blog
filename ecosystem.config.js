@@ -8,8 +8,6 @@ module.exports = {
 			name: 'finger-blog',
 			script: './server/app.js',
 			max_memory_restart: '300M',
-			instances: 4,
-			exec_mode: 'cluster',
 			env: {
 				COMMON_VARIABLE: 'true'
 			},
