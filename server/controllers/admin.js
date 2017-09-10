@@ -84,18 +84,18 @@ module.exports = {
 	async list(ctx) {
 		isLogin(ctx);
 		// 获取当前页码
-		let nowPage = ctx.request.query.page || 1;
+		let nowPageIndex = ctx.request.query.page || 1;
 		const num = 10;
 		const title = '赵的拇指管理后台-文章列表';
 		// 文章列表
-		const articleList = await article.getArticleList({start: (nowPage - 1) * num, end: num});
+		const articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num});
 		// 文章总页数
 		const totalCount = (await article.getArticleCount())[0].total_count;
 		// 显示分页
-		let pageArr = calPageIndex(nowPage, Math.ceil(totalCount / num));
+		let pageArr = calPageIndex(nowPageIndex, Math.ceil(totalCount / num));
 		// 现在页数
 		await ctx.render('admin/list', {
-			title, articleList, pageArr
+			title, articleList, pageArr, nowPageIndex
 		});
 	},
 	// 编辑页面

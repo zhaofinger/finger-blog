@@ -1,13 +1,13 @@
 {% extends "admin/layout.nj" %}
 
 {% block content %}
-	<table>
-		<thead>
+	<table class='article-list'>
+		<thead class='article-head'>
 			<tr>
 				<th>#</th>
-				<th>标题</th>
+				<th class='title-item'>标题</th>
 				<th>是否发布</th>
-				<th>浏览量</th>
+				{# <th>浏览量</th> #}
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -17,17 +17,21 @@
 					<td>{{ loop.index }}</td>
 					<td>{{ item.title }}</td>
 					<td>{{  "已发布" if item.is_show else "未发布" }}</td>
-					<td></td>
-					<td><a href='/admin/edit?id={{item.id}}'>编辑文章</a></td>
+					{# <td></td> #}
+					<td>
+						<a href='/admin/edit?id={{item.id}}'>编辑</a>
+						{# <a href='javascript:void(0);'>{{  "撤销发布" if item.is_show else "发布" }}</a> #}
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
 	<ul class='article-page'>
+		<li>页码:</li>
 		{% for item in pageArr %}
 			<li class='page-item'>
-				<a href='/admin/list?page={{ item }}'>{{ item }}</a>
+				<a href='/admin/list?page={{ item }}' class='{{ "active" if nowPageIndex == item else "" }}'>{{ item }}</a>
 			</li>
 		{% endfor %}
 	</ul>
