@@ -17,14 +17,16 @@
 		</li>
 	{% endfor %}
 </ul>
-<div class='base-article-page'>
-	{% if nowPageIndex > 1 %}
-		<a href='/article?page={{ nowPageIndex - 1 }}'>&#60;</a>
-	{% endif %}
-	{% for item in pageArr %}
-		<a href='/article?page={{ item }}' class='page-item {{ "active" if nowPageIndex == item else "" }}'>{{ item }}</a>
-	{% endfor %}
-	{% if nowPageIndex < pageArr.length %}
-		<a href='/article?page={{ nowPageIndex - -1 }}'>&#62;</a>
-	{% endif %}
-</div>
+{% if (pageArr | length()) %}
+	<div class='base-article-page'>
+		{% if nowPageIndex > 1 %}
+			<a href='/article?page={{ nowPageIndex - 1 }}'>&#60;</a>
+		{% endif %}
+		{% for item in pageArr %}
+			<a href='/article?page={{ item }}' class='page-item {{ "active" if nowPageIndex == item else "" }}'>{{ item }}</a>
+		{% endfor %}
+		{% if nowPageIndex < pageArr.length %}
+			<a href='/article?page={{ nowPageIndex - -1 }}'>&#62;</a>
+		{% endif %}
+	</div>
+{% endif %}
