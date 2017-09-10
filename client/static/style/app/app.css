@@ -90,9 +90,10 @@
 }
 .base-article-page {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
+	margin-top: 80px;
+	padding: 10px;
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
 }
 .base-article-page a {
 	margin-left: 20px;
