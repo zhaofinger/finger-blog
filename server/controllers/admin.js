@@ -51,7 +51,7 @@ module.exports = {
 	async create(ctx) {
 		let username = ctx.request.query.username || 'admin';
 		let pwd = ctx.request.query.pwd || '123456';
-		let salt = bcrypt.genSaltSync(10);
+		const salt = bcrypt.genSaltSync(10);
 		const userModal = {
 			id: null,
 			role: 0,
@@ -62,15 +62,14 @@ module.exports = {
 			created_at: (new Date()).getTime(),
 			updated_at: (new Date()).getTime()
 		};
-		let result = await user.create(userModal);
-		console.log(result);
+		const result = await user.create(userModal);
 		ctx.body = result;
 	},
 	// 后台首页
 	async index(ctx) {
 		isLogin(ctx);
 
-		let session = ctx.session;
+		const session = ctx.session;
 		const title = '赵的拇指管理后台';
 		const userInfo = {
 			username: session.username,
@@ -92,7 +91,7 @@ module.exports = {
 		// 文章总页数
 		const totalCount = (await article.getArticleCount())[0].total_count;
 		// 显示分页
-		let pageArr = calPageIndex(nowPageIndex, Math.ceil(totalCount / num));
+		const pageArr = calPageIndex(nowPageIndex, Math.ceil(totalCount / num));
 		// 现在页数
 		await ctx.render('admin/list', {
 			title, articleList, pageArr, nowPageIndex
@@ -118,7 +117,6 @@ module.exports = {
 			});
 		} else if (ctx.method === 'POST') {
 			let formData = ctx.request.body;
-			console.log(formData);
 			if (formData.newType) {
 				try {
 					// 文章type model

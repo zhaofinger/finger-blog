@@ -9,5 +9,8 @@ module.exports = router
 	.get('/', app.index)
 	.get('/index', app.index)
 	.get('/article', app.article)
+	.get('/article/type/:typeId', app.article)
+	.get('/article/label/:labelId', app.article)
+	.get('/type', app.type)
 	.get('/detail/:id', app.detail)
 	.get('/about', app.about);

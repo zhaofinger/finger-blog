@@ -30,6 +30,9 @@
 	text-align: center;
 	color: #1B3DCC;
 }
+#header .menu a:last-child {
+	margin-right: 0;
+}
 /* content */
 #content {
 	width: 600px;
@@ -77,10 +80,10 @@
 .base-article-list .article-item .title-content {
 	display: flex;
 	align-items: center;
+	margin-left: 20px;
 }
 .base-article-list .article-item .title {
 	max-width: 450px;
-	margin-left: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -165,6 +168,28 @@
 #detail header .article-meta {
 	margin-top: 20px;
 }
+
+/* type */
+#type {
+}
+#type .type-list li {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	padding-left: 10px;
+}
+#type .type-list .type-logo {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+}
+#type .type-list li .type-name {
+	margin-left: 20px;
+	font-size: 18px;
+	letter-spacing: 4px;
+}
+
+
 
 /* 关于 */
 #about {}

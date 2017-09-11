@@ -1,0 +1,19 @@
+{% extends "app/layout.nj" %}
+
+{% block content %}
+	<div id='type'>
+		<ul class='type-list'>
+			{% for item in articleType %}
+			<li>
+				<img src='/img/finger.png' class='type-logo'>
+				<a href='/article/type/{{ item.id }}' class='type-name'>{{ item.name }}</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script>
+	</script>
+{% endblock %}

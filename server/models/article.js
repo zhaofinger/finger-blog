@@ -8,21 +8,23 @@ const article = {
 		let result = await dbUtils.select('article_type', ['name', 'id']);
 		return result;
 	},
+	// /**
+	//  * 获取文章列表
+	//  * @param {object} page 文章分页开始结束
+	//  */
+	// async getArticleList(page) {
+	// 	let result = await dbUtils.findDataByPage('article', 'created_at', 'DESC', '*', page.start, page.end);
+	// 	return result;
+	// },
 	/**
-	 * 获取文章列表
-	 * @param {object} page 文章分页开始结束
+	 * 分页获取文章列表
+	 * @param {*} page 分页开始结束
+	 * @param {*} typeId 分类id
 	 */
-	async getArticleList(page) {
-		let result = await dbUtils.findDataByPage('article', 'created_at', 'DESC', '*', page.start, page.end);
-		return result;
-	},
-	/**
-	 *
-	 */
-	async getArticleListWithType(page) {
+	async getArticleList(page, typeId) {
 		let _sql = `
-			SELECT article.*, article_type.name AS type_name FROM article, article_type
-			WHERE article.type = article_type.id AND article.is_show = 1
+			SELECT * FROM article
+			WHERE is_show = 1 ${typeId ? 'AND type = ' + typeId : ''}
 			ORDER BY article.created_at DESC
 			LIMIT ${page.start} , ${page.end}`;
 		let result = await dbUtils.query(_sql);
@@ -53,10 +55,11 @@ const article = {
 	/**
 	 * 获取已经发布文章总数
 	 */
-	async getArticlePubCount() {
+	async getArticlePubCount(typeId = null) {
 		let _sql = `
 			SELECT COUNT(*) AS total_count FROM article
-			WHERE is_show = 1`;
+			WHERE is_show = 1 ${typeId ? 'AND type = ' + typeId : ''}
+			`;
 		let result = dbUtils.query(_sql);
 		return result;
 	},

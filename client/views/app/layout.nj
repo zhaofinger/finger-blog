@@ -20,6 +20,7 @@
 				<div class='menu'>
 					<a href='/index' class='{{ "active" if nowPage == "index" }}'>首&nbsp;页</a>
 					<a href='/article' class='{{ "active" if nowPage == "article" }}'>文&nbsp;章</a>
+					<a href='/type' class='{{ "active" if nowPage == "type" }}'>分&nbsp;类</a>
 					<a href='/about' class='{{ "active" if nowPage == "about" }}'>关&nbsp;于</a>
 				</div>
 			</div>

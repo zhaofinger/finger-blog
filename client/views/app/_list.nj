@@ -9,9 +9,9 @@
 			<p>{{ item.desc }}</p>
 		</li> #}
 		<li class='article-item'>
-			<img src='/img/finger.png' class='logo'>
-			<a href='detail/{{ item.id }}' class='title-content'>
-				<span class='date'>{{ item.created_at }}</span>
+			{# <img src='/img/finger.png' class='logo'> #}
+			<span class='date'>{{ item.created_at }}</span>
+			<a href='/detail/{{ item.id }}' class='title-content'>
 				<h2 class='title'>{{ item.title }}</h2>
 			</a>
 		</li>
