@@ -187,6 +187,13 @@
 #detail .article-label-list li {
 	margin-right: 20px;
 }
+#detail .article-comment {
+	margin-top: 40px;
+}
+#detail .article-comment .comment-title {
+	margin-right: 16px;
+	font-weight: bold;
+}
 
 /* type */
 #type {

@@ -37,5 +37,9 @@
 				<li>#{{ item }}</li>
 			{% endfor %}
 		</ul>
+		<div class='article-comment'>
+			<span class='comment-title'>评论：</span>
+			<span>暂未开发，有问题可以给我发邮件&nbsp;&nbsp;<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</span>
+		</div>
 	</article>
 {% endblock %}
