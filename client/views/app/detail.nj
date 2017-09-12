@@ -20,12 +20,22 @@
 		<header>
 			<h2 class='article-title'>{{ articleDetail.title }}</h2>
 			<div class='article-meta'>
-				<span>{{ articleDetail.created_at }}</span>
-				<span>{{ articleDetail.type_name\ }}</span>
+				<span>By</span>
+				<span class='author'>赵的拇指</span>
+				<span>At</span>
+				<span class='datetime'>{{ articleDetail.created_at }}</span>
+				<span>In</span>
+				<a href='/article/type/{{ articleDetail.type }}' class='category'>{{ articleDetail.type_name }}</a>
 			</div>
 		</header>
 		<div class='markdown-body'>
 			{{ articleDetail.content_render | safe }}
 		</div>
+		<ul class='article-label-list'>
+			<span class='label-title'>标签：</span>
+			{% for item in labelArr %}
+				<li>#{{ item }}</li>
+			{% endfor %}
+		</ul>
 	</article>
 {% endblock %}

@@ -72,8 +72,9 @@ module.exports = {
 		const articleDetail = await article.getArticleDetail(id);
 		const title = articleDetail.title;
 		articleDetail.created_at = timeFormat(new Date(articleDetail.created_at), 'yyyy-MM-dd');
+		const labelArr = articleDetail.label.split(' ');
 		await ctx.render('app/detail', {
-			title, articleDetail
+			title, articleDetail, labelArr
 		});
 	},
 	/**

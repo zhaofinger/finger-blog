@@ -168,6 +168,25 @@
 #detail header .article-meta {
 	margin-top: 20px;
 }
+#detail header .article-meta .author,
+#detail header .article-meta .datetime,
+#detail header .article-meta .category {
+	margin: 0 10px;
+	color: #1B3DCC;
+}
+#detail .article-label-list {
+	margin-top: 40px;
+	display: flex;
+	flex-wrap: wrap;
+	line-height: 2;
+}
+#detail .article-label-list .label-title {
+	margin-right: 20px;
+	font-weight: bold;
+}
+#detail .article-label-list li {
+	margin-right: 20px;
+}
 
 /* type */
 #type {

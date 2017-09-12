@@ -30,7 +30,7 @@ create table if not exists article_type (
 /* 文章 */
 create table if not exists article (
 	id bigint unsigned not null auto_increment,	-- 文章id
-	type int unsigned not null,			-- 文章分类
+	type int unsigned not null,					-- 文章分类
 	title varchar(100),							-- 文章标题
 	`desc` varchar(100),						-- 文章简介
 	label varchar(100),							-- 文章label
