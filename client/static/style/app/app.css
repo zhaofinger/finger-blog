@@ -43,28 +43,26 @@
 #footer {
 	width: 600px;
 	margin: 80px auto 40px auto;
-	display: flex;
-	align-items: center;
 	color: #bac1cc;
 }
 #footer a {
-	color: #bac1cc;
 }
-#footer .my-link span {
+#footer .link-area {
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+}
+#footer .link-title {
+	margin-right: 20px;
 	letter-spacing: 4px;
 }
-#footer .my-link a {
-	margin-left: 20px;
+#footer .link-area a {
+	margin-right: 20px;
+	color: #bac1cc;
 }
-/* #footer .link-area .github {
-	background: url(/img/github.png) center center /contain;
+#footer .link-area a:hover {
+	color: #1B3DCC;
 }
-#footer .link-area .zhihu {
-	background: url(/img/zhihu.png) center center /contain;
-}
-#footer .link-area .weibo {
-	background: url(/img/weibo.png) center center /contain;
-} */
 
 
 /* 文章列表页 */
@@ -231,6 +229,9 @@
 	#header {
 		margin-top: 40px;
 	}
+	#header .menu a {
+		margin-right: 20px;
+	}
 	#header .title h1 {
 		font-size: 24px;
 	}
@@ -263,6 +264,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: left;
+		justify-content: left;
 		margin-left: 20px;
 	}
 	.base-article-list .article-item .date {
