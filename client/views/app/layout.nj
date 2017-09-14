@@ -3,6 +3,7 @@
 <head>
 	<title>{{ title }}</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<meta name='baidu-site-verification' content='r4wDvCvyLz' />
 	<link rel='shortcut icon' href='/img/finger.png'>
 	<link rel='stylesheet' href='/style/app/base.css'>
 	<link rel='stylesheet' href='/style/app/app.css'>
