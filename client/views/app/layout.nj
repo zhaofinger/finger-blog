@@ -4,6 +4,8 @@
 	<title>{{ title }}</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<meta name="baidu-site-verification" content="r4wDvCvyLz" />
+	<meta name='description' content='这里是赵的拇指写字的地方.'>
+	<meta name='keyword' content='赵的拇指,博客,代码,前端,JavaScript,Css,摄影,散打,跑步,设计'>
 	<link rel='shortcut icon' href='/img/finger.png'>
 	<link rel='stylesheet' href='/style/app/base.css'>
 	<link rel='stylesheet' href='/style/app/app.css'>
