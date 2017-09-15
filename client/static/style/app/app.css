@@ -241,6 +241,12 @@
 	#footer {
 		margin: 40px auto 20px auto;
 	}
+	#footer .link-area {
+		margin-top: 16px;
+	}
+	#footer .link-title, #footer .link-area a {
+		margin-right: 16px;
+	}
 	#index .index-wrapper {
 		width: 80%;
 		margin: 0 auto;
@@ -270,12 +276,10 @@
 	.base-article-list .article-item .date {
 		font-size: 12px;
 	}
-	.base-article-list .article-item .title-content {
+	.base-article-list .article-item .date, .base-article-list .article-item .title-content {
+		display: inline-block;
 		margin-left: 0;
-	}
-	.base-article-list .article-item .title {
-		margin-left: 0;
-		width: 250px;
+		width: 100%;
 	}
 	#about pre {
 		margin-left: 20px;
