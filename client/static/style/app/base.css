@@ -548,6 +548,12 @@ scrollbar[orient="vertical"] {
 	background-color:#666666;
 	border-radius:4px
 }
+a,
+button,
+input,
+textarea {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 /* 基础样式 */
 /* 标题 */
 h1,h2,h3,h4 {
