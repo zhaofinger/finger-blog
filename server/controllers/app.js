@@ -71,10 +71,11 @@ module.exports = {
 		const id = ctx.params.id;
 		const articleDetail = await article.getArticleDetail(id);
 		const title = articleDetail.title;
+		const viewCount = articleDetail.view_count;
 		articleDetail.created_at = timeFormat(new Date(articleDetail.created_at), 'yyyy-MM-dd');
 		const labelArr = articleDetail.label.split(' ');
 		await ctx.render('app/detail', {
-			title, articleDetail, labelArr
+			title, articleDetail, labelArr, viewCount
 		});
 	},
 	/**

@@ -8,14 +8,6 @@ const article = {
 		let result = await dbUtils.select('article_type', ['name', 'id']);
 		return result;
 	},
-	// /**
-	//  * 获取文章列表
-	//  * @param {object} page 文章分页开始结束
-	//  */
-	// async getArticleList(page) {
-	// 	let result = await dbUtils.findDataByPage('article', 'created_at', 'DESC', '*', page.start, page.end);
-	// 	return result;
-	// },
 	/**
 	 * 分页获取文章列表
 	 * @param {*} page 分页开始结束
@@ -44,6 +36,27 @@ const article = {
 			return result[0];
 		}
 		return null;
+	},
+	/**
+	 * 更新文章阅读次数
+	 * @param {*} id
+	 */
+	async updateArticleViewCount(id) {
+		// 更新文章浏览次数
+		let _updateArticleViewsSql = `
+			UPDATE article SET view_count = view_count + 1
+			WHERE id = ${id}
+		`;
+		await dbUtils.query(_updateArticleViewsSql);
+
+		// 获取文章浏览次数
+		let _getArticleViewsSql = `
+			SELECT view_count FROM article
+			WHERE id = ${id}
+		`;
+		let viewCount = (await dbUtils.query(_getArticleViewsSql))[0];
+
+		return viewCount;
 	},
 	/**
 	 * 获取文章总数

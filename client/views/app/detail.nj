@@ -9,6 +9,14 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 	<script>
 		hljs.initHighlightingOnLoad();
+		$(function() {
+			var id = location.pathname.split('/').pop();
+			$.post('/article/view-count/' + id, function(data) {
+				if (data.status) {
+					$('.views').text(data.data.viewCount);
+				}
+			});
+		});
 	</script>
 {% endblock %}
 
@@ -26,6 +34,8 @@
 				<span class='datetime'>{{ articleDetail.created_at }}</span>
 				<span>In</span>
 				<a href='/article/type/{{ articleDetail.type }}' class='category'>{{ articleDetail.type_name }}</a>
+				<span>Views</span>
+				<span class='views'>{{ viewCount }}</span>
 			</div>
 		</header>
 		<div class='markdown-body'>

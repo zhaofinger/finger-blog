@@ -168,6 +168,7 @@
 }
 #detail header .article-meta .author,
 #detail header .article-meta .datetime,
+#detail header .article-meta .views,
 #detail header .article-meta .category {
 	margin: 0 10px;
 	color: #1B3DCC;
