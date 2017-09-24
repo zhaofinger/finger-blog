@@ -2,7 +2,7 @@ create database if not exists finger_blog;
 use finger_blog;
 
 
-/* 用户 */
+-- 用户 --
 create table if not exists user (
 	id int unsigned not null auto_increment,	-- 用户id
 	role int unsigned not null,					-- 用户角色 0->管理员 1->用户
@@ -17,17 +17,17 @@ create table if not exists user (
 	unique (username)
 )engine=InnoDB default charset=utf8mb4;
 
-/* 文章分类 */
+-- 文章分类 --
 create table if not exists article_type (
 	id int unsigned not null auto_increment,	-- 文章分类id
 	name varchar(50) not null,					-- 文章分类name
 	created_at bigint unsigned,					-- 创建时间
-	updated_at bigint unsigned,					-- 最后修改时间
+	updated_at bigint unsigned,					-- 最后修改时间updateData
 	primary key(id),
 	unique (name)
 )engine=InnoDB default charset=utf8mb4;
 
-/* 文章 */
+-- 文章 --
 create table if not exists article (
 	id bigint unsigned not null auto_increment,	-- 文章id
 	type int unsigned not null,					-- 文章分类
@@ -44,3 +44,6 @@ create table if not exists article (
 	primary key(id),
 	foreign key(type) references article_type(id) on delete restrict on update cascade
 )engine=InnoDB default charset=utf8mb4;
+
+-- 增加文章浏览量 --
+ALTER TABLE article ADD view_count int DEFAULT 0;
