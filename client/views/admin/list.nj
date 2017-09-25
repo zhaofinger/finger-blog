@@ -8,6 +8,7 @@
 				<th class='title-item'>标题</th>
 				<th>是否发布</th>
 				{# <th>浏览量</th> #}
+				<th>浏览次数</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -17,7 +18,7 @@
 					<td>{{ loop.index }}</td>
 					<td>{{ item.title }}</td>
 					<td>{{  "已发布" if item.is_show else "未发布" }}</td>
-					{# <td></td> #}
+					<td>{{ item.view_count }}</td>
 					<td>
 						<a href='/admin/edit?id={{item.id}}'>编辑</a>
 						{# <a href='javascript:void(0);'>{{  "撤销发布" if item.is_show else "发布" }}</a> #}
