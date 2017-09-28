@@ -64,6 +64,10 @@
 	color: #1B3DCC;
 }
 
+*[title='站长统计'] {
+	display: none;
+}
+
 
 /* 文章列表页 */
 .base-article-list .article-item {
