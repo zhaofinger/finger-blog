@@ -29,7 +29,7 @@
 			<h2 class='article-title'>{{ articleDetail.title }}</h2>
 			<div class='article-meta'>
 				<span>By</span>
-				<span class='author'>赵的拇指</span>
+				<a class='author' href='https://www.zhaofinger.com'>赵的拇指</a>
 				<span>At</span>
 				<span class='datetime'>{{ articleDetail.created_at }}</span>
 				<span>In</span>
@@ -38,8 +38,14 @@
 				<span class='views'>{{ viewCount }}</span>
 			</div>
 		</header>
-		<div class='markdown-body'>
+		<div class='article-content markdown-body'>
 			{{ articleDetail.content_render | safe }}
+		</div>
+		<div class='article-announce'>
+			<span>感谢您的阅读，本文由</span>
+			<a href='https://www.zhaofinger.com'>赵的拇指</a>
+			<span>版权所有。如若转载，请注明出处：</span>
+			<a href="https://www.zhaofinger.com/detail/{{ articleDetail.id }}">https://www.zhaofinger.com/detail/{{ articleDetail.id }}</a>
 		</div>
 		<ul class='article-label-list'>
 			<span class='label-title'>标签：</span>
@@ -47,9 +53,10 @@
 				<li>#{{ item }}</li>
 			{% endfor %}
 		</ul>
+
 		<div class='article-comment'>
 			<span class='comment-title'>评论：</span>
-			<span>暂未开发，有问题可以给我发邮件&nbsp;&nbsp;<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</span>
+			<span>暂未开发，有问题可以给我发邮件&nbsp;&nbsp;<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</a></span>
 		</div>
 	</article>
 {% endblock %}

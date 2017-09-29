@@ -4,8 +4,10 @@
 	<title>{{ title }}</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<meta name="baidu-site-verification" content="r4wDvCvyLz" />
-	<meta name='description' content='这里是赵的拇指写字的地方.'>
-	<meta name='keyword' content='赵的拇指,博客,代码,前端,JavaScript,Css,摄影,散打,跑步,设计'>
+	<meta name='description' content='赵的拇指的博客'>
+	<meta name='author' content='赵的拇指'>
+	<meta name='designer' content='赵的拇指'>
+	<meta name='keywords' content='赵的拇指,博客,代码,前端,前端开发,JavaScript,CSS,摄影,散打,跑步,设计'>
 	<link rel='shortcut icon' href='/img/finger.png'>
 	<link rel='stylesheet' href='/style/app/base.css'>
 	<link rel='stylesheet' href='/style/app/app.css'>
@@ -43,7 +45,7 @@
 				<a href='http://xcatliu.com/' title="流浪小猫" target='_blank'>流浪小猫</a>
 			</div>
 			<div class='my-link link-area'>
-				<span class='link-title'>CONTACT:</span>
+				<span class='link-title'>联系:</span>
 				<a href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
 				<a href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
 				<a href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
