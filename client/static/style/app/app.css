@@ -231,6 +231,23 @@
 }
 
 
+/* 404 */
+#not_found {
+	padding: 40px;
+	box-shadow: 0px 25px 42px -32px rgba(52, 67, 96, 0.75);
+	background: #f7f7fa;
+	letter-spacing: 4px;
+	user-select: none;
+}
+#not_found h1 {
+	margin-bottom: 40px;
+	font-size: 64px;
+}
+#not_found a {
+	color: #1B3DCC;
+}
+
+
 @media (max-width: 600px) {
 	#header, #content, #footer {
 		width: 90%;

@@ -88,6 +88,16 @@ module.exports = {
 		await ctx.render('app/about', {
 			title, nowPage
 		});
-
+	},
+	/**
+	 * 关于
+	 * @param {*} ctx
+	 */
+	async notFound(ctx) {
+		const title = '赵的拇指';
+		const nowPage = '404';
+		await ctx.render('app/404', {
+			title, nowPage
+		});
 	}
 };

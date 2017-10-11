@@ -13,4 +13,5 @@ module.exports = router
 	.get('/article/label/:labelId', app.article)
 	.get('/type', app.type)
 	.get('/detail/:id', app.detail)
-	.get('/about', app.about);
+	.get('/about', app.about)
+	.get('*', app.notFound);

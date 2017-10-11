@@ -1,0 +1,13 @@
+{% extends "app/layout.nj" %}
+
+{% block content %}
+	<div id='not_found'>
+		<h1>404</h1>
+		<p>噗嗤，又没了，还是去看看<a href='/article'>文章</a>吧</p>
+	</div>
+{% endblock %}
+
+{% block script %}
+	<script>
+	</script>
+{% endblock %}

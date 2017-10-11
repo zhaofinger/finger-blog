@@ -74,7 +74,7 @@ app.use(koaStatic(
 // 配置服务端模板渲染引擎中间件
 const nunjucksEnv = new nunjucks.Environment(
 	new nunjucks.FileSystemLoader(path.join(__dirname, '../client/views'), {
-		noCache: true
+		noCache: env === 'development'
 	})
 );
 app.use(views(path.join(__dirname, '../client/views'), {
