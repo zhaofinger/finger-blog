@@ -12,4 +12,6 @@ module.exports = router
 	.get('/index', admin.index)
 	.get('/edit', admin.edit)
 	.post('/edit', admin.edit)
-	.get('/list', admin.list);
+	.get('/list', admin.list)
+	.get('/user', admin.user)
+	.post('/user', admin.user);

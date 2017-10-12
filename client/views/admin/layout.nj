@@ -17,6 +17,7 @@
 				<a href='/admin/list'><h1>赵的拇指</h1></a>
 				<a href='/admin/list'>文章列表</a>
 				<a href='/admin/edit'>新文章</a>
+				<a href='/admin/user' class='user'>{{ userInfo.nickname }}</a>
 			</nav>
 		</header>
 	{% endblock %}

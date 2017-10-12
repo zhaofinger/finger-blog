@@ -27,6 +27,23 @@ const user = {
 			result = null;
 		}
 		return result;
+	},
+	/**
+	 * 获取用户信息
+	 * @param {*} id
+	 */
+	async getUserInfo(id) {
+		let result = (await dbUtils.findDataById('user', id))[0];
+		return result;
+	},
+	/**
+	 * 更新用户信息
+	 * @param {object} model
+	 * @param {string} id
+	 */
+	async updateUser(model, id) {
+		let result = await dbUtils.updateData('user', model, id);
+		return result;
 	}
 };
 

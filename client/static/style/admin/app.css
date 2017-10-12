@@ -8,21 +8,26 @@
 	background-color: #fff;
 	z-index: 100;
 }
-#header nav{
+#header nav {
 	width: 800px;
 	margin: 0 auto;
 	display: flex;
 	align-items: center;
 	height: 100%;
 }
-#header nav a{
+#header nav a {
 	margin-right: 40px;
 }
+#header nav .user {
+	margin-left: auto;
+}
+
 /* content */
 #content {
 	width: 800px;
 	margin: 80px auto 40px auto;
 }
+
 /* 登录页 */
 .login-form {
 	height: 100%;
@@ -39,6 +44,7 @@
 	margin-top: 20px;
 	text-align: center;
 }
+
 /* 后台首页 */
 .admin-nav {
 	display: flex;
@@ -56,6 +62,7 @@
 	height: 100px;
 	border-radius: 50%;
 }
+
 /* 文章列表页 */
 .article-list {
 	width: 100%;
@@ -85,6 +92,7 @@
 .article-page .page-item:hover {
 	text-decoration: underline;
 }
+
 /* edit 页面 */
 .edit-header {
 	display: flex;
@@ -136,4 +144,16 @@
 }
 #editormd {
 	z-index: 100;
+}
+
+/* user */
+#user {
+	text-align: center;
+}
+#user h2 {
+	margin: 20px 0;
+}
+#user input {
+	width: 300px;
+	margin-bottom: 20px;
 }

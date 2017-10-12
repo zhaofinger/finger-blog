@@ -94,7 +94,8 @@ const article = {
 	},
 	/**
 	 * 更新文章
-	 * @param {*} model
+	 * @param {object} model
+	 * @param {string} id
 	 */
 	async updateArticle(model, id) {
 		let result = await dbUtils.updateData('article', model, id);

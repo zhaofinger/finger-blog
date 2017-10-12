@@ -37,9 +37,10 @@ module.exports = {
 			// 验证用户密码
 			const result = bcrypt.compareSync(formData.password, userInfo.password);
 			if (result) {
-				let session = ctx.session;
+				const session = ctx.session;
 				session.isLogin = true;
 				session.username = userInfo.username;
+				session.nickname = userInfo.nickname;
 				session.userId = userInfo.id;
 				ctx.redirect('./list');
 			} else {
@@ -69,12 +70,8 @@ module.exports = {
 	async index(ctx) {
 		isLogin(ctx);
 
-		const session = ctx.session;
 		const title = '赵的拇指管理后台';
-		const userInfo = {
-			username: session.username,
-			id: session.id
-		};
+		const userInfo = ctx.session;
 		await ctx.render('admin/index', {
 			title, userInfo
 		});
@@ -82,6 +79,7 @@ module.exports = {
 	// 文章列表
 	async list(ctx) {
 		isLogin(ctx);
+		const userInfo = ctx.session;
 		// 获取当前页码
 		let nowPageIndex = ctx.request.query.page || 1;
 		const num = 10;
@@ -94,8 +92,53 @@ module.exports = {
 		const pageArr = calPageIndex(nowPageIndex, Math.ceil(totalCount / num));
 		// 现在页数
 		await ctx.render('admin/list', {
-			title, articleList, pageArr, nowPageIndex
+			title, userInfo, articleList, pageArr, nowPageIndex
 		});
+	},
+	// 文章列表
+	async user(ctx) {
+		isLogin(ctx);
+		if (ctx.method === 'GET') {
+			const userInfo = await user.getUserInfo(ctx.session.userId);
+			// 获取当前页码
+			const title = '赵的拇指管理后台-用户';
+			// 现在页数
+			await ctx.render('admin/user', {
+				title, userInfo
+			});
+		} else if (ctx.method === 'POST') {
+			let formData = ctx.request.body;
+			const userInfo = await user.getUserInfo(ctx.session.userId);
+			// 验证用户密码
+			const result = bcrypt.compareSync(formData.old_pwd, userInfo.password);
+			if (result) {
+				const salt = bcrypt.genSaltSync(10);
+				const userModal = {
+					id: userInfo.id,
+					role: 0,
+					username: formData.username,
+					email: formData.email,
+					password: bcrypt.hashSync(formData.new_pwd || formData.old_pwd, salt),
+					nickname: formData.nickname,
+					updated_at: (new Date()).getTime()
+				};
+				let result = await user.updateUser(userModal, userInfo.id);
+				if (result) {
+					if (formData.new_pwd) {
+						const session = ctx.session;
+						session.isLogin = false;
+						delete session.username;
+						delete session.nickname;
+						delete session.userId;
+						ctx.redirect('./login');
+					} else {
+						ctx.redirect('./user');
+					}
+				}
+			} else {
+				ctx.body = '账号密码错误';
+			}
+		}
 	},
 	// 编辑页面
 	async edit(ctx) {
@@ -103,6 +146,9 @@ module.exports = {
 		if (ctx.method === 'GET') {
 			let articleModel = null;
 			let title = '发表文章';
+
+			const userInfo = ctx.session;
+
 			if (ctx.request.query.id) {
 				articleModel = await article.getArticleDetail(ctx.request.query.id);
 				if (articleModel) {
@@ -111,9 +157,7 @@ module.exports = {
 			}
 			let articleType = await article.getArticleTypes();
 			await ctx.render('admin/edit', {
-				title,
-				articleType,
-				articleModel
+				title,userInfo, articleType, articleModel
 			});
 		} else if (ctx.method === 'POST') {
 			let formData = ctx.request.body;
@@ -131,7 +175,7 @@ module.exports = {
 				}
 			}
 			// 文章model
-			let articleModel = {
+			const articleModel = {
 				id: formData.id,
 				title: formData.title,
 				type: formData.type,
