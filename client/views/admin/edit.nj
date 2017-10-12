@@ -65,6 +65,9 @@
 	<script src='/lib/editormd/editormd.min.js'></script>
 	<script>
 		$(function() {
+			window.onbeforeunload = function() {
+				return '文章尚未保存，确认离开吗？';
+			}
 			// 初始化markdown编辑器
 			var editor = editormd('editormd', {
 				path : '/lib/editormd/lib/',
