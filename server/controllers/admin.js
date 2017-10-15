@@ -85,7 +85,7 @@ module.exports = {
 		const num = 10;
 		const title = '赵的拇指管理后台-文章列表';
 		// 文章列表
-		const articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num});
+		const articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num}, null, false);
 		// 文章总页数
 		const totalCount = (await article.getArticleCount())[0].total_count;
 		// 显示分页

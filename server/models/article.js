@@ -13,10 +13,10 @@ const article = {
 	 * @param {*} page 分页开始结束
 	 * @param {*} typeId 分类id
 	 */
-	async getArticleList(page, typeId) {
+	async getArticleList(page, typeId, isPub = true) {
 		let _sql = `
 			SELECT * FROM article
-			WHERE is_show = 1 ${typeId ? 'AND type = ' + typeId : ''}
+			${typeId || isPub ? 'WHERE' : '' } ${isPub ? 'is_show = 1' : ''} ${typeId && isPub ? 'AND' : '' } ${typeId ? 'type = ' + typeId : ''}
 			ORDER BY article.created_at DESC
 			LIMIT ${page.start} , ${page.end}`;
 		let result = await dbUtils.query(_sql);
