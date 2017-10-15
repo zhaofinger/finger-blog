@@ -125,11 +125,7 @@ module.exports = {
 				let result = await user.updateUser(userModal, userInfo.id);
 				if (result) {
 					if (formData.new_pwd) {
-						const session = ctx.session;
-						session.isLogin = false;
-						delete session.username;
-						delete session.nickname;
-						delete session.userId;
+						ctx.session = null;
 						ctx.redirect('./login');
 					} else {
 						ctx.redirect('./user');

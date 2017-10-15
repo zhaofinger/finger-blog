@@ -1,33 +1,25 @@
 const path = require('path');
 const Koa = require('koa');
-// const convert = require('koa-convert');
 const views = require('koa-views');
 const nunjucks = require('nunjucks');
 const koaStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const session = require('koa-session-minimal');
-const MysqlStore = require('koa-mysql-session');
+const redisStore = require('koa-redis');
+
 const app = new Koa();
 
-const {databaseConfig, PORT, HOST} = require('./../config');
+const {PORT, HOST} = require('./../config');
 const routers = require('./routers/index');
 const logUtil = require('./utils/log');
 
 const env = process.env.NODE_ENV;
 
-// session存储配置
-const sessionMysqlConfig= {
-	user: databaseConfig.USERNAME,
-	password: databaseConfig.PASSWORD,
-	database: databaseConfig.DATABASE,
-	host: 'localhost',
-};
-
 // cookie
 // 存放sessionId的cookie配置
 let cookie = {
-	maxAge: '',			// cookie有效时长
+	maxAge: 86400000,			// cookie有效时长
 	expires: '',		// cookie失效时间
 	path: '',			// 写cookie所在的路径
 	domain: HOST,		// 写cookie所在的域名
@@ -41,7 +33,7 @@ let cookie = {
 // 配置session中间件
 app.use(session({
 	key: 'USER_SID',
-	store: new MysqlStore(sessionMysqlConfig),
+	store: redisStore(),
 	cookie: cookie
 }));
 
