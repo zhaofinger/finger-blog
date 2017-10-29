@@ -4,10 +4,9 @@
 	<table class='article-list'>
 		<thead class='article-head'>
 			<tr>
-				<th>#</th>
+				<th>id</th>
 				<th class='title-item'>标题</th>
 				<th>是否发布</th>
-				{# <th>浏览量</th> #}
 				<th>浏览次数</th>
 				<th>操作</th>
 			</tr>
@@ -15,13 +14,13 @@
 		<tbody>
 			{% for item in articleList %}
 				<tr class='article-item'>
-					<td>{{ loop.index }}</td>
+					<td>{{ item.id }}</td>
 					<td>{{ item.title }}</td>
-					<td>{{  "已发布" if item.is_show else "未发布" }}</td>
+					<td>{{  "已发布" if item.is_publish else "未发布" }}</td>
 					<td>{{ item.view_count }}</td>
 					<td>
 						<a href='/admin/edit?id={{item.id}}'>编辑</a>
-						{# <a href='javascript:void(0);'>{{  "撤销发布" if item.is_show else "发布" }}</a> #}
+						<a href='javascript:void(0);' class='delete-btn' data-id='{{item.id}}'>删除</a>
 					</td>
 				</tr>
 			{% endfor %}
@@ -40,5 +39,17 @@
 
 {% block script %}
 	<script>
+		$('.delete-btn').click(function() {
+			var _this = $(this);
+			var isDelete = confirm('确认删除吗？');
+			if (isDelete) {
+				$.post('/article/delete-article/' + _this.data('id'), {}, function(data) {
+					if (data.status === 200) {
+						_this.parents('tr').remove();
+						alert('删除成功!');
+					}
+				});
+			}
+		});
 	</script>
 {% endblock %}

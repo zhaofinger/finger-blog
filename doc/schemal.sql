@@ -47,3 +47,9 @@ create table if not exists article (
 
 -- 增加文章浏览量 --
 ALTER TABLE article ADD view_count int DEFAULT 0;
+
+-- 修改发布状态字段名 --
+ALTER TABLE article CHANGE is_show is_publish tinyint unsigned not null default 0;
+
+-- 增加删除字段 --
+ALTER TABLE article ADD is_delete tinyint unsigned not null default 0;

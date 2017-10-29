@@ -65,9 +65,10 @@
 	<script src='/lib/editormd/editormd.min.js'></script>
 	<script>
 		$(function() {
-			window.onbeforeunload = function() {
+			var isLeave = true;
+			$(window).on('beforeunload', function() {
 				return '文章尚未保存，确认离开吗？';
-			}
+			});
 			// 初始化markdown编辑器
 			var editor = editormd('editormd', {
 				path : '/lib/editormd/lib/',
@@ -88,7 +89,8 @@
 				}
 			});
 			// 提交文章内容
-			$('.article-operate-btn button').click(function() {
+			$('.article-operate-btn button').click(function(e) {
+				$(window).off('beforeunload');
 				// markdown
 				editor.getMarkdown();       // 获取 Markdown 源码
 				editor.getHTML();           // 获取 Textarea 保存的 HTML 源码

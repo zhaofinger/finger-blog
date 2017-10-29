@@ -10,7 +10,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sniperbo/finger-blog.git"
+		"url": "git+https://github.com/zhaofinger/finger-blog.git"
 	},
 	"keywords": [
 		"blog",
@@ -19,9 +19,9 @@
 	"author": "ZhaoFinger",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/sniperbo/finger-blog/issues"
+		"url": "https://github.com/zhaofinger/finger-blog/issues"
 	},
-	"homepage": "https://github.com/sniperbo/finger-blog#readme",
+	"homepage": "https://github.com/zhaofinger/finger-blog#readme",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
 		"koa": "^2.3.0",

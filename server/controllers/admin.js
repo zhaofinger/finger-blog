@@ -179,7 +179,7 @@ module.exports = {
 				label: formData.label,
 				content_md: formData['editormd-markdown-doc'],
 				content_render: formData['editormd-html-code'],
-				is_show: formData.status,
+				is_publish: formData.status,
 				created_at: formData.created_at || (new Date()).getTime(),
 				updated_at: (new Date()).getTime()
 			};

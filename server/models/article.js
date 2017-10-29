@@ -10,13 +10,18 @@ const article = {
 	},
 	/**
 	 * 分页获取文章列表
-	 * @param {*} page 分页开始结束
-	 * @param {*} typeId 分类id
+	 * @param {object} page 分页开始结束
+	 * @param {string} typeId 分类id
+	 * @param {boolean} isPub 是否发布
 	 */
 	async getArticleList(page, typeId, isPub = true) {
 		let _sql = `
 			SELECT * FROM article
-			${typeId || isPub ? 'WHERE' : '' } ${isPub ? 'is_show = 1' : ''} ${typeId && isPub ? 'AND' : '' } ${typeId ? 'type = ' + typeId : ''}
+				${typeId || isPub ? 'WHERE' : '' }
+				${isPub ? 'is_publish = 1' : ''}
+				${typeId && isPub ? 'AND' : '' }
+				${typeId ? 'type = ' + typeId : ''}
+				${typeId || isPub ? 'AND' : 'WHERE' } is_delete = 0
 			ORDER BY article.created_at DESC
 			LIMIT ${page.start} , ${page.end}`;
 		let result = await dbUtils.query(_sql);
@@ -24,7 +29,7 @@ const article = {
 	},
 	/**
 	 * 获取文章详情
-	 * @param {*} id 文章id
+	 * @param {string} id 文章id
 	 */
 	async getArticleDetail(id) {
 		let _sql = `
@@ -38,27 +43,6 @@ const article = {
 		return null;
 	},
 	/**
-	 * 更新文章阅读次数
-	 * @param {*} id
-	 */
-	async updateArticleViewCount(id) {
-		// 更新文章浏览次数
-		let _updateArticleViewsSql = `
-			UPDATE article SET view_count = view_count + 1
-			WHERE id = ${id}
-		`;
-		await dbUtils.query(_updateArticleViewsSql);
-
-		// 获取文章浏览次数
-		let _getArticleViewsSql = `
-			SELECT view_count FROM article
-			WHERE id = ${id}
-		`;
-		let viewCount = (await dbUtils.query(_getArticleViewsSql))[0];
-
-		return viewCount;
-	},
-	/**
 	 * 获取文章总数
 	 */
 	async getArticleCount() {
@@ -67,11 +51,12 @@ const article = {
 	},
 	/**
 	 * 获取已经发布文章总数
+	 * @param {string} typeId 文章typeid
 	 */
 	async getArticlePubCount(typeId = null) {
 		let _sql = `
 			SELECT COUNT(*) AS total_count FROM article
-			WHERE is_show = 1 ${typeId ? 'AND type = ' + typeId : ''}
+			WHERE is_publish = 1 AND is_delete = 1 ${typeId ? 'AND type = ' + typeId : ''}
 			`;
 		let result = dbUtils.query(_sql);
 		return result;
@@ -101,6 +86,39 @@ const article = {
 		let result = await dbUtils.updateData('article', model, id);
 		return result;
 	},
+	/**
+	 * 更新文章阅读次数
+	 * @param {string} id
+	 */
+	async updateArticleViewCount(id) {
+		// 更新文章浏览次数
+		let _updateArticleViewsSql = `
+			UPDATE article SET view_count = view_count + 1
+			WHERE id = ${id}
+		`;
+		await dbUtils.query(_updateArticleViewsSql);
+
+		// 获取文章浏览次数
+		let _getArticleViewsSql = `
+			SELECT view_count FROM article
+			WHERE id = ${id}
+		`;
+		let viewCount = (await dbUtils.query(_getArticleViewsSql))[0];
+		return viewCount;
+	},
+	/**
+	 * 删除文章
+	 * @param {string} id
+	 */
+	async deleteArticle(id) {
+		// 删除文章 软删除
+		let _sql = `
+			UPDATE article SET is_delete = 1
+			WHERE id = ${id}
+		`;
+		let result = await dbUtils.query(_sql);
+		return result;
+	}
 };
 
 module.exports = article;
