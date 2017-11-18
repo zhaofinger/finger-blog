@@ -5,7 +5,7 @@ const article = {
 	 * 获取是所有文章type
 	 */
 	async getArticleTypes() {
-		let result = await dbUtils.select('article_type', ['name', 'id']);
+		const result = await dbUtils.select('article_type', ['name', 'id']);
 		return result;
 	},
 	/**
@@ -15,7 +15,7 @@ const article = {
 	 * @param {boolean} isPub 是否发布
 	 */
 	async getArticleList(page, typeId, isPub = true) {
-		let _sql = `
+		const _sql = `
 			SELECT * FROM article
 				${typeId || isPub ? 'WHERE' : '' }
 				${isPub ? 'is_publish = 1' : ''}
@@ -24,7 +24,7 @@ const article = {
 				${typeId || isPub ? 'AND' : 'WHERE' } is_delete = 0
 			ORDER BY article.created_at DESC
 			LIMIT ${page.start} , ${page.end}`;
-		let result = await dbUtils.query(_sql);
+		const result = await dbUtils.query(_sql);
 		return result;
 	},
 	/**
@@ -32,10 +32,10 @@ const article = {
 	 * @param {string} id 文章id
 	 */
 	async getArticleDetail(id) {
-		let _sql = `
+		const _sql = `
 			SELECT article.*, article_type.name AS type_name FROM article, article_type
 			WHERE article.id = ${id} AND article.type = article_type.id`;
-		let result = await dbUtils.query(_sql);
+		const result = await dbUtils.query(_sql);
 
 		if (result.length) {
 			return result[0];
@@ -46,7 +46,18 @@ const article = {
 	 * 获取文章总数
 	 */
 	async getArticleCount() {
-		let result = await dbUtils.count('article');
+		const result = await dbUtils.count('article');
+		return result;
+	},
+	/**
+	 * 获取对应文章评论
+	 * @param {string} id 文章id
+	 */
+	async getCommentList(id) {
+		const _sql = `
+			SELECT * FROM comment WHERE article_id = ${id}
+			ORDER BY comment.created_at DESC`;
+		const result = await dbUtils.query(_sql);
 		return result;
 	},
 	/**
@@ -54,11 +65,11 @@ const article = {
 	 * @param {string} typeId 文章typeid
 	 */
 	async getArticlePubCount(typeId = null) {
-		let _sql = `
+		const _sql = `
 			SELECT COUNT(*) AS total_count FROM article
 			WHERE is_publish = 1 AND is_delete = 0 ${typeId ? 'AND type = ' + typeId : ''}
-			`;
-		let result = dbUtils.query(_sql);
+		`;
+		const result = dbUtils.query(_sql);
 		return result;
 	},
 	/**
@@ -66,7 +77,7 @@ const article = {
 	 * @param {object} model 新建文章type
 	 */
 	async createType(model) {
-		let result = await dbUtils.insertData('article_type', model);
+		const result = await dbUtils.insertData('article_type', model);
 		return result;
 	},
 	/**
@@ -74,7 +85,7 @@ const article = {
 	 * @param {object} model 文章数据模型
 	 */
 	async createArticle(model) {
-		let result = await dbUtils.insertData('article', model);
+		const result = await dbUtils.insertData('article', model);
 		return result;
 	},
 	/**
@@ -83,7 +94,7 @@ const article = {
 	 * @param {string} id
 	 */
 	async updateArticle(model, id) {
-		let result = await dbUtils.updateData('article', model, id);
+		const result = await dbUtils.updateData('article', model, id);
 		return result;
 	},
 	/**
@@ -92,18 +103,18 @@ const article = {
 	 */
 	async updateArticleViewCount(id) {
 		// 更新文章浏览次数
-		let _updateArticleViewsSql = `
+		const _updateArticleViewsSql = `
 			UPDATE article SET view_count = view_count + 1
 			WHERE id = ${id}
 		`;
 		await dbUtils.query(_updateArticleViewsSql);
 
 		// 获取文章浏览次数
-		let _getArticleViewsSql = `
+		const _getArticleViewsSql = `
 			SELECT view_count FROM article
 			WHERE id = ${id}
 		`;
-		let viewCount = (await dbUtils.query(_getArticleViewsSql))[0];
+		const viewCount = (await dbUtils.query(_getArticleViewsSql))[0];
 		return viewCount;
 	},
 	/**
@@ -112,12 +123,21 @@ const article = {
 	 */
 	async deleteArticle(id) {
 		// 删除文章 软删除
-		let _sql = `
+		const _sql = `
 			UPDATE article SET is_delete = 1
 			WHERE id = ${id}
 		`;
-		let result = await dbUtils.query(_sql);
+		const result = await dbUtils.query(_sql);
 		return result;
+	},
+	/**
+	 * 增加文章评论
+	 * @param {object} model 评论model
+	 */
+	async addComment(model) {
+		const result = await dbUtils.insertData('comment', model);
+		const comment = await dbUtils.findDataById('comment', result.insertId);
+		return comment[0];
 	}
 };
 

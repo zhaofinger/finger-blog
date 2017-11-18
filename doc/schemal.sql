@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS finger_blog;
 USE finger_blog;
 
-
 -- 用户 --
 CREATE TABLE IF NOT EXISTS user (
 	id INT UNSIGNED NOT NULL auto_increment,	-- 用户id
@@ -37,19 +36,25 @@ CREATE TABLE IF NOT EXISTS article (
 	cover VARCHAR(100),							-- 文章封面图片
 	content_md TEXT,							-- 文章markdown内容
 	content_render TEXT,						-- 文章渲染内容
-	is_show TINYINT UNSIGNED NOT NULL default 0,-- 是否显示文章
+	is_publish TINYINT UNSIGNED NOT NULL default 0,	-- 是否显示文章
+	is_delete TINYINT UNSIGNED NOT NULL default 0,	-- 是否删除
 	rank TINYINT UNSIGNED NOT NULL default 1,	-- 排序等级
+	view_count INT DEFAULT 0,					-- 文章浏览量
 	created_at BIGINT UNSIGNED,					-- 创建时间
 	updated_at BIGINT UNSIGNED,					-- 修改时间
 	PRIMARY KEY (id),
 	FOREIGN KEY (type) REFERENCES article_type(id) ON DELETE RESTRICT ON UPDATE CASCADE
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- 增加文章浏览量 --
-ALTER TABLE article ADD view_count INT DEFAULT 0;
-
--- 修改发布状态字段名 --
-ALTER TABLE article CHANGE is_show is_publish TINYINT UNSIGNED NOT NULL DEFAULT 0;
-
--- 增加删除字段 --
-ALTER TABLE article ADD is_delete TINYINT UNSIGNED NOT NULL DEFAULT 0;
+-- 评论 --
+CREATE TABLE IF NOT EXISTS comment (
+	id BIGINT UNSIGNED NOT NULL auto_increment,	-- 评论id
+	article_id BIGINT UNSIGNED NOT NULL,		-- 对应文章id
+	parent_id BIGINT,							-- 父评论id
+	author VARCHAR(50) NOT NULL,				-- 作者名称
+	email VARCHAR(50) NOT NULL,					-- 邮箱地址
+	content VARCHAR(100) NOT NULL,				-- 评论内容
+	created_at BIGINT UNSIGNED,					-- 创建时间
+	PRIMARY KEY (id),
+	FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE RESTRICT ON UPDATE CASCADE
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

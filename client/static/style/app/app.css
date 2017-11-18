@@ -202,6 +202,42 @@
 	font-weight: bold;
 }
 
+/* 评论 */
+.post-comment {
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
+}
+.post-comment .title {
+	font-weight: 350;
+}
+.post-comment .comment-input {
+	display: flex;
+	flex: 1;
+	margin-top: 10px;
+}
+.post-comment .comment-input .left {
+	flex: 4;
+	height: 164px;
+	background-color: #f6f6f6;
+}
+.post-comment .comment-input .right {
+	flex: 2;
+	margin-left: 20px;
+}
+.post-comment .comment-input .right input {
+	width: 100%;
+	margin-bottom: 20px;
+	background-color: #f6f6f6;
+}
+.post-comment .comment-input .right .submit-comment {
+	width: 100%;
+	padding: 12px;
+	border-radius: 2px;
+	background-color: #1B3DCC;
+	color: #fff;
+}
+
 /* type */
 #type {
 }

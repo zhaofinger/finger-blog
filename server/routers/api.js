@@ -7,4 +7,5 @@ const api = require('../controllers/api');
 
 module.exports = router
 	.post('/article/view-count/:articleId', api.views)
+	.post('/article/comment/:articleId', api.comment)
 	.post('/article/delete-article/:articleId', api.deleteArticle);

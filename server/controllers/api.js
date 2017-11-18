@@ -16,6 +16,20 @@ module.exports = {
 		};
 	},
 	/**
+	 * 发表评论
+	 * @param {object} ctx
+	 */
+	async comment(ctx) {
+		const commentModel = ctx.request.body;
+		commentModel.article_id = ctx.params.articleId;
+		commentModel.created_at = (new Date()).getTime();
+		let result = await article.addComment(commentModel);
+		ctx.body = {
+			status: 200,
+			data: result
+		};
+	},
+	/**
 	 * 删除文章
 	 * @param {object} ctx
 	 */

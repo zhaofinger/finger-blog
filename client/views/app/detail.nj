@@ -21,11 +21,33 @@
 		hljs.initHighlightingOnLoad();
 		$(function() {
 			var id = location.pathname.split('/').pop();
+			// 浏览量
 			$.post('/article/view-count/' + id, function(data) {
 				if (data.status) {
 					$('.views').text(data.data.viewCount);
 				}
 			});
+			// 提交评论
+			var usernameEle = $('#username');
+			var emailEle = $('#email');
+			var commentContentEle = $('#comment_content');
+			var submitCommentEle = $('.submit-comment');
+			submitCommentEle.click(function() {
+				$.ajax({
+					url: '/article/comment/' + id,
+					type: 'post',
+					dataType: 'json',
+					data: {
+						author: usernameEle.val(),
+						email: emailEle.val(),
+						content: commentContentEle.val()
+					},
+					success: function(data) {
+						console.log(data);
+					}
+				})
+			});
+
 		});
 	</script>
 {% endblock %}
@@ -35,6 +57,7 @@
 {% endblock %}
 
 {% block content %}
+	{# 文章内容 #}
 	<article id='detail'>
 		<header>
 			<h2 class='article-title'>{{ articleDetail.title }}</h2>
@@ -65,9 +88,23 @@
 			{% endfor %}
 		</ul>
 
-		<div class='article-comment'>
+		{# <div class='article-comment'>
 			<span class='comment-title'>评论：</span>
 			<span>暂未开发，有问题可以给我发邮件&nbsp;&nbsp;<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</a></span>
-		</div>
+		</div> #}
 	</article>
+	{# 评论输入 #}
+	<div class='post-comment'>
+		<h2 class='title'>发表评论：</h2>
+		<div class='comment-input'>
+			<textarea id='comment_content' placeholder='请输入评论内容' class='input input-medium left'></textarea>
+			<div class='right'>
+				<input type='text' placeholder='请输入用户名' id='username' class='input input-medium'><br>
+				<input type='text' placeholder='请输入邮箱以便交流' id='email' class='input input-medium'><br>
+				<button class='submit-comment'>发表评论</button>
+			</div>
+		</div>
+	</div>
+	{# 评论列表 #}
+	<ul class='comment-list'></ul>
 {% endblock %}

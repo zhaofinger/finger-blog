@@ -20,11 +20,11 @@ const env = process.env.NODE_ENV;
 // 存放sessionId的cookie配置
 let cookie = {
 	maxAge: 86400000,			// cookie有效时长
-	expires: '',		// cookie失效时间
-	path: '',			// 写cookie所在的路径
-	domain: HOST,		// 写cookie所在的域名
-	httpOnly: true,		// 是否只用于http请求中获取
-	overwrite: true,	// 是否允许重写
+	expires: '',				// cookie失效时间
+	path: '',					// 写cookie所在的路径
+	domain: HOST,				// 写cookie所在的域名
+	httpOnly: true,				// 是否只用于http请求中获取
+	overwrite: true,			// 是否允许重写
 	secure: '',
 	sameSite: '',
 	signed: '',
