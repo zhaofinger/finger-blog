@@ -36,7 +36,7 @@ module.exports = {
 		// 已发布文章列表
 		const articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num}, typeId);
 		articleList.map(item => {
-			item.created_at = timeFormat(new Date(item.created_at), 'yyyy-MM-dd');
+			item.created_at = timeFormat(item.created_at);
 			return item;
 		});
 
@@ -71,10 +71,15 @@ module.exports = {
 		const id = ctx.params.id;
 		const articleDetail = await article.getArticleDetail(id);
 		const title = articleDetail.title;
-		articleDetail.created_at = timeFormat(new Date(articleDetail.created_at), 'yyyy-MM-dd');
+		articleDetail.created_at = timeFormat(articleDetail.created_at);
 		const labelArr = articleDetail.label.split(' ');
 		const viewCount = articleDetail.view_count;
 		const commentList = await article.getCommentList(id);
+
+		commentList.map(item => {
+			item.created_at = timeFormat(item.created_at, 'yyyy-MM-dd hh:mm:ss');
+			return item;
+		});
 		await ctx.render('app/detail', {
 			title, articleDetail, labelArr, viewCount, commentList
 		});

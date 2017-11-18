@@ -237,6 +237,27 @@
 	background-color: #1B3DCC;
 	color: #fff;
 }
+/* 评论列表 */
+.comment-list .comment-item {
+	margin-top: 20px;
+	padding: 20px;
+	border-radius: 6px;
+	font-size: 16px;
+	overflow: hidden;
+	background-color: #f9f9f9;
+}
+.comment-list .comment-item .comment-author {
+	font-weight: 500;
+}
+.comment-list .comment-item .comment-content {
+	margin: 20px 0;
+	padding-left: 20px;
+	line-height: 1.6;
+	color: #333;
+}
+.comment-list .comment-item .comment-time {
+	float: right;
+}
 
 /* type */
 #type {

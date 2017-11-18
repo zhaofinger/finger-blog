@@ -1,4 +1,10 @@
-const timeFormat = function(time, fmt) {
+/**
+ * 格式化时间
+ * @param {date} time 时间戳
+ * @param {string} fmt yyyy-MM-dd hh:mm:ss
+ */
+const timeFormat = function(time, fmt = 'yyyy-MM-dd') {
+	time = new Date(time);
 	let o = {
 		'M+': time.getMonth() + 1, // 月份
 		'd+': time.getDate(), // 日

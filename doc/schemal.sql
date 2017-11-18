@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS comment (
 	parent_id BIGINT,							-- 父评论id
 	author VARCHAR(50) NOT NULL,				-- 作者名称
 	email VARCHAR(50) NOT NULL,					-- 邮箱地址
-	content VARCHAR(100) NOT NULL,				-- 评论内容
+	content TEXT NOT NULL,				-- 评论内容
 	created_at BIGINT UNSIGNED,					-- 创建时间
 	PRIMARY KEY (id),
 	FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE RESTRICT ON UPDATE CASCADE

@@ -8,7 +8,7 @@ module.exports = {
 	async views(ctx) {
 		const articleId = ctx.params.articleId;
 		let result = await article.updateArticleViewCount(articleId);
-		ctx.body = {
+		return ctx.body = {
 			status: 200,
 			data: {
 				viewCount: result.view_count
@@ -21,10 +21,16 @@ module.exports = {
 	 */
 	async comment(ctx) {
 		const commentModel = ctx.request.body;
+		if (!commentModel.username || !commentModel.email || !commentModel.content) {
+			return ctx.body = {
+				status: 500,
+				message: '请输入正确的字段'
+			};
+		}
 		commentModel.article_id = ctx.params.articleId;
 		commentModel.created_at = (new Date()).getTime();
 		let result = await article.addComment(commentModel);
-		ctx.body = {
+		return ctx.body = {
 			status: 200,
 			data: result
 		};
@@ -36,7 +42,7 @@ module.exports = {
 	async deleteArticle(ctx) {
 		const articleId = ctx.params.articleId;
 		await article.deleteArticle(articleId);
-		ctx.body = {
+		return ctx.body = {
 			status: 200,
 			data: '删除成功'
 		};

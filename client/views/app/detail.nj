@@ -33,14 +33,27 @@
 			var commentContentEle = $('#comment_content');
 			var submitCommentEle = $('.submit-comment');
 			submitCommentEle.click(function() {
+				var username = usernameEle.val();
+				var email = usernameEle.val();
+				var content = usernameEle.val();
+				if (!username) {
+					alert('请输入用户名');
+					return;
+				} else if (!email) {
+					alert('请输入邮箱');
+					return;
+				} else if (!content) {
+					alert('请输入评论内容');
+					return;
+				}
 				$.ajax({
 					url: '/article/comment/' + id,
 					type: 'post',
 					dataType: 'json',
 					data: {
-						author: usernameEle.val(),
-						email: emailEle.val(),
-						content: commentContentEle.val()
+						author: username,
+						email: email,
+						content: content
 					},
 					success: function(data) {
 						console.log(data);
@@ -106,5 +119,15 @@
 		</div>
 	</div>
 	{# 评论列表 #}
-	<ul class='comment-list'></ul>
+	<ul class='comment-list'>
+		{% for item in commentList %}
+			<li class='comment-item'>
+				<span class='comment-author'>{{ item.author }}</span>
+				<p class='comment-content'>{{ item.content }}</p>
+				<div class='comment-time'>
+					发表于 <i>{{ item.created_at }}</i>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}

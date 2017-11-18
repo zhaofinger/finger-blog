@@ -2,7 +2,7 @@
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 	line-height: 1.5;
-	color: #24292e;
+	color: #333333;
 	font-size: 16px;
 	line-height: 2;
 	word-wrap: break-word;
@@ -24,7 +24,7 @@
 
 .markdown-body .pl-smi,
 .markdown-body .pl-s .pl-s1 {
-	color: #24292e;
+	color: #333333;
 }
 
 .markdown-body .pl-ent {
@@ -86,12 +86,12 @@
 
 .markdown-body .pl-mi {
 	font-style: italic;
-	color: #24292e;
+	color: #333333;
 }
 
 .markdown-body .pl-mb {
 	font-weight: bold;
-	color: #24292e;
+	color: #333333;
 }
 
 .markdown-body .pl-md {
