@@ -29,7 +29,9 @@ module.exports = {
 				message: '请输入正确的字段'
 			};
 		}
-
+		if (!commentModel.parent_id) {
+			commentModel.parent_id = null;
+		}
 		commentModel.content_md = commentModel.content;
 		commentModel.content = marked(commentModel.content);
 		commentModel.article_id = ctx.params.articleId;
