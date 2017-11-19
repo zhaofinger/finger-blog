@@ -87,7 +87,7 @@
 			$(document).on('click', '.comment-replay', function() {
 				var replayName = $(this).data('replay-name');
 				replayId = $(this).data('replay-id');
-				commentContentEle.prop('placeholder', '回复: ' + replayName);
+				commentContentEle.prop('placeholder', '回复: ' + replayName + '，支持markdown语法');
 				commentContentEle[0].scrollIntoView({block: "end", behavior: "smooth"});
 			});
 
@@ -140,7 +140,7 @@
 	<div class='post-comment'>
 		<h2 class='title'>发表评论：</h2>
 		<div class='comment-input'>
-			<textarea id='comment_content' placeholder='请输入评论内容' class='input input-medium left'></textarea>
+			<textarea id='comment_content' placeholder='请输入评论内容，支持markdown语法' class='input input-medium left'></textarea>
 			<div class='right'>
 				<input type='text' placeholder='请输入用户名' id='username' class='input input-medium'><br>
 				<input type='text' placeholder='请输入邮箱以便交流' id='email' class='input input-medium'><br>

@@ -1,5 +1,6 @@
 const article = require('../models/article');
 const timeFormat = require('../utils/time-format');
+const marked = require('marked');
 
 module.exports = {
 	/**
@@ -28,6 +29,9 @@ module.exports = {
 				message: '请输入正确的字段'
 			};
 		}
+
+		commentModel.content_md = commentModel.content;
+		commentModel.content = marked(commentModel.content);
 		commentModel.article_id = ctx.params.articleId;
 		commentModel.created_at = (new Date()).getTime();
 
