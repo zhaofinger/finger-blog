@@ -1,4 +1,5 @@
 const article = require('../models/article');
+const timeFormat = require('../utils/time-format');
 
 module.exports = {
 	/**
@@ -21,7 +22,7 @@ module.exports = {
 	 */
 	async comment(ctx) {
 		const commentModel = ctx.request.body;
-		if (!commentModel.username || !commentModel.email || !commentModel.content) {
+		if (!commentModel.author || !commentModel.email || !commentModel.content) {
 			return ctx.body = {
 				status: 500,
 				message: '请输入正确的字段'
@@ -29,7 +30,10 @@ module.exports = {
 		}
 		commentModel.article_id = ctx.params.articleId;
 		commentModel.created_at = (new Date()).getTime();
+
 		let result = await article.addComment(commentModel);
+
+		result.created_at = timeFormat(result.created_at, 'yyyy-MM-dd hh:mm:ss');
 		return ctx.body = {
 			status: 200,
 			data: result

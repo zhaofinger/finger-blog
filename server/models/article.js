@@ -136,8 +136,12 @@ const article = {
 	 */
 	async addComment(model) {
 		const result = await dbUtils.insertData('comment', model);
-		const comment = await dbUtils.findDataById('comment', result.insertId);
-		return comment[0];
+		const comment = (await dbUtils.findDataById('comment', result.insertId))[0];
+		// 父级评论内容
+		if (comment.parent_id) {
+			comment.parent = (await dbUtils.findDataById('comment', comment.parent_id))[0];
+		}
+		return comment;
 	}
 };
 

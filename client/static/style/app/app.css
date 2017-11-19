@@ -217,6 +217,7 @@
 	margin-top: 10px;
 }
 .post-comment .comment-input .left {
+	line-height: 1.6;
 	flex: 4;
 	height: 164px;
 	background-color: #f6f6f6;
@@ -242,12 +243,14 @@
 	margin-top: 20px;
 	padding: 20px;
 	border-radius: 6px;
-	font-size: 16px;
 	overflow: hidden;
 	background-color: #f9f9f9;
 }
-.comment-list .comment-item .comment-author {
+.comment-list .comment-item .comment-author a {
 	font-weight: 500;
+}
+.comment-list .comment-item .comment-author span {
+	margin: 0 10px;
 }
 .comment-list .comment-item .comment-content {
 	margin: 20px 0;
@@ -257,6 +260,12 @@
 }
 .comment-list .comment-item .comment-time {
 	float: right;
+}
+.comment-list .comment-item .comment-time span {
+	margin: 0 10px;
+}
+.comment-list .comment-item .comment-replay {
+	color: #1B3DCC;
 }
 
 /* type */

@@ -27,15 +27,18 @@
 					$('.views').text(data.data.viewCount);
 				}
 			});
+
+			var replayId = '';
 			// 提交评论
 			var usernameEle = $('#username');
 			var emailEle = $('#email');
 			var commentContentEle = $('#comment_content');
 			var submitCommentEle = $('.submit-comment');
+			var commentListEle = $('.comment-list');
 			submitCommentEle.click(function() {
 				var username = usernameEle.val();
-				var email = usernameEle.val();
-				var content = usernameEle.val();
+				var email = emailEle.val();
+				var content = commentContentEle.val();
 				if (!username) {
 					alert('请输入用户名');
 					return;
@@ -53,12 +56,39 @@
 					data: {
 						author: username,
 						email: email,
-						content: content
+						content: content,
+						parent_id: replayId
 					},
 					success: function(data) {
-						console.log(data);
+						replayId = '';
+						if (data.status === 200) {
+							commentContentEle.val('');
+							var commentHtml =
+								"<li class='comment-item'>"
+									+ "<div class='comment-author'>"
+										+ "<a href='javascript:void(0);'>" + data.data.author + "</a>"
+										+ (data.data.parent_id ? ("<span>回复</span><a href='javascript:void(0);'>" + data.data.parent.author + "</a>") : "")
+									+ "</div>"
+									+ "<p class='comment-content'>" + data.data.content + "</p>"
+									+ "<div class='comment-time'>发表于"
+										+ "<span>" + data.data.created_at + "</span>"
+										+ "<a href='javascript:void(0);' class='comment-replay' data-replay-id='" + data.data.id + "' data-replay-name='" + data.data.author + "'>回复</a>"
+									+ "</div>"
+								+ "</li>";
+							commentListEle.prepend($(commentHtml));
+						} else {
+							alert(data.message);
+						}
 					}
 				})
+			});
+
+			// 回复评论
+			$(document).on('click', '.comment-replay', function() {
+				var replayName = $(this).data('replay-name');
+				replayId = $(this).data('replay-id');
+				commentContentEle.prop('placeholder', '回复: ' + replayName);
+				commentContentEle[0].scrollIntoView({block: "end", behavior: "smooth"});
 			});
 
 		});
@@ -122,10 +152,16 @@
 	<ul class='comment-list'>
 		{% for item in commentList %}
 			<li class='comment-item'>
-				<span class='comment-author'>{{ item.author }}</span>
-				<p class='comment-content'>{{ item.content }}</p>
+				<div class='comment-author'>
+					<a href='javascript:void(0);'>{{ item.author }}</a>
+					{% if item.parent_id %}
+						<span>回复</span>
+						<a href='javascript:void(0);'>{{ item.parent.author }}</a>
+					{% endif %}
+				</div>
+				<p class='comment-content'>{{ item.content | safe }}</p>
 				<div class='comment-time'>
-					发表于 <i>{{ item.created_at }}</i>
+					发表于<span>{{ item.created_at }}</span><a href='javascript:void(0);' class='comment-replay' data-replay-id='{{ item.id }}' data-replay-name='{{ item.author }}'>回复</a>
 				</div>
 			</li>
 		{% endfor %}

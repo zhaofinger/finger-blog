@@ -78,6 +78,14 @@ module.exports = {
 
 		commentList.map(item => {
 			item.created_at = timeFormat(item.created_at, 'yyyy-MM-dd hh:mm:ss');
+			if (item.parent_id) {
+				for (let _item of commentList) {
+					if (_item.id === item.parent_id) {
+						item.parent = _item;
+						break;
+					}
+				}
+			}
 			return item;
 		});
 		await ctx.render('app/detail', {
