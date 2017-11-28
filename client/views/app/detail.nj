@@ -2,7 +2,8 @@
 
 {% block style %}
 	<link rel='stylesheet' href='/style/app/markdown.css'>
-	<link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css'>
+	<link rel='stylesheet' href='/style/app/prism.css'>
+	{# <link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css'> #}
 	<style>
 		#header, #content, #footer {
 			width: 800px;
@@ -16,9 +17,10 @@
 {% endblock %}
 
 {% block script %}
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	{# <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> #}
+	<script src="/js/prism.js"></script>
 	<script>
-		hljs.initHighlightingOnLoad();
+		{# hljs.initHighlightingOnLoad(); #}
 		$(function() {
 			var id = location.pathname.split('/').pop();
 			// 浏览量
