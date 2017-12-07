@@ -34,8 +34,8 @@ module.exports = {
 		}
 
 		// 已发布文章列表
-		const articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num}, typeId);
-		articleList.map(item => {
+		let articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num}, typeId);
+		articleList = articleList.map(item => {
 			item.created_at = timeFormat(item.created_at);
 			return item;
 		});
@@ -72,11 +72,16 @@ module.exports = {
 		const articleDetail = await article.getArticleDetail(id);
 		const title = articleDetail.title;
 		articleDetail.created_at = timeFormat(articleDetail.created_at);
-		const labelArr = articleDetail.label.split(' ');
-		const viewCount = articleDetail.view_count;
-		const commentList = await article.getCommentList(id);
 
-		commentList.map(item => {
+		// 标签
+		const labelArr = articleDetail.label.split(' ');
+
+		// 浏览次数
+		const viewCount = articleDetail.view_count;
+
+		// 评论列表
+		let commentList = await article.getCommentList(id);
+		commentList = commentList.map(item => {
 			item.created_at = timeFormat(item.created_at, 'yyyy-MM-dd hh:mm:ss');
 			if (item.parent_id) {
 				for (let _item of commentList) {
