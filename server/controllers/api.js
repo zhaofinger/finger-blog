@@ -1,6 +1,7 @@
 const article = require('../models/article');
 const timeFormat = require('../utils/time-format');
 const marked = require('marked');
+const generateToken = require('./upload');
 
 module.exports = {
 	/**
@@ -55,6 +56,17 @@ module.exports = {
 		return ctx.body = {
 			status: 200,
 			data: '删除成功'
+		};
+	},
+	/**
+	 * 生成七牛 token
+	 * @param {object} ctx
+	 */
+	async generateQiniuToken(ctx) {
+		let token = generateToken();
+		return ctx.body = {
+			status: 200,
+			data: { token }
 		};
 	}
 };

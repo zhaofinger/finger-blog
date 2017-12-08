@@ -43,7 +43,7 @@
 			var _this = $(this);
 			var isDelete = confirm('确认删除吗？');
 			if (isDelete) {
-				$.post('/article/delete-article/' + _this.data('id'), {}, function(data) {
+				$.post('/api/article/delete-article/' + _this.data('id'), {}, function(data) {
 					if (data.status === 200) {
 						_this.parents('tr').remove();
 						alert('删除成功!');

@@ -24,7 +24,7 @@
 		$(function() {
 			var id = location.pathname.split('/').pop();
 			// 浏览量
-			$.post('/article/view-count/' + id, function(data) {
+			$.post('/api/article/view-count/' + id, function(data) {
 				if (data.status) {
 					$('.views').text(data.data.viewCount);
 				}
@@ -52,7 +52,7 @@
 					return;
 				}
 				$.ajax({
-					url: '/article/comment/' + id,
+					url: '/api/article/comment/' + id,
 					type: 'post',
 					dataType: 'json',
 					data: {
@@ -82,7 +82,7 @@
 							alert(data.message);
 						}
 					}
-				})
+				});
 			});
 
 			// 回复评论

@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const user = require('../models/user');
 const article = require('../models/article');
 const calPageIndex = require('../utils/cal-page-index');
+const IMG_PRE = require('../../const').IMG_PRE;
 
 /**
  * 判断用户是否登录
@@ -153,7 +154,7 @@ module.exports = {
 			}
 			let articleType = await article.getArticleTypes();
 			await ctx.render('admin/edit', {
-				title,userInfo, articleType, articleModel
+				title, userInfo, articleType, articleModel, IMG_PRE
 			});
 		} else if (ctx.method === 'POST') {
 			let formData = ctx.request.body;
@@ -175,6 +176,7 @@ module.exports = {
 				id: formData.id,
 				title: formData.title,
 				type: formData.type,
+				cover: formData.cover,
 				desc: formData.desc,
 				label: formData.label,
 				content_md: formData['editormd-markdown-doc'],
@@ -192,6 +194,18 @@ module.exports = {
 				await article.createArticle(articleModel);
 			}
 			ctx.redirect('./list');
+		}
+	},
+	// 照片
+	async photo(ctx) {
+		if (ctx.method === 'GET') {
+			const title = '新照片';
+			const userInfo = ctx.session;
+			await ctx.render('admin/photo', {
+				title, userInfo
+			});
+		} else if (ctx.method === 'POST') {
+			console.log(1);
 		}
 	}
 };

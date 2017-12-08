@@ -54,8 +54,17 @@ CREATE TABLE IF NOT EXISTS comment (
 	author VARCHAR(50) NOT NULL,				-- 作者名称
 	email VARCHAR(50) NOT NULL,					-- 邮箱地址
 	content TEXT NOT NULL,						-- 评论内容
+	is_publish TINYINT UNSIGNED NOT NULL default 0,	-- 是否显示文章
+	is_delete TINYINT UNSIGNED NOT NULL default 0,	-- 是否删除
 	content_md TEXT NOT NULL,					-- 评论内容
 	created_at BIGINT UNSIGNED,					-- 创建时间
 	PRIMARY KEY (id),
 	FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE RESTRICT ON UPDATE CASCADE
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+-- 图片 --
+CREATE TABLE IF NOT EXISTS img (
+	id BIGINT UNSIGNED NOT NULL auto_increment,	-- 图片id
+	type INT UNSIGNED NOT NULL,					-- 文章分类
+	url VARCHAR(100) NOT NULL,					-- 图片地址
+)

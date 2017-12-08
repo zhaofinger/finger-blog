@@ -14,4 +14,4 @@ module.exports = router
 	.get('/type', app.type)
 	.get('/detail/:id', app.detail)
 	.get('/about', app.about)
-	.get('*', app.notFound);
+	.get('/not-found', app.notFound);

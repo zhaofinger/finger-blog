@@ -33,11 +33,7 @@
 					<textarea placeholder='描述' rows='6' name='desc' class='input input-big'>{{ articleModel.desc }}</textarea>
 				</div>
 			</div>
-			<div class='right'>
-				<div class='upload-preview'>
-					<span>点击上传图片</span>
-				</div>
-				<input type='file' accept='image/jpeg, image/jpg, image/png' class='hide'>
+			<div class='right img-place' data-img='{{ articleModel.cover }}'>
 			</div>
 		</div>
 
@@ -62,9 +58,11 @@
 {% endblock %}
 
 {% block script %}
+	<script src='/js/file-upload.js'></script>
 	<script src='/lib/editormd/editormd.min.js'></script>
 	<script>
 		$(function() {
+			$('.img-place').fileUpload(IMG_TYPE.ARTICLE_COVER, 'cover');
 			var isLeave = true;
 			$(window).on('beforeunload', function() {
 				return '文章尚未保存，确认离开吗？';

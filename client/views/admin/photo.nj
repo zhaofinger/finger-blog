@@ -1,0 +1,18 @@
+{% extends "admin/layout.nj" %}
+
+{% block content %}
+	<form action='/admin/edit' method='post' id='article'>
+		<input type='text' name='title' class='input input-big title' placeholder='照片标题'>
+		<div class='upload-wrapper'></div>
+	</form>
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block script %}
+	<script src='/js/file-upload.js'></script>
+	<script>
+		$('.upload-wrapper').fileUpload();
+	</script>
+{% endblock %}

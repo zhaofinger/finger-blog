@@ -17,6 +17,7 @@
 				<a href='/admin/list'><h1>赵的拇指</h1></a>
 				<a href='/admin/list'>文章列表</a>
 				<a href='/admin/edit'>新文章</a>
+				<a href='/admin/photo'>新照片</a>
 				<a href='/admin/user' class='user'>{{ userInfo.nickname }}</a>
 			</nav>
 		</header>
@@ -29,7 +30,14 @@
 	</footer>
 
 	<script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
-
+	<script>
+		var IMG_PRE = 'http://owu5r8hjs.bkt.clouddn.com/';
+		var IMG_TYPE = {
+			ARTICLE_COVER: 1,
+			ARTICLE_CONTENT: 2,
+			PHOTOGRAPHY: 3
+		};
+	</script>
 	{% block script %}
 	{% endblock %}
 </body>

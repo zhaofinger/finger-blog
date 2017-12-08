@@ -10,7 +10,7 @@ const redisStore = require('koa-redis');
 
 const app = new Koa();
 
-const {PORT, HOST} = require('./../config');
+const { PORT, HOST } = require('./../config');
 const routers = require('./routers/index');
 const logUtil = require('./utils/log');
 

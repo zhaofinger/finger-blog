@@ -18,6 +18,12 @@ const databaseConfig = env === 'production' ? {
 	PORT: '3306'
 };
 
+// 七牛key
+const qiniuKey = {
+	accessKey: '******',
+	secretKey: '******'
+};
+
 // log配置
 const errorLogPath = path.resolve(__dirname, './logs/error/error');				// 错误日志输出完整路径
 const responseLogPath = path.resolve(__dirname, './logs/response/response');	// 响应日志输出完整路径
@@ -47,4 +53,4 @@ const logConfig = {
 	}
 };
 
-module.exports = {PORT, HOST, databaseConfig, logConfig};
+module.exports = { PORT, HOST, databaseConfig, logConfig, qiniuKey };
