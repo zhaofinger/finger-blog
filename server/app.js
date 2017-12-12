@@ -12,13 +12,13 @@ const app = new Koa();
 
 const { PORT, HOST } = require('./../config');
 const routers = require('./routers/index');
-const logUtil = require('./utils/log');
 
 const env = process.env.NODE_ENV;
 
 // cookie
 // 存放sessionId的cookie配置
-let cookie = {
+/* session cookie */
+let cookieConfig = {
 	maxAge: 86400000,			// cookie有效时长
 	expires: '',				// cookie失效时间
 	path: '',					// 写cookie所在的路径
@@ -29,31 +29,14 @@ let cookie = {
 	sameSite: '',
 	signed: '',
 };
-
 // 配置session中间件
 app.use(session({
 	key: 'USER_SID',
 	store: redisStore(),
-	cookie: cookie
+	cookie: cookieConfig
 }));
 
-// 测试 配置控制台日志中间件
-// 正式 运行日志中间件
-app.use(env !== 'production' ? koaLogger() : async (ctx, next) => {
-	// 响应开始时间
-	const start = new Date();
-	// 响应间隔时间
-	let ms;
-	try {
-		// 开始进入到下一个中间件
-		await next();
-		ms = new Date() - start;
-		logUtil.logResponse(ctx, ms);		// 记录响应日志
-	} catch (error) {
-		ms = new Date() - start;
-		logUtil.logError(ctx, error, ms);	// 记录异常日志
-	}
-});
+app.use(koaLogger());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());
@@ -81,6 +64,11 @@ app.use(views(path.join(__dirname, '../client/views'), {
 
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods());
+app.use(async ctx => {
+	if (ctx.status === 404) {
+		ctx.redirect('/not-found');
+	}
+});
 
 // 监听启动端口
 app.listen(PORT);

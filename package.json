@@ -35,7 +35,6 @@
 		"koa-session-minimal": "^3.0.4",
 		"koa-static": "^4.0.1",
 		"koa-views": "^6.0.2",
-		"log4js": "^1.1.1",
 		"marked": "^0.3.6",
 		"mysql": "^2.13.0",
 		"nunjucks": "^3.0.1",
