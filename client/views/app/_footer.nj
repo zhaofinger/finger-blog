@@ -1,0 +1,12 @@
+<div class='friends-link link-area'>
+	<span class='link-title'>友链:</span>
+	<a href='https://blog.kasora.moe/' title="kasora's blog" target='_blank'>kasora's blog</a>
+	<a href='http://foreversong.cn/' title="ADog's Blog" target='_blank'>ADog's Blog</a>
+	<a href='http://xcatliu.com/' title="流浪小猫" target='_blank'>流浪小猫</a>
+</div>
+<div class='my-link link-area'>
+	<span class='link-title'>联系:</span>
+	<a href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
+	<a href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
+	<a href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
+</div>

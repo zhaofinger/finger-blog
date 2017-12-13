@@ -20,9 +20,6 @@
 	</div>
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
-
 {% block style %}
 	<style>
 		html, body, #content {

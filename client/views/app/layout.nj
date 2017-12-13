@@ -25,6 +25,7 @@
 				<div class='menu'>
 					<a href='/index' class='{{ "active" if nowPage == "index" }}'>首&nbsp;页</a>
 					<a href='/article' class='{{ "active" if nowPage == "article" }}'>文&nbsp;章</a>
+					<a href='/photo' class='{{ "active" if nowPage == "photo" }}'>摄&nbsp;影</a>
 					<a href='/type' class='{{ "active" if nowPage == "type" }}'>分&nbsp;类</a>
 					<a href='/about' class='{{ "active" if nowPage == "about" }}'>关&nbsp;于</a>
 				</div>
@@ -36,26 +37,18 @@
 		{% endblock %}
 	</div>
 
-	{% block footer %}
-		<footer id='footer'>
-			<div class='friends-link link-area'>
-				<span class='link-title'>友链:</span>
-				<a href='https://blog.kasora.moe/' title="kasora's blog" target='_blank'>kasora's blog</a>
-				<a href='http://foreversong.cn/' title="ADog's Blog" target='_blank'>ADog's Blog</a>
-				<a href='http://xcatliu.com/' title="流浪小猫" target='_blank'>流浪小猫</a>
-			</div>
-			<div class='my-link link-area'>
-				<span class='link-title'>联系:</span>
-				<a href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
-				<a href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
-				<a href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
-			</div>
-		</footer>
-	{% endblock %}
+
+	<footer id='footer'>
+		{% block footer %}
+		{% endblock %}
+		{% include "app/_footer.nj" %}
+	</footer>
 
 	<script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
 	<script src="https://s22.cnzz.com/z_stat.php?id=1264543759&web_id=1264543759" language="JavaScript"></script>
-
+	<script>
+		var IMG_PRE = 'http://owu5r8hjs.bkt.clouddn.com/';
+	</script>
 	{% block script %}
 	{% endblock %}
 </body>
