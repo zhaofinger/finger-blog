@@ -12,7 +12,11 @@
 				<label for='type'>选择文章分类：</label>
 				<select name='type' id='type'>
 					{% for item in articleType %}
-						<option value='{{ item.id }}'>{{ item.name }}</option>
+						{% if item.id === articleModel.type %}
+							<option value='{{ item.id }}' selected='selected'>{{ item.name }}</option>
+						{% else %}
+							<option value='{{ item.id }}'>{{ item.name }}</option>
+						{% endif %}
 					{% endfor %}
 					<option value='new'>新建</option>
 				</select>
