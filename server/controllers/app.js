@@ -74,7 +74,7 @@ module.exports = {
 		articleDetail.created_at = timeFormat(articleDetail.created_at);
 
 		// 标签
-		const labelArr = articleDetail.label.split(' ');
+		const labelArr = articleDetail.label && articleDetail.label.split(' ');
 
 		// 浏览次数
 		const viewCount = articleDetail.view_count;

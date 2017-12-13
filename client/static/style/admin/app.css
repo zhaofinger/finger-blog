@@ -118,25 +118,22 @@
 .edit-article-message .left input, .edit-article-message .left textarea{
 	width: 100%;
 }
-.edit-article-message .input-wrapper{
+.edit-article-message .input-wrapper {
 	display: flex;
 	align-items: center;
 	margin-bottom: 15px;
+}
+.edit-article-message .input-wrapper:last-child {
+	margin-bottom: 0;
 }
 .edit-article-message .right {
 	width: 380px;
 	margin-left: 20px;
 }
-/* .edit-article-message .right .upload-preview {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 260px;
-	border-radius: 2px;
-	cursor: pointer;
-	border: 2px dotted #ddd;
-	color: #ddd;
-} */
+.edit-article-message .right .upload-file-wrapper {
+	width: 100%;
+	height: 100%;
+}
 .edit-article-content {
 	width: 100%;
 	height: 400px;
@@ -144,6 +141,28 @@
 }
 #editormd {
 	z-index: 100;
+}
+
+/* photo */
+#photo .photo-header {
+	display: flex;
+}
+#photo .photo-header .left {
+	width: 600px;
+}
+#photo .photo-header .left .input {
+	width: 100%;
+	margin-bottom: 15px;
+}
+#photo .photo-header .right {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 380px;
+	margin-left: 20px;
+}
+#photo .photo-header .right .btn {
+	margin-right: 20px;
 }
 
 /* user */
@@ -160,16 +179,46 @@
 
 
 /* fileupload */
-.upload-preview {
+.upload-file-wrapper {
+	height: 200px;
+	max-width: 100%;
+	max-height: 100%;
+}
+.upload-file-wrapper .upload-img-list {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+.upload-file-wrapper .upload-btn {
+	display: inline-block;
+	padding: 6px 10px;
+	border-radius: 6px;
+	background-color: #1B3DCC;
+	color: #ffffff;
+	cursor: pointer;
+}
+.upload-file-wrapper .upload-preview {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 400px;
-	height: 260px;
-	max-width: 100%;
-	max-height: 100%;
+	width: 100%;
+	height: 100%;
 	border-radius: 2px;
 	cursor: pointer;
 	border: 2px dotted #ddd;
 	color: #ddd;
+}
+.upload-file-wrapper .upload-img-item {
+	position: relative;
+	width: 300px;
+	height: 200px;
+	margin: 10px 10px 10px 0;
+	border: 10px solid #ffffff;
+	border-radius: 10px;
+}
+.upload-file-wrapper .upload-img-item .delete {
+	position: absolute;
+	right: -8px;
+	top: -14px;
+	cursor: pointer;
 }

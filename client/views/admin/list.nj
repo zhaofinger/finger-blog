@@ -15,11 +15,11 @@
 			{% for item in articleList %}
 				<tr class='article-item'>
 					<td>{{ item.id }}</td>
-					<td>{{ item.title }}</td>
+					<td>{{ "[摄影] " if item.is_photo else "" }}{{ item.title }}</td>
 					<td>{{  "已发布" if item.is_publish else "未发布" }}</td>
 					<td>{{ item.view_count }}</td>
 					<td>
-						<a href='/admin/edit?id={{item.id}}'>编辑</a>
+						<a href='/admin/{{ "photo" if item.is_photo else "edit" }}?id={{item.id}}'>编辑</a>
 						<a href='javascript:void(0);' class='delete-btn' data-id='{{item.id}}'>删除</a>
 					</td>
 				</tr>

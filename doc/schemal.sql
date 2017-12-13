@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS article_type (
 	created_at BIGINT UNSIGNED,					-- 创建时间
 	updated_at BIGINT UNSIGNED,					-- 最后修改时间updateData
 	PRIMARY KEY (id),
-	unique (name)
+	UNIQUE (name)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 文章 --
@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS article (
 	cover VARCHAR(100),							-- 文章封面图片
 	content_md TEXT,							-- 文章markdown内容
 	content_render TEXT,						-- 文章渲染内容
+	is_photo TINYINT UNSIGNED NOT NULL default 0,	-- 是否是摄影照片
 	is_publish TINYINT UNSIGNED NOT NULL default 0,	-- 是否显示文章
 	is_delete TINYINT UNSIGNED NOT NULL default 0,	-- 是否删除
 	rank TINYINT UNSIGNED NOT NULL default 1,	-- 排序等级
@@ -61,10 +62,3 @@ CREATE TABLE IF NOT EXISTS comment (
 	PRIMARY KEY (id),
 	FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE RESTRICT ON UPDATE CASCADE
 )ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
--- 图片 --
-CREATE TABLE IF NOT EXISTS img (
-	id BIGINT UNSIGNED NOT NULL auto_increment,	-- 图片id
-	type INT UNSIGNED NOT NULL,					-- 文章分类
-	url VARCHAR(100) NOT NULL,					-- 图片地址
-)

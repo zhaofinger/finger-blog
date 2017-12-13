@@ -640,6 +640,8 @@ a.active::after {
 .btn {
 	padding: 8px 16px;
 	border-radius: 4px;
+	background-color: #1B3DCC;
+	color: #ffffff;
 }
 
 .shadow {

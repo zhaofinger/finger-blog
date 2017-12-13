@@ -179,9 +179,10 @@ module.exports = {
 				cover: formData.cover,
 				desc: formData.desc,
 				label: formData.label,
-				content_md: formData['editormd-markdown-doc'],
-				content_render: formData['editormd-html-code'],
+				content_md: formData.is_photo ? formData.file : formData['editormd-markdown-doc'],
+				content_render: formData.is_photo ? formData.file : formData['editormd-html-code'],
 				is_publish: formData.status,
+				is_photo: formData.is_photo || 0,
 				created_at: formData.created_at || (new Date()).getTime(),
 				updated_at: (new Date()).getTime()
 			};
@@ -198,14 +199,20 @@ module.exports = {
 	},
 	// 照片
 	async photo(ctx) {
-		if (ctx.method === 'GET') {
-			const title = '新照片';
-			const userInfo = ctx.session;
-			await ctx.render('admin/photo', {
-				title, userInfo
-			});
-		} else if (ctx.method === 'POST') {
-			console.log(1);
+		let photoModel = null;
+		let title = '新照片';
+
+		const userInfo = ctx.session;
+
+		if (ctx.request.query.id) {
+			photoModel = await article.getArticleDetail(ctx.request.query.id);
+			if (photoModel) {
+				title = '编辑照片';
+			}
 		}
+
+		await ctx.render('admin/photo', {
+			title, userInfo, photoModel
+		});
 	}
 };
