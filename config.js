@@ -1,4 +1,3 @@
-const path = require('path');
 const env = process.env.NODE_ENV;
 
 // server端口
@@ -20,8 +19,7 @@ const databaseConfig = env === 'production' ? {
 
 // 七牛key
 const qiniuKey = {
-	accessKey: '******',
-	secretKey: '******'
+	scope: env === 'production' ? 'finger-blog' : 'finger-blog-dev'
 };
 
 
