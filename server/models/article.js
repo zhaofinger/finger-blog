@@ -28,6 +28,19 @@ const article = {
 		return result;
 	},
 	/**
+	 * 分页获取照片列表
+	 * @param {object} page 分页开始结束
+	 */
+	async getPhotoList(page) {
+		const _sql = `
+			SELECT * FROM article
+			WHERE is_photo = 1 AND is_delete = 0
+			ORDER BY article.created_at DESC
+			LIMIT ${page.start} , ${page.end}`;
+		const result = await dbUtils.query(_sql);
+		return result;
+	},
+	/**
 	 * 获取文章详情
 	 * @param {string} id 文章id
 	 */
@@ -68,6 +81,17 @@ const article = {
 		const _sql = `
 			SELECT COUNT(*) AS total_count FROM article
 			WHERE is_publish = 1 AND is_delete = 0 ${typeId ? 'AND type = ' + typeId : ''}
+		`;
+		const result = dbUtils.query(_sql);
+		return result;
+	},
+	/**
+	 * 获取photo总页数
+	 */
+	async getPhotoPubCount() {
+		const _sql = `
+			SELECT COUNT(*) AS total_count FROM article
+			WHERE is_publish = 1 AND is_delete = 0 AND is_photo = 1
 		`;
 		const result = dbUtils.query(_sql);
 		return result;

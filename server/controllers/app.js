@@ -1,6 +1,7 @@
 const article = require('../models/article');
 const calPageIndex = require('../utils/cal-page-index');
 const timeFormat = require('../utils/time-format');
+const { IMG_PRE } = require('../../const');
 
 module.exports = {
 	/**
@@ -93,8 +94,44 @@ module.exports = {
 			}
 			return item;
 		});
+
+		if (articleDetail.is_photo) {
+			console.log(articleDetail);
+			articleDetail.content_render = articleDetail.content_render.split('||').map(item => IMG_PRE + item);
+		}
+
 		await ctx.render('app/detail', {
 			title, articleDetail, labelArr, viewCount, commentList
+		});
+	},
+	/**
+	 * 摄影
+	 * @param {*} ctx
+	 */
+	async photo(ctx) {
+		const title = '赵的拇指-摄影';
+		const nowPage = 'photo';
+
+		// 获取当前页码
+		let nowPageIndex = ctx.request.query.page || 1;
+		const num = 6;
+
+		// 已发布文章列表
+		let photoList = await article.getPhotoList({start: (nowPageIndex - 1) * num, end: num});
+		photoList = photoList.map(item => {
+			item.created_at = timeFormat(item.created_at);
+			item.cover = IMG_PRE + item.content_render.split('||')[0];
+			return item;
+		});
+
+		// 已发布文章总页数
+		const totalCount = (await article.getPhotoPubCount())[0].total_count;
+
+		// 显示分页
+		let pageArr = calPageIndex(nowPageIndex, Math.ceil(totalCount / num));
+
+		await ctx.render('app/photo', {
+			nowPage, title, photoList, pageArr, nowPageIndex, totalCount
 		});
 	},
 	/**

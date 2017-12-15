@@ -1,7 +1,7 @@
 const article = require('../models/article');
 const timeFormat = require('../utils/time-format');
 const marked = require('marked');
-const generateToken = require('./upload');
+const generateToken = require('../utils/generate-qiniu-token');
 
 module.exports = {
 	/**

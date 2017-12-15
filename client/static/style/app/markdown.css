@@ -686,3 +686,7 @@
 .markdown-body hr {
 	border-bottom-color: #eee;
 }
+
+.markdown-body img {
+	max-width: 100% !important;
+}

@@ -108,18 +108,31 @@
 			<h2 class='article-title'>{{ articleDetail.title }}</h2>
 			<div class='article-meta'>
 				<span>By</span>
-				<a class='author' href='https://www.zhaofinger.com'>赵的拇指</a>
+				<a class='author' href='/'>赵的拇指</a>
 				<span>At</span>
 				<span class='datetime'>{{ articleDetail.created_at }}</span>
-				<span>In</span>
-				<a href='/article/type/{{ articleDetail.type }}' class='category'>{{ articleDetail.type_name }}</a>
+				{% if articleDetail.is_photo != 1 %}
+					<span>In</span>
+					<a href='/article/type/{{ articleDetail.type }}' class='category'>{{ articleDetail.type_name }}</a>
+				{% endif %}
 				<span>Views</span>
 				<span class='views'>{{ viewCount }}</span>
 			</div>
 		</header>
-		<div class='article-content markdown-body'>
-			{{ articleDetail.content_render | safe }}
-		</div>
+
+		{% if articleDetail.is_photo %}
+			<div class='article-content photo-content'>
+				<p class='photo-desc'>{{ articleDetail.desc }}</p>
+				{% for item in articleDetail.content_render %}
+					<img src='{{ item }}'>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class='article-content markdown-body'>
+				{{ articleDetail.content_render | safe }}
+			</div>
+		{% endif %}
+
 		<div class='article-announce'>
 			<span>感谢您的阅读，本文由</span>
 			<a href='https://www.zhaofinger.com'>赵的拇指</a>
