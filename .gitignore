@@ -2,6 +2,7 @@ node_modules/
 .idea/
 .vscode/
 logs/
+doc/.*
 .DS_Store
 npm-debug.log
 npm-debug.log.*

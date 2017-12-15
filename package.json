@@ -6,7 +6,8 @@
 		"lint": "eslint *.js server/**",
 		"dev": "export NODE_ENV=development && nodemon --harmony ./server/app.js",
 		"deploy_setup": "pm2 deploy ecosystem.config.js production setup",
-		"deploy": "pm2 deploy ecosystem.config.js production"
+		"deploy": "pm2 deploy ecosystem.config.js production",
+		"start": "export NODE_ENV=production && pm2 start ./server/app.js --max-memory-restart 300M -n zhao-finger --watch"
 	},
 	"repository": {
 		"type": "git",
