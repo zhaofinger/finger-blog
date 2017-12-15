@@ -1,8 +1,9 @@
 node_modules/
 .idea/
+.vscode/
+logs/
 .DS_Store
 npm-debug.log
 npm-debug.log.*
-logs/
-.vscode
+
 config.js
