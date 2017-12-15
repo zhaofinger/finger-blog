@@ -11,6 +11,8 @@ const redisStore = require('koa-redis');
 const app = new Koa();
 
 const { PORT, HOST } = require('./../config');
+const { IMG_PRE } = require('./../const');
+
 const routers = require('./routers/index');
 
 const env = process.env.NODE_ENV;
@@ -52,6 +54,9 @@ const nunjucksEnv = new nunjucks.Environment(
 		noCache: env === 'development'
 	})
 );
+
+nunjucksEnv.addGlobal('IMG_PRE', IMG_PRE);
+
 app.use(views(path.join(__dirname, '../client/views'), {
 	extension: 'nj',
 	options: {
