@@ -23,7 +23,7 @@ $.fn.extend({
 			var hasImgsArr = hasImgVal.split('||');
 			if (isMutiple) {
 				hasImgsArr.forEach(function(item) {
-					var imgHtml = '<li class="upload-img-item" style="background: url(' + IMG_PRE + item + ') center center /cover"><i class="delete">×</i></li>';
+					var imgHtml = '<li class="upload-img-item" style="background: url(\'' + IMG_PRE + item + '\') center center /cover"><i class="delete">×</i></li>';
 					uploadImgListEle.append(imgHtml);
 				});
 			} else {
@@ -57,7 +57,8 @@ $.fn.extend({
 				if (data.status === 200) {
 					formData.append('token', data.data.token);
 					$.ajax({
-						url: 'http://upload.qiniu.com/',
+						// url: '//upload.qiniu.com/',
+						url: '//up.qbox.me',
 						type: 'post',
 						data: formData,
 						processData: false,
@@ -74,7 +75,7 @@ $.fn.extend({
 							} else {
 								imgArr.push(data.key);
 								filePathEle.val(imgArr.join('||'));
-								var imgHtml = '<li class="upload-img-item" style="background: url(' + IMG_PRE + data.key + ') center center /cover"><i class="delete">×</i></li>';
+								var imgHtml = '<li class="upload-img-item" style="background: url(\'' + IMG_PRE + data.key + '\') center center /cover"><i class="delete">×</i></li>';
 								uploadImgListEle.append(imgHtml);
 							}
 							if (callback) {
