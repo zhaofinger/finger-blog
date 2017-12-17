@@ -23,6 +23,7 @@ $.fn.extend({
 			var hasImgsArr = hasImgVal.split('||');
 			if (isMutiple) {
 				hasImgsArr.forEach(function(item) {
+					imgArr.push(item);
 					var imgHtml = '<li class="upload-img-item" style="background: url(\'' + IMG_PRE + item + '\') center center /cover"><i class="delete">×</i></li>';
 					uploadImgListEle.append(imgHtml);
 				});
