@@ -42,9 +42,15 @@
 		</div>
 
 		{# 文章内容 #}
-		<div class='edit-article-content'>
-			<div id='editormd'>
-				<textarea style='display:none;'>{{ articleModel.content_md }}</textarea>
+		<div class='markdown-wrapper'>
+			<ul class='markdown-menu'>
+				<li class='markdown-preview'>预览</li>
+				<li class='markdown-full'>全屏</li>
+			</ul>
+			<div class='markdown-content'>
+				<textarea name='markdown_md' class='markdown-input'>{{ articleModel.content_md }}</textarea>
+				<input type='hidden' name='markdown_render' class='markdown-render'>
+				<div class='markdown-body hide'></div>
 			</div>
 		</div>
 
@@ -58,28 +64,64 @@
 {% endblock %}
 
 {% block style %}
-	<link rel='stylesheet' href='/lib/editormd/css/editormd.min.css'>
+	<link rel='stylesheet' href='/style/app/markdown.css'>
 {% endblock %}
 
 {% block script %}
+	<script src='//cdn.bootcss.com/marked/0.3.7/marked.min.js'></script>
 	<script src='/js/file-upload.js'></script>
 	<script src='/lib/editormd/editormd.min.js'></script>
 	<script>
+		var markdown = {
+			isOpenPreview: false,
+			isFullScreen: false,
+			init: function($markdownInput, $markdownResult, $markdownRender, $preview, $fullscreen, $wrapper) {
+				var _this = this;
+				$markdownInput.on('input', function(val) {
+					var result = marked($(this).val());
+					if (_this.isOpenPreview) {
+						$markdownResult.val(result);
+					}
+					$markdownRender.html(result);
+				});
+				$preview.click(function() {
+					_this.isOpenPreview = !_this.isOpenPreview;
+					if (_this.isOpenPreview) {
+						$(this).text('退出预览');
+						$markdownRender.show();
+					} else {
+						$(this).text('预览');
+						$markdownRender.hide();
+					}
+				});
+				$fullscreen.click(function() {
+					_this.isFullScreen = !_this.isFullScreen;
+					if (_this.isFullScreen) {
+						$(this).text('退出全屏');
+						$wrapper.addClass('full-screen');
+					} else {
+						$(this).text('全屏');
+						$wrapper.removeClass('full-screen');
+					}
+				});
+			}
+		};
 		$(function() {
 			$('.img-place').fileUpload(IMG_TYPE.ARTICLE_COVER, 'cover');
 			var isLeave = true;
 			$(window).on('beforeunload', function() {
 				return '文章尚未保存，确认离开吗？';
 			});
-			// 初始化markdown编辑器
-			var editor = editormd('editormd', {
-				path : '/lib/editormd/lib/',
-				toolbarIcons : function() {
-					return ["undo", "redo", "|", "preview", "watch", "||", "fullscreen"]
-				},
-				watch: false,
-				saveHTMLToTextarea: true
-			});
+
+			markdown.init(
+				$('.markdown-input'),
+				$('.markdown-render'),
+				$('.markdown-body'),
+				$('.markdown-preview'),
+				$('.markdown-full'),
+				$('.markdown-wrapper')
+			);
+
 			// 新建文章分类
 			var newTypeEl = $('.new-type-input');
 			$('#type').change(function() {
@@ -90,12 +132,10 @@
 					newTypeEl.fadeOut();
 				}
 			});
+
 			// 提交文章内容
 			$('.article-operate-btn button').click(function(e) {
 				$(window).off('beforeunload');
-				// markdown
-				editor.getMarkdown();       // 获取 Markdown 源码
-				editor.getHTML();           // 获取 Textarea 保存的 HTML 源码
 				// 暂存 提交
 				$('#status').val($(this).hasClass('save') ? 0 : 1);
 				$('#article').submit();
