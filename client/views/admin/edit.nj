@@ -49,7 +49,7 @@
 			</ul>
 			<div class='markdown-content'>
 				<textarea name='markdown_md' class='markdown-input'>{{ articleModel.content_md }}</textarea>
-				<input type='hidden' name='markdown_render' class='markdown-render'>
+				<input type='hidden' name='markdown_render' class='markdown-render' value='{{ articleModel.content_md }}'>
 				<div class='markdown-body hide'></div>
 			</div>
 		</div>
@@ -80,13 +80,16 @@
 				$markdownInput.on('input', function(val) {
 					var result = marked($(this).val());
 					if (_this.isOpenPreview) {
-						$markdownResult.val(result);
+						$markdownRender.html(result);
 					}
-					$markdownRender.html(result);
+					$markdownResult.val(result);
 				});
 				$preview.click(function() {
 					_this.isOpenPreview = !_this.isOpenPreview;
 					if (_this.isOpenPreview) {
+
+						$markdownRender.html(marked($markdownInput.val()));
+
 						$(this).text('退出预览');
 						$markdownRender.show();
 					} else {
