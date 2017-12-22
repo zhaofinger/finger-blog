@@ -42,7 +42,7 @@ module.exports = {
 		});
 
 		// 已发布文章总页数
-		const totalCount = (await article.getArticlePubCount())[0].total_count;
+		const totalCount = (await article.getArticlePubCount(typeId))[0].total_count;
 
 		// 显示分页
 		let pageArr = calPageIndex(nowPageIndex, Math.ceil(totalCount / num));
