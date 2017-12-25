@@ -24,5 +24,20 @@ const qiniuKey = {
 	scope: env === 'production' ? 'photo-prod' : 'photo-dev'
 };
 
+// 友链
+const friendsLink = [
+	{
+		link: 'https://blog.kasora.moe/',
+		title: 'kasora\'s blog'
+	},
+	{
+		link: 'http://foreversong.cn/',
+		title: 'ADog\'s Blog'
+	},
+	{
+		link: 'http://xcatliu.com/',
+		title: '流浪小猫'
+	}
+];
 
-module.exports = { PORT, HOST, databaseConfig, qiniuKey };
+module.exports = { PORT, HOST, databaseConfig, qiniuKey, friendsLink };
