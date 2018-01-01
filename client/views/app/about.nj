@@ -22,7 +22,7 @@ const me = {
 	mail: 'zhbqsj@126.com',
 	weChat: 'little_zhao_finger',
 	introduction: '一只野生前端',
-	motto: '但行好事，莫问前程'
+	motto: 'Less is more.'
 };
 </code>
 			</pre>
