@@ -1,36 +1,43 @@
 {% extends "app/layout.nj" %}
+{% block style %}
+	<link rel='stylesheet' href='/style/app/prism.css'>
+{% endblock %}
+{% block script %}
+	<script src="/js/prism.js"></script>
+	<script>
+	</script>
+{% endblock %}
 
 {% block content %}
 	<div id='about'>
 		<div class='about-me'>
 			<h2>关于我</h2>
 			<pre>
+<code class="lang-javascript">
 const me = {
 	name: '赵海波',
 	nickname: '赵的拇指',
 	sex: 'male',
 	college: '常熟理工学院(CIT)',
-	mail: '<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</a>',
+	mail: 'zhbqsj@126.com',
 	weChat: 'little_zhao_finger',
 	introduction: '一只野生前端',
 	motto: '但行好事，莫问前程'
 };
+</code>
 			</pre>
 		</div>
 		<div class='about-site'>
 			<h2>关于网站</h2>
 			<pre>
+<code class="lang-javascript">
 const site = {
 	name: '赵的拇指',
 	language: 'JavaScript',
 	frame: 'koa2'
 };
+</code>
 			</pre>
 		</div>
 	</div>
-{% endblock %}
-
-{% block script %}
-	<script>
-	</script>
 {% endblock %}
