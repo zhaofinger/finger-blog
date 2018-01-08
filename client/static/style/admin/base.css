@@ -17,6 +17,18 @@ body {
 	box-sizing: border-box;
 }
 
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: 'PingFang SC', 'Menlo', 'Meslo LG', 'monospace', 'Helvetica', 'Tahoma', 'Arial', 'Microsoft JhengHei', 'Microsoft YaHei', 'SimSun', 'sans-serif';
+	outline: 0;
+	border: 0;
+	padding: 0;
+	color: #666666;
+}
+
 /* a */
 a {
 	text-decoration: none;
