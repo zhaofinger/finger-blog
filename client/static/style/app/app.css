@@ -333,6 +333,37 @@
 	margin-left: 60px;
 }
 
+/* 蒙罗币 */
+.miner {
+	margin-top: 20px;
+}
+.miner button {
+	padding: 6px 12px;
+	border-radius: 2px;
+	background-color: #1B3DCC;
+	color: #ffffff;
+}
+.miner-wrapper {
+	display: flex;
+	margin-top: 10px;
+}
+.miner-operate-btn {
+	margin-right: 20px;
+}
+.miner-reduce, .miner-add {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	font-size: 12px;
+	font-style: normal;
+	text-align: center;
+	margin: 0 10px;
+	cursor: pointer;
+	user-select: none;
+	background-color: #1B3DCC;
+	color: #ffffff;
+}
 
 /* 404 */
 #not_found {

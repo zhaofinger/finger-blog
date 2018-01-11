@@ -27,6 +27,9 @@ textarea {
 	padding: 0;
 	color: #666666;
 }
+button {
+	cursor: pointer;
+}
 
 /* a */
 a {

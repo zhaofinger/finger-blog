@@ -19,6 +19,9 @@
 		</div>
 	</div>
 {% endblock %}
+{% block footer %}
+{% endblock %}
+
 
 {% block style %}
 	<style>
