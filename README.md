@@ -1,5 +1,7 @@
 # finger-blog
 
+![预览图](http://p3zod2iop.bkt.clouddn.com/blog.png)
+
 finger-blog 是一个基于 koa2 mysql的网络博客应用.
 
 ## Installation
