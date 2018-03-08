@@ -30,7 +30,7 @@
 	<script src='/js/file-upload.js'></script>
 	<script>
 		$(function() {
-			$('.upload-wrapper').fileUpload(IMG_TYPE.ARTICLE_COVER, null, true);
+			$('.upload-wrapper').fileUpload(IMG_TYPE.PHOTOGRAPHY, null, true);
 
 			$(window).on('beforeunload', function() {
 				return '文章尚未保存，确认离开吗？';

@@ -183,6 +183,8 @@ module.exports = {
 				content_render: formData.is_photo ? formData.file : formData['markdown_render'],
 				is_publish: formData.status,
 				is_photo: formData.is_photo || 0,
+				is_film: formData.is_film || 0,
+				external_link: formData.external_link,
 				created_at: formData.created_at || (new Date()).getTime(),
 				updated_at: (new Date()).getTime()
 			};
@@ -213,6 +215,24 @@ module.exports = {
 
 		await ctx.render('admin/photo', {
 			title, userInfo, photoModel
+		});
+	},
+	// 电影
+	async film(ctx) {
+		let filmModel = null;
+		let title = '新电影';
+
+		const userInfo = ctx.session;
+
+		if (ctx.request.query.id) {
+			filmModel = await article.getArticleDetail(ctx.request.query.id);
+			if (filmModel) {
+				title = '编辑电影';
+			}
+		}
+
+		await ctx.render('admin/film', {
+			title, userInfo, filmModel
 		});
 	}
 };

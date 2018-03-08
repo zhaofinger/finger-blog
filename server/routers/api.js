@@ -7,6 +7,7 @@ const api = require('../controllers/api');
 
 module.exports = router
 	.post('/api/article/view-count/:articleId', api.views)
+	.get('/api/article/film-list', api.getFilmList)
 	.post('/api/article/comment/:articleId', api.comment)
 	.post('/api/article/delete-article/:articleId', api.deleteArticle)
 	.get('/api/**/*', api.generateQiniuToken)

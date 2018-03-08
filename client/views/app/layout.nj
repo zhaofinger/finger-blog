@@ -20,13 +20,15 @@
 <body>
 	{% block header %}
 		<header id='header'>
-			<img src='/img/finger.png' class='logo'>
+			<a href='/'>
+				<img src='/img/finger.png' class='logo'>
+			</a>
 			<div class='word'>
 				<a href='/' class='title' nounder><h1>赵的拇指</h1></a>
 				<div class='menu'>
-					<a href='/index' class='{{ "active" if nowPage == "index" }}'>首&nbsp;页</a>
 					<a href='/article' class='{{ "active" if nowPage == "article" }}'>文&nbsp;章</a>
 					<a href='/photo' class='{{ "active" if nowPage == "photo" }}'>摄&nbsp;影</a>
+					<a href='/film' class='{{ "active" if nowPage == "film" }}'>电&nbsp;影</a>
 					<a href='/type' class='{{ "active" if nowPage == "type" }}'>分&nbsp;类</a>
 					<a href='/about' class='{{ "active" if nowPage == "about" }}'>关&nbsp;于</a>
 				</div>
@@ -42,7 +44,7 @@
 	{% block footer %}
 		<footer id='footer'>
 			{% include "app/_footer.nj" %}
-			<div class='miner'>
+			{# <div class='miner'>
 				<h3>门罗币挖矿</h3>
 				<div class='miner-wrapper'>
 					<div class='miner-operate-btn'>
@@ -57,16 +59,16 @@
 						<div class='miner-cpu'>线程数：<i class="miner-reduce">-</i><span>0</span><i class="miner-add">+</i></div>
 					</div>
 				</div>
-			</div>
+			</div> #}
 		</footer>
 	{% endblock %}
 
 	<script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
-	<script src='//coinhive.com/lib/coinhive.min.js'></script>
+	{# <script src='//coinhive.com/lib/coinhive.min.js'></script> #}
 	<script src='//s22.cnzz.com/z_stat.php?id=1264543759&web_id=1264543759' language='JavaScript'></script>
 	<script>
 		var IMG_PRE = '{{ IMG_PRE }}';
-		var miner = new CoinHive.Anonymous('VhPPPoepgFj8UANAZLVcnTCNf0Sbn4j9', 'zhaofinger_blog', {
+		{# var miner = new CoinHive.Anonymous('VhPPPoepgFj8UANAZLVcnTCNf0Sbn4j9', 'zhaofinger_blog', {
 			throttle: 0.3
 		});
 		var allThreads = navigator.hardwareConcurrency
@@ -114,7 +116,7 @@
 			} else {
 				return;
 			}
-		});
+		}); #}
 
 	</script>
 	{% block script %}

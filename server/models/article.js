@@ -21,7 +21,8 @@ const article = {
 				${isPub ? 'is_publish = 1' : ''}
 				${typeId && isPub ? 'AND' : '' }
 				${typeId ? 'type = ' + typeId : ''}
-				${typeId || isPub ? 'AND' : 'WHERE' } is_delete = 0
+				${typeId || isPub ? 'AND' : 'WHERE' }
+				is_delete = 0 AND is_film = 0
 			ORDER BY article.created_at DESC
 			LIMIT ${page.start} , ${page.end}`;
 		const result = await dbUtils.query(_sql);
@@ -34,7 +35,20 @@ const article = {
 	async getPhotoList(page) {
 		const _sql = `
 			SELECT * FROM article
-			WHERE is_photo = 1 AND is_delete = 0
+			WHERE is_photo = 1 AND is_delete = 0 AND is_publish = 1
+			ORDER BY article.created_at DESC
+			LIMIT ${page.start} , ${page.end}`;
+		const result = await dbUtils.query(_sql);
+		return result;
+	},
+	/**
+	 * 分页获取电影列表
+	 * @param {object} page 分页开始结束
+	 */
+	async getFilmList(page) {
+		const _sql = `
+			SELECT * FROM article
+			WHERE is_film = 1 AND is_delete = 0 AND is_publish = 1
 			ORDER BY article.created_at DESC
 			LIMIT ${page.start} , ${page.end}`;
 		const result = await dbUtils.query(_sql);

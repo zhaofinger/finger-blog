@@ -19,6 +19,7 @@
 				<a href='/admin/list'>文章列表</a>
 				<a href='/admin/edit'>新文章</a>
 				<a href='/admin/photo'>新照片</a>
+				<a href='/admin/film'>新电影</a>
 				<a href='/admin/user' class='user'>{{ userInfo.nickname }}</a>
 			</nav>
 		</header>
@@ -34,9 +35,10 @@
 	<script>
 		var IMG_PRE = '{{ IMG_PRE }}';
 		var IMG_TYPE = {
-			ARTICLE_COVER: 1,
+			PHOTOGRAPHY: 1,
 			ARTICLE_CONTENT: 2,
-			PHOTOGRAPHY: 3
+			ARTICLE_COVER: 3,
+			FILM: 4
 		};
 	</script>
 	{% block script %}

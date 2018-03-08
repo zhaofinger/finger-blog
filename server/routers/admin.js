@@ -15,4 +15,5 @@ module.exports = router
 	.get('/list', admin.list)
 	.get('/user', admin.user)
 	.post('/user', admin.user)
-	.get('/photo', admin.photo);
+	.get('/photo', admin.photo)
+	.get('/film', admin.film);

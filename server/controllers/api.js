@@ -1,3 +1,4 @@
+const { IMG_PRE } = require('../../const');
 const article = require('../models/article');
 const timeFormat = require('../utils/time-format');
 const marked = require('marked');
@@ -16,6 +17,24 @@ module.exports = {
 			data: {
 				viewCount: result.view_count
 			}
+		};
+	},
+	/**
+	 * 获取电影页
+	 * @param {object} ctx
+	 */
+	async getFilmList(ctx) {
+		let nowPageIndex = ctx.request.query.start || 1;
+		let num = ctx.request.query.num || 6;
+		let filmList = await article.getFilmList({start: (nowPageIndex - 1) * num, end: num});
+		filmList = filmList.map(item => {
+			item.created_at = timeFormat(item.created_at);
+			item.cover = IMG_PRE + item.cover;
+			return item;
+		});
+		return ctx.body = {
+			status: 200,
+			data: { filmList }
 		};
 	},
 	/**

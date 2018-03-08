@@ -11,6 +11,7 @@ module.exports = router
 	.get('/article', app.article)
 	.get('/article/type/:typeId', app.article)
 	.get('/article/label/:labelId', app.article)
+	.get('/film', app.film)
 	.get('/photo', app.photo)
 	.get('/type', app.type)
 	.get('/detail/:id', app.detail)

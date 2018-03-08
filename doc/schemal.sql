@@ -37,8 +37,10 @@ CREATE TABLE IF NOT EXISTS article (
 	content_md TEXT,							-- 文章markdown内容
 	content_render TEXT,						-- 文章渲染内容
 	is_photo TINYINT UNSIGNED NOT NULL default 0,	-- 是否是摄影照片
+	is_film TINYINT UNSIGNED NOT NULL default 0,	-- 是否是电影
 	is_publish TINYINT UNSIGNED NOT NULL default 0,	-- 是否显示文章
 	is_delete TINYINT UNSIGNED NOT NULL default 0,	-- 是否删除
+	external_link VARCHAR(100),					-- 外部链接暂时用于电影豆瓣链接
 	rank TINYINT UNSIGNED NOT NULL default 1,	-- 排序等级
 	view_count INT DEFAULT 0,					-- 文章浏览量
 	created_at BIGINT UNSIGNED,					-- 创建时间
