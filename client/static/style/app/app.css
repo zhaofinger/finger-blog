@@ -327,7 +327,7 @@
 }
 .time-line {
 	position: absolute;
-	left: 92px;
+	left: 100px;
 	width: 1px;
 	height: 100%;
 	border-right: 1px dashed #CCCCCC;
@@ -344,7 +344,7 @@
 .film-item .time::before {
 	content: '';
 	position: absolute;
-	right: 0;
+	right: -8px;
 	top: 2px;
 	width: 8px;
 	height: 8px;
@@ -488,6 +488,10 @@
 		display: inline-block;
 		margin-left: 0;
 		width: 100%;
+	}
+	.film-item .cover {
+		flex: 8;
+		margin: 0 20px;
 	}
 	#about pre {
 		margin-left: 20px;
