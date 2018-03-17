@@ -7,16 +7,20 @@
 		var noMore = false;
 		var $filmList = $('.film-list');
 		var $loadTip = $('.load-tip');
+		var isLoad = false;
 		var $noMore = $('.no-more-tip');
 
 		var getFilmlist = function() {
+			if (isLoad) return;
 			$loadTip.show();
+			isLoad = true;
 			$.ajax({
 				url: '/api/article/film-list?num=10&start=' + nowPage,
 				type: 'get',
 				dataType: 'json',
 				success: function(data) {
 					$loadTip.hide();
+					isLoad = false;
 					if (data.status === 200) {
 						if (data.data.filmList.length === 10) {
 							nowPage += 1;
