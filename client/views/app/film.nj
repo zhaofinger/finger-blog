@@ -15,14 +15,14 @@
 			$loadTip.show();
 			isLoad = true;
 			$.ajax({
-				url: '/api/article/film-list?num=10&start=' + nowPage,
+				url: '/api/article/film-list?num=6&start=' + nowPage,
 				type: 'get',
 				dataType: 'json',
 				success: function(data) {
 					$loadTip.hide();
 					isLoad = false;
 					if (data.status === 200) {
-						if (data.data.filmList.length === 10) {
+						if (data.data.filmList.length === 6) {
 							nowPage += 1;
 						} else {
 							noMore = true;

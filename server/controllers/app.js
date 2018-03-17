@@ -148,7 +148,6 @@ module.exports = {
 
 		// 已发布文章列表
 		let filmList = await article.getFilmList({start: (nowPageIndex - 1) * num, end: num});
-		console.log(filmList);
 		filmList = filmList.map(item => {
 			item.created_at = timeFormat(item.created_at);
 			item.cover = IMG_PRE + item.cover;
