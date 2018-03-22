@@ -8,7 +8,7 @@
 	<meta name='author' content='赵的拇指'>
 	<meta name='designer' content='赵的拇指'>
 	<meta name='keywords' content='赵的拇指,博客,代码,前端,前端开发,JavaScript,CSS,摄影,散打,跑步,设计'>
-	<link rel='shortcut icon' href='/img/finger.png'>
+	<link rel='shortcut icon' href='http://ow3w4ozuv.bkt.clouddn.com/finger.png'>
 	<link rel='stylesheet' href='//cdn.bootcss.com/normalize/7.0.0/normalize.min.css'>
 	<link rel='stylesheet' href='/style/app/base.css'>
 	<link rel='stylesheet' href='/style/app/app.css'>
@@ -20,9 +20,7 @@
 <body>
 	{% block header %}
 		<header id='header'>
-			<a href='/'>
-				<img src='/img/finger.png' class='logo'>
-			</a>
+			<img src='http://ow3w4ozuv.bkt.clouddn.com/finger.png' class='logo'>
 			<div class='word'>
 				<a href='/' class='title' nounder><h1>赵的拇指</h1></a>
 				<div class='menu'>
