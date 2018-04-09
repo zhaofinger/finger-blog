@@ -94,7 +94,7 @@ const article = {
 	async getArticlePubCount(typeId = null) {
 		const _sql = `
 			SELECT COUNT(*) AS total_count FROM article
-			WHERE is_publish = 1 AND is_delete = 0 ${typeId ? 'AND type = ' + typeId : ''}
+			WHERE is_publish = 1 AND is_delete = 0 AND is_film = 0 ${typeId ? 'AND type = ' + typeId : ''}
 		`;
 		const result = dbUtils.query(_sql);
 		return result;
