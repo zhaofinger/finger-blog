@@ -21,12 +21,16 @@
 		{# hljs.initHighlightingOnLoad(); #}
 		$(function() {
 			var id = location.pathname.split('/').pop();
+			var hasReadArticle = window.localStorage.getItem('hasReadArticle') || '';
 			// 浏览量
-			$.post('/api/article/view-count/' + id, function(data) {
-				if (data.status) {
-					$('.views').text(data.data.viewCount);
-				}
-			});
+			if (hasReadArticle.split(';').indexOf(id) === -1) {
+				$.post('/api/article/view-count/' + id, function(data) {
+					if (data.status) {
+						$('.views').text(data.data.viewCount);
+						window.localStorage.setItem('hasReadArticle', hasReadArticle + ';' + id);
+					}
+				});
+			}
 
 			var replayId = '';
 			// 提交评论
