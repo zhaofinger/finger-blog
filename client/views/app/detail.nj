@@ -39,15 +39,17 @@
 			var commentContentEle = $('#comment_content');
 			var submitCommentEle = $('.submit-comment');
 			var commentListEle = $('.comment-list');
+			var emailReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 			submitCommentEle.click(function() {
 				var username = usernameEle.val();
 				var email = emailEle.val();
 				var content = commentContentEle.val();
+
 				if (!username) {
 					alert('请输入用户名');
 					return;
-				} else if (!email) {
-					alert('请输入邮箱');
+				} else if (!emailReg.test(email)) {
+					alert('请输入正确的邮箱');
 					return;
 				} else if (!content) {
 					alert('请输入评论内容');
@@ -58,7 +60,7 @@
 					type: 'post',
 					dataType: 'json',
 					data: {
-						author: username,
+						author: username.replace(/<\/?[^>]*>/g,''),
 						email: email,
 						content: content,
 						parent_id: replayId

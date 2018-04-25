@@ -4,6 +4,8 @@ const timeFormat = require('../utils/time-format');
 const marked = require('marked');
 const generateToken = require('../utils/generate-qiniu-token');
 
+marked.setOptions({ sanitize: true });
+
 module.exports = {
 	/**
 	 * 文章浏览次数

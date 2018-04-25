@@ -42,7 +42,6 @@
 							$filmList.append(itemHtml);
 						});
 					} else {
-						console.log('11');
 					}
 				}
 			});

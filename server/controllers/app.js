@@ -96,7 +96,6 @@ module.exports = {
 		});
 
 		if (articleDetail.is_photo) {
-			console.log(articleDetail);
 			articleDetail.content_render = articleDetail.content_render.split('||').map(item => IMG_PRE + item);
 		}
 
