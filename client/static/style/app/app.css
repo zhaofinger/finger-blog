@@ -53,12 +53,14 @@
 	margin-right: 20px;
 	letter-spacing: 4px;
 }
-#footer .link-area a {
+#footer a {
 	margin-right: 20px;
+	border-bottom: 1px dotted #bac1cc;
 	color: #bac1cc;
+	opacity: .8;
 }
-#footer .link-area a:hover {
-	color: #1B3DCC;
+#footer a:hover {
+	opacity: 1;
 }
 
 *[title='站长统计'] {

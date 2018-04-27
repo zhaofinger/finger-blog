@@ -137,12 +137,12 @@
 			</div>
 		{% endif %}
 
-		<div class='article-announce'>
+		{# <div class='article-announce'>
 			<span>感谢您的阅读，本文由</span>
 			<a href='https://www.zhaofinger.com'>赵的拇指</a>
 			<span>版权所有。如若转载，请注明出处：</span>
 			<a href="https://www.zhaofinger.com/detail/{{ articleDetail.id }}">https://www.zhaofinger.com/detail/{{ articleDetail.id }}</a>
-		</div>
+		</div> #}
 		<ul class='article-label-list'>
 			<span class='label-title'>标签：</span>
 			{% for item in labelArr %}
