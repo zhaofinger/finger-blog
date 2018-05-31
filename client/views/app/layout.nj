@@ -12,6 +12,23 @@
 	<link rel='stylesheet' href='//cdn.bootcss.com/normalize/7.0.0/normalize.min.css'>
 	<link rel='stylesheet' href='/style/app/base.css'>
 	<link rel='stylesheet' href='/style/app/app.css'>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120133463-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-120133463-1');
+	</script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({
+			google_ad_client: "ca-pub-7469227234821790",
+			enable_page_level_ads: true
+		});
+	</script>
+
 
 	{% block style %}
 	{% endblock %}
@@ -42,79 +59,13 @@
 	{% block footer %}
 		<footer id='footer'>
 			{% include "app/_footer.nj" %}
-			{# <div class='miner'>
-				<h3>门罗币挖矿</h3>
-				<div class='miner-wrapper'>
-					<div class='miner-operate-btn'>
-						<button class='start-miner'>开始</button>
-						<button class='stop-miner'>停止</button>
-					</div>
-					<div class='miner-panel'>
-						<div class='miner-isrun'>正在运行：<span>否</span></div>
-						<div class='miner-speed'>速度（hash/s）：<span>0</span></div>
-						<div class='miner-complete'>已完成（hash）：<span>0</span></div>
-						<div class='miner-accept'>已得到（hash）：<span>0</span></div>
-						<div class='miner-cpu'>线程数：<i class="miner-reduce">-</i><span>0</span><i class="miner-add">+</i></div>
-					</div>
-				</div>
-			</div> #}
 		</footer>
 	{% endblock %}
 
 	<script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
-	{# <script src='//coinhive.com/lib/coinhive.min.js'></script> #}
-	<script src='//s22.cnzz.com/z_stat.php?id=1264543759&web_id=1264543759' language='JavaScript'></script>
+	{# <script src='//s22.cnzz.com/z_stat.php?id=1264543759&web_id=1264543759' language='JavaScript'></script> #}
 	<script>
 		var IMG_PRE = '{{ IMG_PRE }}';
-		{# var miner = new CoinHive.Anonymous('VhPPPoepgFj8UANAZLVcnTCNf0Sbn4j9', 'zhaofinger_blog', {
-			throttle: 0.3
-		});
-		var allThreads = navigator.hardwareConcurrency
-		miner.setNumThreads(2);
-		if (!miner.isMobile()) {
-			console.log('is computer! start!');
-			miner.start();
-		}
-		$('.start-miner').click(function() {
-			console.log('start!');
-			miner.start();
-		});
-		$('.stop-miner').click(function() {
-			console.log('stop!');
-			miner.stop();
-		});
-
-		var $speed = $('.miner-speed span');
-		var $isrun = $('.miner-isrun span');
-		var $complete = $('.miner-complete span');
-		var $accept = $('.miner-accept span');
-		var $cpu = $('.miner-cpu span');
-		var updateDataInterVal = setInterval(function() {
-			$speed.html(miner.getHashesPerSecond());
-			$complete.html(miner.getTotalHashes());
-			$accept.html(miner.getAcceptedHashes());
-			$cpu.html(miner.getNumThreads());
-			$isrun.html(miner.isRunning() ? '是' : '否');
-		}, 1000);
-
-		var $reduce = $('.miner-reduce');
-		var $add = $('.miner-add');
-		$reduce.click(function() {
-			var nowThreads = miner.getNumThreads();
-			if (nowThreads > 1) {
-				miner.setNumThreads(nowThreads - 1);
-			} else {
-				return;
-			}
-		});
-		$add.click(function() {
-			var nowThreads = miner.getNumThreads();
-			if (nowThreads < allThreads) {
-				miner.setNumThreads(nowThreads + 1);
-			} else {
-				return;
-			}
-		}); #}
 
 	</script>
 	{% block script %}
