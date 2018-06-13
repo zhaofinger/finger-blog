@@ -136,13 +136,6 @@
 				{{ articleDetail.content_render | safe }}
 			</div>
 		{% endif %}
-
-		{# <div class='article-announce'>
-			<span>感谢您的阅读，本文由</span>
-			<a href='https://www.zhaofinger.com'>赵的拇指</a>
-			<span>版权所有。如若转载，请注明出处：</span>
-			<a href="https://www.zhaofinger.com/detail/{{ articleDetail.id }}">https://www.zhaofinger.com/detail/{{ articleDetail.id }}</a>
-		</div> #}
 		<ul class='article-label-list'>
 			<span class='label-title'>标签：</span>
 			{% for item in labelArr %}
@@ -150,10 +143,16 @@
 			{% endfor %}
 		</ul>
 
-		{# <div class='article-comment'>
-			<span class='comment-title'>评论：</span>
-			<span>暂未开发，有问题可以给我发邮件&nbsp;&nbsp;<a href='mailto:zhbqsj@126.com'>zhbqsj@126.com</a></span>
-		</div> #}
+		{# <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<ins class="adsbygoogle"
+			style="display:block; text-align:center;"
+			data-ad-layout="in-article"
+			data-ad-format="fluid"
+			data-ad-client="ca-pub-7469227234821790"
+			data-ad-slot="2339527031"></ins>
+		<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script> #}
 	</article>
 	{# 评论输入 #}
 	<div class='post-comment'>

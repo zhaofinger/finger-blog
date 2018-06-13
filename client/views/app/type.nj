@@ -5,7 +5,7 @@
 		<ul class='type-list'>
 			{% for item in articleType %}
 			<li>
-				<img src='http://ow3w4ozuv.bkt.clouddn.com/finger.png' class='type-logo'>
+				<img src='/img/finger.png' class='type-logo'>
 				<a href='/article/type/{{ item.id }}' class='type-name'>{{ item.name }}</a>
 			</li>
 			{% endfor %}

@@ -12,7 +12,6 @@
 				<p>{{ item.desc }}</p>
 			</li> #}
 			<li class='article-item'>
-				{# <img src='http://ow3w4ozuv.bkt.clouddn.com/finger.png' class='logo'> #}
 				<span class='date'>{{ item.created_at }}</span>
 				<a href='/detail/{{ item.id }}' class='title-content'>
 					<h2 class='title'>{{ '[摄影]' if item.is_photo }}{{ item.title }}</h2>
