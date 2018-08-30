@@ -1,300 +1,300 @@
 /* header */
 #header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 60px;
-	background-color: #fff;
-	z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #fff;
+  z-index: 100;
 }
 #header nav {
-	width: 800px;
-	margin: 0 auto;
-	display: flex;
-	align-items: center;
-	height: 100%;
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 #header nav a {
-	margin-right: 40px;
+  margin-right: 40px;
 }
 #header nav .user {
-	margin-left: auto;
+  margin-left: auto;
 }
 
 /* content */
 #content {
-	width: 800px;
-	margin: 80px auto 40px auto;
+  width: 800px;
+  margin: 80px auto 40px auto;
 }
 
 /* 登录页 */
 .login-form {
-	height: 100%;
-	margin-top: -40px;
+  height: 100%;
+  margin-top: -40px;
 }
 .login-form,.login-form form {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .login-form form input ,.login-form form button{
-	width: 300px;
-	margin-top: 20px;
-	text-align: center;
+  width: 300px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 /* 后台首页 */
 .admin-nav {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	height: 100%;
-	width: 400px;
-	margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 400px;
+  margin: 0 auto;
 }
 .admin-nav a button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 /* 文章列表页 */
 .article-list {
-	width: 100%;
-	border-collapse: collapse;
-	border-spacing: 0;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 .article-list th, .article-list td {
-	padding: 10px;
-	border-bottom: 1px solid #eaeaea;
+  padding: 10px;
+  border-bottom: 1px solid #eaeaea;
 }
 .article-head th {
-	text-align: left;
+  text-align: left;
 }
 .article-head .title-item {
-	width: 60%;
+  width: 60%;
 }
 .article-page {
-	display: flex;
-	margin-top: 80px;
-	padding: 10px;
-	border-top: 1px solid #eaeaea;
-	border-bottom: 1px solid #eaeaea;
+  display: flex;
+  margin-top: 80px;
+  padding: 10px;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 .article-page .page-item {
-	margin: 0 10px;
+  margin: 0 10px;
 }
 .article-page .page-item:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* edit 页面 */
 .edit-header {
-	display: flex;
-	align-items: center;
-	height: 50px;
-	margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 20px;
 }
 .edit-header .category {
-	margin-left: 40px;
-	font-size: 16px;
+  margin-left: 40px;
+  font-size: 16px;
 }
 .edit-header .new-type-input {
-	margin-left: 20px;
-	width: 200px;
+  margin-left: 20px;
+  width: 200px;
 }
 
 .edit-article-message {
-	display: flex;
-	margin-bottom: 20px;
+  display: flex;
+  margin-bottom: 20px;
 }
 .edit-article-message .left {
-	width: 600px
+  width: 600px
 }
 .edit-article-message .left input, .edit-article-message .left textarea{
-	width: 100%;
+  width: 100%;
 }
 .edit-article-message .input-wrapper {
-	display: flex;
-	align-items: center;
-	margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 .edit-article-message .input-wrapper:last-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 .edit-article-message .right {
-	width: 380px;
-	margin-left: 20px;
+  width: 380px;
+  margin-left: 20px;
 }
 .edit-article-message .right .upload-file-wrapper {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .edit-article-content {
-	width: 100%;
-	height: 400px;
-	margin: 20px auto;
+  width: 100%;
+  height: 400px;
+  margin: 20px auto;
 }
 
 .markdown-wrapper {
-	position: relative;
-	height: 400px;
-	margin-bottom: 20px;
+  position: relative;
+  height: 400px;
+  margin-bottom: 20px;
 }
 .markdown-wrapper.full-screen {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: auto;
-	z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  z-index: 100;
 }
 .markdown-wrapper .markdown-menu {
-	display: flex;
-	justify-content: flex-end;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 34px;
-	line-height: 34px;
-	background-color: #ddd;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  background-color: #ddd;
 }
 .markdown-wrapper .markdown-menu li {
-	margin: 0 20px;
-	cursor: pointer;
+  margin: 0 20px;
+  cursor: pointer;
 }
 .markdown-wrapper .markdown-content {
-	display: flex;
-	height: 100%;
+  display: flex;
+  height: 100%;
 }
 .markdown-wrapper .markdown-input, .markdown-wrapper .markdown-body {
-	flex: 1;
-	padding: 40px 10px 10px 10px;
-	width: 100%;
-	height: 100%;
-	overflow-y: auto;
-	resize: none;
-	outline: none;
-	background-color: #fff;
+  flex: 1;
+  padding: 40px 10px 10px 10px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  resize: none;
+  outline: none;
+  background-color: #fff;
 }
 .markdown-wrapper .markdown-input {
-	line-height: 1.5;
+  line-height: 1.5;
 }
 .markdown-wrapper .markdown-body {
-	border-left: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 
 /* photo */
 #photo .photo-header {
-	display: flex;
+  display: flex;
 }
 #photo .photo-header .left {
-	width: 600px;
+  width: 600px;
 }
 #photo .photo-header .left .input {
-	width: 100%;
-	margin-bottom: 15px;
+  width: 100%;
+  margin-bottom: 15px;
 }
 #photo .photo-header .right {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 380px;
-	margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  margin-left: 20px;
 }
 #photo .photo-header .right .btn {
-	margin-right: 20px;
+  margin-right: 20px;
 }
 
 /* film */
 #film {
-	display: flex;
-	align-items: stretch;
+  display: flex;
+  align-items: stretch;
 }
 #film .film-cover {
-	flex: 2;
+  flex: 2;
 }
 #film .film-cover .upload-file-wrapper {
-	height: 100%;
+  height: 100%;
 }
 #film .film-message {
-	flex: 5;
-	margin-left: 20px;
+  flex: 5;
+  margin-left: 20px;
 }
 #film .film-message input, #film .film-message textarea {
-	width: 100%;
-	margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 #film .film-operate-btn {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 #film .film-operate-btn .btn {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 /* user */
 #user {
-	text-align: center;
+  text-align: center;
 }
 #user h2 {
-	margin: 20px 0;
+  margin: 20px 0;
 }
 #user input {
-	width: 300px;
-	margin-bottom: 20px;
+  width: 300px;
+  margin-bottom: 20px;
 }
 
 
 /* fileupload */
 .upload-file-wrapper {
-	height: 200px;
-	max-width: 100%;
-	max-height: 100%;
+  height: 200px;
+  max-width: 100%;
+  max-height: 100%;
 }
 .upload-file-wrapper .upload-img-list {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .upload-file-wrapper .upload-btn {
-	display: inline-block;
-	padding: 6px 10px;
-	border-radius: 6px;
-	background-color: #1B3DCC;
-	color: #ffffff;
-	cursor: pointer;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: #1B3DCC;
+  color: #ffffff;
+  cursor: pointer;
 }
 .upload-file-wrapper .upload-preview {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	border-radius: 2px;
-	cursor: pointer;
-	border: 2px dotted #ddd;
-	color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 2px dotted #ddd;
+  color: #ddd;
 }
 .upload-file-wrapper .upload-img-item {
-	position: relative;
-	width: 300px;
-	height: 200px;
-	margin: 10px 10px 10px 0;
-	border: 10px solid #ffffff;
-	border-radius: 10px;
+  position: relative;
+  width: 300px;
+  height: 200px;
+  margin: 10px 10px 10px 0;
+  border: 10px solid #ffffff;
+  border-radius: 10px;
 }
 .upload-file-wrapper .upload-img-item .delete {
-	position: absolute;
-	right: -8px;
-	top: -14px;
-	cursor: pointer;
+  position: absolute;
+  right: -8px;
+  top: -14px;
+  cursor: pointer;
 }

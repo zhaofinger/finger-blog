@@ -1,104 +1,104 @@
 {% extends "app/layout.nj" %}
 
 {% block style %}
-	<link rel='stylesheet' href='/style/app/markdown.css'>
-	<link rel='stylesheet' href='/style/app/prism.css'>
-	<style>
-		#header, #content, #footer {
-			width: 800px;
-		}
-		@media (max-width: 800px) {
-			#header, #content, #footer {
-				width: 90%;
-			}
-		}
-	</style>
+  <link rel='stylesheet' href='/style/app/markdown.css'>
+  <link rel='stylesheet' href='/style/app/prism.css'>
+  <style>
+    #header, #content, #footer {
+      width: 800px;
+    }
+    @media (max-width: 800px) {
+      #header, #content, #footer {
+        width: 90%;
+      }
+    }
+  </style>
 {% endblock %}
 
 {% block script %}
-	<script src="/js/prism.js"></script>
-	<script>
-		{# hljs.initHighlightingOnLoad(); #}
-		$(function() {
-			var id = location.pathname.split('/').pop();
-			var hasReadArticle = window.localStorage.getItem('hasReadArticle') || '';
-			// 浏览量
-			if (hasReadArticle.split(';').indexOf(id) === -1) {
-				$.post('/api/article/view-count/' + id, function(data) {
-					if (data.status) {
-						$('.views').text(data.data.viewCount);
-						window.localStorage.setItem('hasReadArticle', hasReadArticle + ';' + id);
-					}
-				});
-			}
+  <script src="/js/prism.js"></script>
+  <script>
+    {# hljs.initHighlightingOnLoad(); #}
+    $(function() {
+      var id = location.pathname.split('/').pop();
+      var hasReadArticle = window.localStorage.getItem('hasReadArticle') || '';
+      // 浏览量
+      if (hasReadArticle.split(';').indexOf(id) === -1) {
+        $.post('/api/article/view-count/' + id, function(data) {
+          if (data.status) {
+            $('.views').text(data.data.viewCount);
+            window.localStorage.setItem('hasReadArticle', hasReadArticle + ';' + id);
+          }
+        });
+      }
 
-			var replayId = '';
-			// 提交评论
-			var usernameEle = $('#username');
-			var emailEle = $('#email');
-			var commentContentEle = $('#comment_content');
-			var submitCommentEle = $('.submit-comment');
-			var commentListEle = $('.comment-list');
-			var emailReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-			submitCommentEle.click(function() {
-				var username = usernameEle.val();
-				var email = emailEle.val();
-				var content = commentContentEle.val();
+      var replayId = '';
+      // 提交评论
+      var usernameEle = $('#username');
+      var emailEle = $('#email');
+      var commentContentEle = $('#comment_content');
+      var submitCommentEle = $('.submit-comment');
+      var commentListEle = $('.comment-list');
+      var emailReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+      submitCommentEle.click(function() {
+        var username = usernameEle.val();
+        var email = emailEle.val();
+        var content = commentContentEle.val();
 
-				if (!username) {
-					alert('请输入用户名');
-					return;
-				} else if (!emailReg.test(email)) {
-					alert('请输入正确的邮箱');
-					return;
-				} else if (!content) {
-					alert('请输入评论内容');
-					return;
-				}
-				$.ajax({
-					url: '/api/article/comment/' + id,
-					type: 'post',
-					dataType: 'json',
-					data: {
-						author: username.replace(/<\/?[^>]*>/g,''),
-						email: email,
-						content: content,
-						parent_id: replayId
-					},
-					success: function(data) {
-						replayId = '';
-						if (data.status === 200) {
-							commentContentEle.val('');
-							var commentHtml =
-								"<li class='comment-item'>"
-									+ "<div class='comment-author'>"
-										+ "<a href='javascript:void(0);'>" + data.data.author + "</a>"
-										+ (data.data.parent_id ? ("<span>回复</span><a href='javascript:void(0);'>" + data.data.parent.author + "</a>") : "")
-									+ "</div>"
-									+ "<p class='comment-content'>" + data.data.content + "</p>"
-									+ "<div class='comment-time'>发表于"
-										+ "<span>" + data.data.created_at + "</span>"
-										+ "<a href='javascript:void(0);' class='comment-replay' data-replay-id='" + data.data.id + "' data-replay-name='" + data.data.author + "'>回复</a>"
-									+ "</div>"
-								+ "</li>";
-							commentListEle.prepend($(commentHtml));
-						} else {
-							alert(data.message);
-						}
-					}
-				});
-			});
+        if (!username) {
+          alert('请输入用户名');
+          return;
+        } else if (!emailReg.test(email)) {
+          alert('请输入正确的邮箱');
+          return;
+        } else if (!content) {
+          alert('请输入评论内容');
+          return;
+        }
+        $.ajax({
+          url: '/api/article/comment/' + id,
+          type: 'post',
+          dataType: 'json',
+          data: {
+            author: username.replace(/<\/?[^>]*>/g,''),
+            email: email,
+            content: content,
+            parent_id: replayId
+          },
+          success: function(data) {
+            replayId = '';
+            if (data.status === 200) {
+              commentContentEle.val('');
+              var commentHtml =
+                "<li class='comment-item'>"
+                  + "<div class='comment-author'>"
+                    + "<a href='javascript:void(0);'>" + data.data.author + "</a>"
+                    + (data.data.parent_id ? ("<span>回复</span><a href='javascript:void(0);'>" + data.data.parent.author + "</a>") : "")
+                  + "</div>"
+                  + "<p class='comment-content'>" + data.data.content + "</p>"
+                  + "<div class='comment-time'>发表于"
+                    + "<span>" + data.data.created_at + "</span>"
+                    + "<a href='javascript:void(0);' class='comment-replay' data-replay-id='" + data.data.id + "' data-replay-name='" + data.data.author + "'>回复</a>"
+                  + "</div>"
+                + "</li>";
+              commentListEle.prepend($(commentHtml));
+            } else {
+              alert(data.message);
+            }
+          }
+        });
+      });
 
-			// 回复评论
-			$(document).on('click', '.comment-replay', function() {
-				var replayName = $(this).data('replay-name');
-				replayId = $(this).data('replay-id');
-				commentContentEle.prop('placeholder', '回复: ' + replayName + '，支持markdown语法');
-				commentContentEle[0].scrollIntoView({block: "end", behavior: "smooth"});
-			});
+      // 回复评论
+      $(document).on('click', '.comment-replay', function() {
+        var replayName = $(this).data('replay-name');
+        replayId = $(this).data('replay-id');
+        commentContentEle.prop('placeholder', '回复: ' + replayName + '，支持markdown语法');
+        commentContentEle[0].scrollIntoView({block: "end", behavior: "smooth"});
+      });
 
-		});
-	</script>
+    });
+  </script>
 {% endblock %}
 
 
@@ -106,82 +106,82 @@
 {% endblock %}
 
 {% block content %}
-	{# 文章内容 #}
-	<article id='detail'>
-		<header>
-			<h2 class='article-title'>{{ articleDetail.title }}</h2>
-			<div class='article-meta'>
-				<span>By</span>
-				<a class='author' href='/'>赵的拇指</a>
-				<span>At</span>
-				<span class='datetime'>{{ articleDetail.created_at }}</span>
-				{% if articleDetail.is_photo != 1 %}
-					<span>In</span>
-					<a href='/article/type/{{ articleDetail.type }}' class='category'>{{ articleDetail.type_name }}</a>
-				{% endif %}
-				<span>Views</span>
-				<span class='views'>{{ viewCount }}</span>
-			</div>
-		</header>
+  {# 文章内容 #}
+  <article id='detail'>
+    <header>
+      <h2 class='article-title'>{{ articleDetail.title }}</h2>
+      <div class='article-meta'>
+        <span>By</span>
+        <a class='author' href='/'>赵的拇指</a>
+        <span>At</span>
+        <span class='datetime'>{{ articleDetail.created_at }}</span>
+        {% if articleDetail.is_photo != 1 %}
+          <span>In</span>
+          <a href='/article/type/{{ articleDetail.type }}' class='category'>{{ articleDetail.type_name }}</a>
+        {% endif %}
+        <span>Views</span>
+        <span class='views'>{{ viewCount }}</span>
+      </div>
+    </header>
 
-		{% if articleDetail.is_photo %}
-			<div class='article-content photo-content'>
-				<p class='photo-desc'>{{ articleDetail.desc }}</p>
-				{% for item in articleDetail.content_render %}
-					<img src='{{ item }}'>
-				{% endfor %}
-			</div>
-		{% else %}
-			<div class='article-content markdown-body'>
-				{{ articleDetail.content_render | safe }}
-			</div>
-		{% endif %}
-		<ul class='article-label-list'>
-			<span class='label-title'>标签：</span>
-			{% for item in labelArr %}
-				<li>#{{ item }}</li>
-			{% endfor %}
-		</ul>
+    {% if articleDetail.is_photo %}
+      <div class='article-content photo-content'>
+        <p class='photo-desc'>{{ articleDetail.desc }}</p>
+        {% for item in articleDetail.content_render %}
+          <img src='{{ item }}'>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class='article-content markdown-body'>
+        {{ articleDetail.content_render | safe }}
+      </div>
+    {% endif %}
+    <ul class='article-label-list'>
+      <span class='label-title'>标签：</span>
+      {% for item in labelArr %}
+        <li>#{{ item }}</li>
+      {% endfor %}
+    </ul>
 
-		{# <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<ins class="adsbygoogle"
-			style="display:block; text-align:center;"
-			data-ad-layout="in-article"
-			data-ad-format="fluid"
-			data-ad-client="ca-pub-7469227234821790"
-			data-ad-slot="2339527031"></ins>
-		<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-		</script> #}
-	</article>
-	{# 评论输入 #}
-	<div class='post-comment'>
-		<h2 class='title'>发表评论：</h2>
-		<div class='comment-input'>
-			<textarea id='comment_content' placeholder='请输入评论内容，支持markdown语法' class='input input-medium left'></textarea>
-			<div class='right'>
-				<input type='text' placeholder='请输入用户名' id='username' class='input input-medium'><br>
-				<input type='text' placeholder='请输入邮箱以便交流' id='email' class='input input-medium'><br>
-				<button class='submit-comment'>发表评论</button>
-			</div>
-		</div>
-	</div>
-	{# 评论列表 #}
-	<ul class='comment-list'>
-		{% for item in commentList %}
-			<li class='comment-item'>
-				<div class='comment-author'>
-					<a href='javascript:void(0);'>{{ item.author }}</a>
-					{% if item.parent_id %}
-						<span>回复</span>
-						<a href='javascript:void(0);'>{{ item.parent.author }}</a>
-					{% endif %}
-				</div>
-				<p class='comment-content'>{{ item.content | safe }}</p>
-				<div class='comment-time'>
-					发表于<span>{{ item.created_at }}</span><a href='javascript:void(0);' class='comment-replay' data-replay-id='{{ item.id }}' data-replay-name='{{ item.author }}'>回复</a>
-				</div>
-			</li>
-		{% endfor %}
-	</ul>
+    {# <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+      style="display:block; text-align:center;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-7469227234821790"
+      data-ad-slot="2339527031"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script> #}
+  </article>
+  {# 评论输入 #}
+  <div class='post-comment'>
+    <h2 class='title'>发表评论：</h2>
+    <div class='comment-input'>
+      <textarea id='comment_content' placeholder='请输入评论内容，支持markdown语法' class='input input-medium left'></textarea>
+      <div class='right'>
+        <input type='text' placeholder='请输入用户名' id='username' class='input input-medium'><br>
+        <input type='text' placeholder='请输入邮箱以便交流' id='email' class='input input-medium'><br>
+        <button class='submit-comment'>发表评论</button>
+      </div>
+    </div>
+  </div>
+  {# 评论列表 #}
+  <ul class='comment-list'>
+    {% for item in commentList %}
+      <li class='comment-item'>
+        <div class='comment-author'>
+          <a href='javascript:void(0);'>{{ item.author }}</a>
+          {% if item.parent_id %}
+            <span>回复</span>
+            <a href='javascript:void(0);'>{{ item.parent.author }}</a>
+          {% endif %}
+        </div>
+        <p class='comment-content'>{{ item.content | safe }}</p>
+        <div class='comment-time'>
+          发表于<span>{{ item.created_at }}</span><a href='javascript:void(0);' class='comment-replay' data-replay-id='{{ item.id }}' data-replay-name='{{ item.author }}'>回复</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}

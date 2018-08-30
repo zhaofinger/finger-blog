@@ -1,36 +1,36 @@
 const Types = {
 
-	isPrototype(data) {
-		return Object.prototype.toString.call(data).toLowerCase();
-	},
+  isPrototype(data) {
+    return Object.prototype.toString.call(data).toLowerCase();
+  },
 
-	isArray(data) {
-		return this.isPrototype(data) === '[object array]';
-	},
+  isArray(data) {
+    return this.isPrototype(data) === '[object array]';
+  },
 
-	isJSON(data) {
-		return this.isPrototype(data) === '[object object]';
-	},
+  isJSON(data) {
+    return this.isPrototype(data) === '[object object]';
+  },
 
-	isFunction(data) {
-		return this.isPrototype(data) === '[object function]';
-	},
+  isFunction(data) {
+    return this.isPrototype(data) === '[object function]';
+  },
 
-	isString(data) {
-		return this.isPrototype(data) === '[object string]';
-	},
+  isString(data) {
+    return this.isPrototype(data) === '[object string]';
+  },
 
-	isNumber(data) {
-		return this.isPrototype(data) === '[object number]';
-	},
+  isNumber(data) {
+    return this.isPrototype(data) === '[object number]';
+  },
 
-	isUndefined(data) {
-		return this.isPrototype(data) === '[object undefined]';
-	},
+  isUndefined(data) {
+    return this.isPrototype(data) === '[object undefined]';
+  },
 
-	isNull(data) {
-		return this.isPrototype(data) === '[object null]';
-	}
+  isNull(data) {
+    return this.isPrototype(data) === '[object null]';
+  }
 
 };
 

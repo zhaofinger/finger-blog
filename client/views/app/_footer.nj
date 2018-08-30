@@ -1,16 +1,16 @@
 <div class="licenses">
-	本站内容遵循&nbsp;&nbsp;<a nounder href="https://creativecommons.org/licenses/by/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
+  本站内容遵循&nbsp;&nbsp;<a nounder href="https://creativecommons.org/licenses/by/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a>
 </div>
 <div class='friends-link link-area'>
-	<span class='link-title'>友链:</span>
-	{% for item in FRIENDS_LINK %}
-		<a nounder href='{{ item.link }}' title="{{ item.title }}" target='_blank'>{{ item.title }}</a>
-	{% endfor %}
+  <span class='link-title'>友链:</span>
+  {% for item in FRIENDS_LINK %}
+    <a nounder href='{{ item.link }}' title="{{ item.title }}" target='_blank'>{{ item.title }}</a>
+  {% endfor %}
 </div>
 <div class='my-link link-area'>
-	<span class='link-title'>联系:</span>
-	<a nounder href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
-	<a nounder href='https://t.me/zhaofinger' title='github' target='_blank'>Telegrame</a>
-	<a nounder href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
-	<a nounder href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
+  <span class='link-title'>联系:</span>
+  <a nounder href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
+  <a nounder href='https://t.me/zhaofinger' title='github' target='_blank'>Telegrame</a>
+  <a nounder href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
+  <a nounder href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
 </div>

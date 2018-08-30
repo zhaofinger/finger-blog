@@ -1,20 +1,20 @@
 {% extends "app/layout.nj" %}
 
 {% block content %}
-	<ul class='photo-list'>
-		{% for item in photoList %}
-			<li class='photo-item'>
-				<a href='/detail/{{ item.id }}' class='title-content'>
-					<div class='img-wrapper' style='background: url("{{ item.cover }}") center center /cover' alt=''></div>
-					<h2 class='title'>{{ item.title }}</h2>
-				</a>
-			</li>
-		{% endfor %}
-	</ul>
-	{% include "app/_page.nj" %}
+  <ul class='photo-list'>
+    {% for item in photoList %}
+      <li class='photo-item'>
+        <a href='/detail/{{ item.id }}' class='title-content'>
+          <div class='img-wrapper' style='background: url("{{ item.cover }}") center center /cover' alt=''></div>
+          <h2 class='title'>{{ item.title }}</h2>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% include "app/_page.nj" %}
 {% endblock %}
 
 {% block script %}
-	<script>
-	</script>
+  <script>
+  </script>
 {% endblock %}

@@ -1,47 +1,47 @@
 {% extends "admin/layout.nj" %}
 
 {% block content %}
-	<form action='/admin/edit' method='post' id='photo'>
-		<input type='hidden' name='id' value='{{ photoModel.id }}'>
-		<input type='hidden' name='created_at' value='{{ photoModel.created_at }}'>
-		<input type='hidden' name='is_photo' value='1'>
-		<input type='hidden' name='type' value='1'>
+  <form action='/admin/edit' method='post' id='photo'>
+    <input type='hidden' name='id' value='{{ photoModel.id }}'>
+    <input type='hidden' name='created_at' value='{{ photoModel.created_at }}'>
+    <input type='hidden' name='is_photo' value='1'>
+    <input type='hidden' name='type' value='1'>
 
-		<div class='photo-header'>
-			<div class='left'>
-				<input type='text' name='title' class='input input-big title' placeholder='照片标题' value='{{ photoModel.title }}'><br/>
-				<textarea rows='6' name='desc' class='input input-big' placeholder='照片简介'>{{ photoModel.desc }}</textarea>
-				<input type='text' placeholder='照片标签，多个以“空格”分割' name='label' class='input input-big label' value='{{ photoModel.label }}'>
-			</div>
-			<div class='right photo-operate-btn'>
-				<input type='hidden' value='0' name='status' id='status'>
-				<button type='button' class='btn save'>暂存</button>
-				<button type='button' class='btn submit'>发布</button>
-			</div>
-		</div>
-		<div class='upload-wrapper' data-value='{{ photoModel.content_md }}'></div>
-	</form>
+    <div class='photo-header'>
+      <div class='left'>
+        <input type='text' name='title' class='input input-big title' placeholder='照片标题' value='{{ photoModel.title }}'><br/>
+        <textarea rows='6' name='desc' class='input input-big' placeholder='照片简介'>{{ photoModel.desc }}</textarea>
+        <input type='text' placeholder='照片标签，多个以“空格”分割' name='label' class='input input-big label' value='{{ photoModel.label }}'>
+      </div>
+      <div class='right photo-operate-btn'>
+        <input type='hidden' value='0' name='status' id='status'>
+        <button type='button' class='btn save'>暂存</button>
+        <button type='button' class='btn submit'>发布</button>
+      </div>
+    </div>
+    <div class='upload-wrapper' data-value='{{ photoModel.content_md }}'></div>
+  </form>
 {% endblock %}
 
 {% block style %}
 {% endblock %}
 
 {% block script %}
-	<script src='/js/file-upload.js'></script>
-	<script>
-		$(function() {
-			$('.upload-wrapper').fileUpload(IMG_TYPE.PHOTOGRAPHY, null, true);
+  <script src='/js/file-upload.js'></script>
+  <script>
+    $(function() {
+      $('.upload-wrapper').fileUpload(IMG_TYPE.PHOTOGRAPHY, null, true);
 
-			$(window).on('beforeunload', function() {
-				return '文章尚未保存，确认离开吗？';
-			});
+      $(window).on('beforeunload', function() {
+        return '文章尚未保存，确认离开吗？';
+      });
 
-			$('.photo-operate-btn button').click(function(e) {
-				$(window).off('beforeunload');
-				// 暂存 提交
-				$('#status').val($(this).hasClass('save') ? 0 : 1);
-				$('#photo').submit();
-			});
-		});
-	</script>
+      $('.photo-operate-btn button').click(function(e) {
+        $(window).off('beforeunload');
+        // 暂存 提交
+        $('#status').val($(this).hasClass('save') ? 0 : 1);
+        $('#photo').submit();
+      });
+    });
+  </script>
 {% endblock %}

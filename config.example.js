@@ -6,38 +6,38 @@ const HOST = env === 'production' ? 'zhaofinger.com' : 'localhost';
 
 // 数据库配置
 const databaseConfig = env === 'production' ? {
-	DATABASE: 'finger_blog',
-	USERNAME: 'nodeserver',
-	PASSWORD: '',
-	PORT: '3306'
+  DATABASE: 'finger_blog',
+  USERNAME: 'nodeserver',
+  PASSWORD: '',
+  PORT: '3306'
 } : {
-	DATABASE: 'finger_blog',
-	USERNAME: 'node',
-	PASSWORD: '',
-	PORT: '3306'
+  DATABASE: 'finger_blog',
+  USERNAME: 'node',
+  PASSWORD: '',
+  PORT: '3306'
 };
 
 // 七牛key以及空间名，根据实际情况填写
 const qiniuKey = {
-	accessKey: '******',
-	secretKey: '******',
-	scope: env === 'production' ? 'photo-prod' : 'photo-dev'
+  accessKey: '******',
+  secretKey: '******',
+  scope: env === 'production' ? 'photo-prod' : 'photo-dev'
 };
 
 // 友链
 const friendsLink = [
-	{
-		link: 'https://blog.kasora.moe/',
-		title: 'kasora\'s blog'
-	},
-	{
-		link: 'http://foreversong.cn/',
-		title: 'ADog\'s Blog'
-	},
-	{
-		link: 'http://xcatliu.com/',
-		title: '流浪小猫'
-	}
+  {
+    link: 'https://blog.kasora.moe/',
+    title: 'kasora\'s blog'
+  },
+  {
+    link: 'http://foreversong.cn/',
+    title: 'ADog\'s Blog'
+  },
+  {
+    link: 'http://xcatliu.com/',
+    title: '流浪小猫'
+  }
 ];
 
 module.exports = { PORT, HOST, databaseConfig, qiniuKey, friendsLink };

@@ -1,12 +1,12 @@
 <div>
-	<textarea name='markdown_md' id='markdown_md' cols="30" rows="10"></textarea>
-	<div class='makrdown-render'>
-	</div>
+  <textarea name='markdown_md' id='markdown_md' cols="30" rows="10"></textarea>
+  <div class='makrdown-render'>
+  </div>
 </div>
 
 {% block script %}
-	<script src="https://cdn.bootcss.com/marked/0.3.7/marked.min.js"></script>
-	<script>
+  <script src="https://cdn.bootcss.com/marked/0.3.7/marked.min.js"></script>
+  <script>
 
-	</script>
+  </script>
 {% endblock %}
