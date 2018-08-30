@@ -17,6 +17,12 @@ const databaseConfig = env === 'production' ? {
   PORT: '3306'
 };
 
+// stmp配置
+const mailConfig = {
+  username: 'xxx@163.com',
+  password: 'xxxxxx'
+};
+
 // 七牛key以及空间名，根据实际情况填写
 const qiniuKey = {
   accessKey: '******',
@@ -40,4 +46,4 @@ const friendsLink = [
   }
 ];
 
-module.exports = { PORT, HOST, databaseConfig, qiniuKey, friendsLink };
+module.exports = { PORT, HOST, databaseConfig, mailConfig, qiniuKey, friendsLink };
