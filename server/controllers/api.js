@@ -3,6 +3,8 @@ const article = require('../models/article');
 const timeFormat = require('../utils/time-format');
 const marked = require('marked');
 const generateToken = require('../utils/generate-qiniu-token');
+const sendMail = require('../utils/mail');
+const { adminMail } = require('../../config');
 
 marked.setOptions({ sanitize: true });
 
@@ -60,6 +62,15 @@ module.exports = {
     commentModel.created_at = (new Date()).getTime();
 
     let result = await article.addComment(commentModel);
+
+    // 评论文章，发送邮件给管理员
+    sendMail(adminMail, '文章收到新的评论', `${commentModel.author}评论了您的<a href="http://www.zhaofinger.com/detail/${commentModel.article_id}">文章</a>`)
+    if (commentModel.parent_id) {
+      // 发送邮件给父评论者
+      let parentCommentDetail = await article.getCommentDetail(commentModel.parent_id);
+      console.log(parentCommentDetail);
+      sendMail(parentCommentDetail.email, '有人评论了您', `${commentModel.author}评论了您的<a href="http://www.zhaofinger.com/detail/${commentModel.article_id}">评论</a>`);
+    }
 
     result.created_at = timeFormat(result.created_at, 'yyyy-MM-dd hh:mm:ss');
     return ctx.body = {

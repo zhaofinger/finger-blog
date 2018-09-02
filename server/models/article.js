@@ -88,6 +88,20 @@ const article = {
     return result;
   },
   /**
+   * 获取评论详情
+   * @param {string} id
+   */
+  async getCommentDetail(id) {
+    const _sql = `
+      SELECT * FROM comment
+      WHERE id = ${id}`;
+    const result = await dbUtils.query(_sql);
+    if (result.length) {
+      return result[0];
+    }
+    return null;
+  },
+  /**
    * 获取已经发布文章总数
    * @param {string} typeId 文章typeid
    */

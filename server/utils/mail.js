@@ -14,9 +14,9 @@ const transporter = nodemailer.createTransport({
 
 /**
  * 发送邮件
- * @param {array/string} receiver
- * @param {string}} subject
- * @param {string} content
+ * @param {array/string} receiver receiver
+ * @param {string}} subject subject
+ * @param {string} content html
  */
 module.exports = function(receiver, subject, content) {
   let mailOptions = {
@@ -28,8 +28,10 @@ module.exports = function(receiver, subject, content) {
   return new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.error(error);
         reject(error);
       } else {
+        console.log(info);
         resolve(info);
       }
     });
