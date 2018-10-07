@@ -357,9 +357,8 @@
 
 .film-item .cover {
   flex: 2;
-  height: 120px;
+  width: 100px;
   margin: 0 20px 0 40px;
-  padding-bottom: 40px;
 }
 .film-item .desc {
   flex: 8;

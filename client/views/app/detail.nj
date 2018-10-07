@@ -3,6 +3,8 @@
 {% block style %}
   <link rel='stylesheet' href='/style/app/markdown.css'>
   <link rel='stylesheet' href='/style/app/prism.css'>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.css" rel="stylesheet">
+
   <style>
     #header, #content, #footer {
       width: 800px;
@@ -16,6 +18,7 @@
 {% endblock %}
 
 {% block script %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.js"></script>
   <script src="/js/prism.js"></script>
   <script>
     {# hljs.initHighlightingOnLoad(); #}
@@ -96,6 +99,9 @@
         commentContentEle.prop('placeholder', '回复: ' + replayName + '，支持markdown语法');
         commentContentEle[0].scrollIntoView({block: "end", behavior: "smooth"});
       });
+
+      // 图片浏览
+      $('.photo-content').viewer();
 
     });
   </script>

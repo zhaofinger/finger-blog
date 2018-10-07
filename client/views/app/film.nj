@@ -1,7 +1,9 @@
 {% extends "app/layout.nj" %}
 {% block style %}
+  <link href="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.css" rel="stylesheet">
 {% endblock %}
 {% block script %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.js"></script>
   <script>
     var nowPage = 2;
     var noMore = false;
@@ -32,7 +34,7 @@
               var itemHtml =
                 $("<li class='film-item'>" +
                   "<span class='time'>" + item.created_at + "</span>" +
-                  "<div class='cover' style='background: url(" + item.cover + ") center center no-repeat /cover'></div>" +
+                  "<img class='cover' src='" + item.cover + "' alt='" + item.title + "'>" +
                   "<div class='desc'>" +
                     "<h2>" + item.title + "</h2>" +
                     "<p class='comment'>" + item.desc + "</p>" +
@@ -41,6 +43,8 @@
                 "</li>");
               $filmList.append(itemHtml);
             });
+            $('.film-list').viewer('destroy');
+            $('.film-list').viewer();
           } else {
           }
         }
@@ -56,6 +60,9 @@
         getFilmlist();
       }
     });
+
+    $('.film-list').viewer();
+
   </script>
 {% endblock %}
 
@@ -66,7 +73,8 @@
       {% for item in filmList %}
         <li class='film-item'>
           <span class='time'>{{ item.created_at }}</span>
-          <div class='cover' style='background: url({{ item.cover }}) center center no-repeat /cover'></div>
+          <img class='cover' src='{{ item.cover }}' alt='{{ item.title }}'>
+          {# <div class='cover' data-url='{{ item.cover }}' style='background: url({{ item.cover }}) center center no-repeat /cover'></div> #}
           <div class='desc'>
             <h2>{{ item.title }}</h2>
             <p class='comment'>{{ item.desc }}</p>
