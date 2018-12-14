@@ -5,7 +5,7 @@
 </div>
 
 {% block script %}
-  <script src="https://cdn.bootcss.com/marked/0.3.7/marked.min.js"></script>
+  <script src="//cdn.bootcss.com/marked/0.3.7/marked.min.js"></script>
   <script>
 
   </script>
