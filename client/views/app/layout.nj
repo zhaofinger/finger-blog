@@ -42,7 +42,7 @@
         <div class='menu'>
           <a href='/article' class='{{ "active" if nowPage == "article" }}'>文&nbsp;章</a>
           <a href='/photo' class='{{ "active" if nowPage == "photo" }}'>摄&nbsp;影</a>
-          <a href='/film' class='{{ "active" if nowPage == "film" }}'>电&nbsp;影</a>
+          <a href='/film' class='{{ "active" if nowPage == "film" }}'>影&nbsp;视</a>
           <a href='/type' class='{{ "active" if nowPage == "type" }}'>分&nbsp;类</a>
           <a href='/about' class='{{ "active" if nowPage == "about" }}'>关&nbsp;于</a>
         </div>
