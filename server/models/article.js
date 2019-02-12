@@ -17,12 +17,12 @@ const article = {
   async getArticleList(page, typeId, isPub = true) {
     const _sql = `
       SELECT * FROM article
-        ${typeId || isPub ? 'WHERE' : '' }
+        ${typeId || isPub ? 'WHERE' : ''}
         ${isPub ? 'is_publish = 1' : ''}
-        ${typeId && isPub ? 'AND' : '' }
+        ${typeId && isPub ? 'AND' : ''}
         ${typeId ? 'type = ' + typeId : ''}
-        ${typeId || isPub ? 'AND' : 'WHERE' }
-        is_delete = 0 AND is_film = 0
+        ${typeId || isPub ? 'AND' : 'WHERE'}
+        is_film = 0 AND is_delete = 0
       ORDER BY article.created_at DESC
       LIMIT ${page.start} , ${page.end}`;
     const result = await dbUtils.query(_sql);
