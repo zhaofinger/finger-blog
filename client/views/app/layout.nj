@@ -9,7 +9,7 @@
   <meta name='designer' content='赵的拇指'>
   <meta name='keywords' content='赵的拇指,博客,代码,前端,前端开发,JavaScript,CSS,摄影,散打,跑步,设计'>
   <link rel='shortcut icon' href='/img/finger.png'>
-  <link rel='stylesheet' href='//cdn.bootcss.com/normalize/7.0.0/normalize.min.css'>
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css'>
   <link rel='stylesheet' href='/style/app/base.css'>
   <link rel='stylesheet' href='/style/app/app.css'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -61,7 +61,7 @@
     </footer>
   {% endblock %}
 
-  <script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   {# <script src='//s22.cnzz.com/z_stat.php?id=1264543759&web_id=1264543759' language='JavaScript'></script> #}
   <script>
     var IMG_PRE = '{{ IMG_PRE }}';

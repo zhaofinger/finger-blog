@@ -3,7 +3,7 @@
 <head>
   <title>{{ title }}</title>
   <link rel='shortcut icon' href='/img/finger.png'>
-  <link rel='stylesheet' href='//cdn.bootcss.com/normalize/7.0.0/normalize.min.css'>
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css'>
   <link rel='stylesheet' href='/style/admin/base.css'>
   <link rel='stylesheet' href='/style/admin/app.css'>
 
@@ -31,7 +31,7 @@
   <footer id='footer'>
   </footer>
 
-  <script src='//cdn.bootcss.com/jquery/3.2.1/jquery.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script>
     var IMG_PRE = '{{ IMG_PRE }}';
     var IMG_TYPE = {

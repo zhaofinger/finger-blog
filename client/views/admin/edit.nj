@@ -68,7 +68,7 @@
 {% endblock %}
 
 {% block script %}
-  <script src='//cdn.bootcss.com/marked/0.3.7/marked.min.js'></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/marked/0.3.7/marked.min.js'></script>
   <script src='/js/file-upload.js'></script>
   <script src='/lib/editormd/editormd.min.js'></script>
   <script>
