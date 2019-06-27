@@ -36,7 +36,7 @@
     "koa-session-minimal": "^3.0.4",
     "koa-static": "^4.0.1",
     "koa-views": "^6.0.2",
-    "marked": "^0.3.6",
+    "marked": "^0.6.2",
     "mysql": "^2.13.0",
     "nodemailer": "^4.6.8",
     "nunjucks": "^3.0.1",
@@ -48,7 +48,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
-    "eslint": "^4.2.0",
+    "eslint": "^6.0.1",
     "eslint-plugin-html": "^3.1.0"
   }
 }
