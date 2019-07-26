@@ -11,16 +11,15 @@
 {% block content %}
   <div id='about'>
     <div class='about-me'>
-      <h2>关于我</h2>
+      <h2>About me</h2>
       <pre>
 <code class="lang-javascript">
 const me = {
   name: '赵海波',
-  nickname: '赵的拇指',
+  nickname: 'zhaofinger',
   sex: 'male',
   college: '常熟理工学院(CIT)',
-  mail: 'zhbqsj@126.com',
-  weChat: 'little_zhao_finger',
+  mail: 'zhaohaibo1994@gmail.com',
   introduction: '一只野生前端',
   motto: 'Less is more.'
 };
@@ -28,11 +27,11 @@ const me = {
       </pre>
     </div>
     <div class='about-site'>
-      <h2>关于网站</h2>
+      <h2>About site</h2>
       <pre>
 <code class="lang-javascript">
 const site = {
-  name: '赵的拇指',
+  name: 'zhaofinger blog',
   language: 'JavaScript',
   frame: 'koa2'
 };
