@@ -47,17 +47,23 @@
 #footer .link-area {
   margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;
 }
 #footer .link-title {
+  flex-shrink: 0;
   margin-right: 20px;
   letter-spacing: 4px;
+  line-height: 2;
+}
+#footer .link-list {
+  display: flex;
+  flex-wrap: wrap;
 }
 #footer a {
   margin-right: 20px;
   border-bottom: 1px dotted #bac1cc;
   color: #bac1cc;
   opacity: .8;
+  line-height: 2;
 }
 #footer a:hover {
   opacity: 1;

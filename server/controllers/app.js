@@ -26,7 +26,7 @@ module.exports = {
 
     // 获取当前页码
     let nowPageIndex = ctx.request.query.page || 1;
-    const num = 6;
+    const num = 10;
 
     // 有分类，取分类Id
     let typeId = '';

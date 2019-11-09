@@ -3,15 +3,19 @@
 </div>
 <div class='friends-link link-area'>
   <span class='link-title'>友链:</span>
-  {% for item in FRIENDS_LINK %}
-    <a nounder href='{{ item.link }}' title="{{ item.title }}" target='_blank'>{{ item.title }}</a>
-  {% endfor %}
+  <ul class='link-list'>
+    {% for item in FRIENDS_LINK %}
+      <a nounder href='{{ item.link }}' title="{{ item.title }}" target='_blank'>{{ item.title }}</a>
+    {% endfor %}
+  </ul>
 </div>
 <div class='my-link link-area'>
   <span class='link-title'>联系:</span>
-  <a nounder href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
-  <a nounder href='https://t.me/zhaofinger' title='telegrame' target='_blank'>Telegrame</a>
-  <a nounder href='https://www.instagram.com/zhao_finger/' title='instagram' target='_blank'>Instagram</a>
-  <a nounder href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
-  <a nounder href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
+  <ul class='link-list'>
+    <a nounder href='https://github.com/zhaofinger' title='github' target='_blank'>GitHub</a>
+    <a nounder href='https://t.me/zhaofinger' title='telegrame' target='_blank'>Telegrame</a>
+    <a nounder href='https://www.instagram.com/zhao_finger/' title='instagram' target='_blank'>Instagram</a>
+    <a nounder href='https://www.zhihu.com/people/zhao-finger/activities' title='zhihu' target='_blank'>知乎</a>
+    <a nounder href='http://weibo.com/puopuo' title='weibo' target='_blank'>微博</a>
+  </ul>
 </div>
