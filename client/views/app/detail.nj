@@ -1,6 +1,7 @@
 {% extends "app/layout.nj" %}
 
 {% block style %}
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
   <link rel='stylesheet' href='/style/app/markdown.css'>
   <link rel='stylesheet' href='/style/app/prism.css'>
   <link href="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.css" rel="stylesheet">
@@ -18,10 +19,10 @@
 {% endblock %}
 
 {% block script %}
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.js"></script>
   <script src="/js/prism.js"></script>
   <script>
-    {# hljs.initHighlightingOnLoad(); #}
     $(function() {
       var id = location.pathname.split('/').pop();
       var hasReadArticle = window.localStorage.getItem('hasReadArticle') || '';
@@ -34,75 +35,21 @@
           }
         });
       }
-
-      var replayId = '';
-      // 提交评论
-      var usernameEle = $('#username');
-      var emailEle = $('#email');
-      var commentContentEle = $('#comment_content');
-      var submitCommentEle = $('.submit-comment');
-      var commentListEle = $('.comment-list');
-      var emailReg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-      submitCommentEle.click(function() {
-        var username = usernameEle.val();
-        var email = emailEle.val();
-        var content = commentContentEle.val();
-
-        if (!username) {
-          alert('请输入用户名');
-          return;
-        } else if (!emailReg.test(email)) {
-          alert('请输入正确的邮箱');
-          return;
-        } else if (!content) {
-          alert('请输入评论内容');
-          return;
-        }
-        $.ajax({
-          url: '/api/article/comment/' + id,
-          type: 'post',
-          dataType: 'json',
-          data: {
-            author: username.replace(/<\/?[^>]*>/g,''),
-            email: email,
-            content: content,
-            parent_id: replayId
-          },
-          success: function(data) {
-            replayId = '';
-            if (data.status === 200) {
-              commentContentEle.val('');
-              var commentHtml =
-                "<li class='comment-item'>"
-                  + "<div class='comment-author'>"
-                    + "<a href='javascript:void(0);'>" + data.data.author + "</a>"
-                    + (data.data.parent_id ? ("<span>回复</span><a href='javascript:void(0);'>" + data.data.parent.author + "</a>") : "")
-                  + "</div>"
-                  + "<p class='comment-content'>" + data.data.content + "</p>"
-                  + "<div class='comment-time'>发表于"
-                    + "<span>" + data.data.created_at + "</span>"
-                    + "<a href='javascript:void(0);' class='comment-replay' data-replay-id='" + data.data.id + "' data-replay-name='" + data.data.author + "'>回复</a>"
-                  + "</div>"
-                + "</li>";
-              commentListEle.prepend($(commentHtml));
-            } else {
-              alert(data.message);
-            }
-          }
-        });
-      });
-
-      // 回复评论
-      $(document).on('click', '.comment-replay', function() {
-        var replayName = $(this).data('replay-name');
-        replayId = $(this).data('replay-id');
-        commentContentEle.prop('placeholder', '回复: ' + replayName + '，支持markdown语法');
-        commentContentEle[0].scrollIntoView({block: "end", behavior: "smooth"});
-      });
-
       // 图片浏览
       $('.photo-content').viewer();
-
+      // 评论
+      var gitalk = new Gitalk({
+        clientID: '6a127e9c3a2377ff1350',
+        clientSecret: 'beb80770736d1ae3dd1e94f1cacbd9d3dc423941',
+        repo: 'finger-blog',
+        owner: 'zhaofinger',
+        admin: ['zhaofinger'],
+        id: location.pathname,
+        distractionFreeMode: false,
+        title: "{{ articleDetail.title }}",
+        body: `文章地址：${location.href}`
+      });
+      gitalk.render('gitalk-container');
     });
   </script>
 {% endblock %}
@@ -160,34 +107,6 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script> #}
   </article>
-  {# 评论输入 #}
-  <div class='post-comment'>
-    <h2 class='title'>发表评论：</h2>
-    <div class='comment-input'>
-      <textarea id='comment_content' placeholder='请输入评论内容，支持markdown语法' class='input input-medium left'></textarea>
-      <div class='right'>
-        <input type='text' placeholder='请输入用户名' id='username' class='input input-medium'><br>
-        <input type='text' placeholder='请输入邮箱以便交流' id='email' class='input input-medium'><br>
-        <button class='submit-comment'>发表评论</button>
-      </div>
-    </div>
-  </div>
-  {# 评论列表 #}
-  <ul class='comment-list'>
-    {% for item in commentList %}
-      <li class='comment-item'>
-        <div class='comment-author'>
-          <a href='javascript:void(0);'>{{ item.author }}</a>
-          {% if item.parent_id %}
-            <span>回复</span>
-            <a href='javascript:void(0);'>{{ item.parent.author }}</a>
-          {% endif %}
-        </div>
-        <p class='comment-content'>{{ item.content | safe }}</p>
-        <div class='comment-time'>
-          发表于<span>{{ item.created_at }}</span><a href='javascript:void(0);' class='comment-replay' data-replay-id='{{ item.id }}' data-replay-name='{{ item.author }}'>回复</a>
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
+  {# 评论 #}
+  <div id="gitalk-container"></div>
 {% endblock %}
