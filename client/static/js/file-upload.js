@@ -59,7 +59,7 @@ $.fn.extend({
           formData.append('token', data.data.token);
           $.ajax({
             // url: '//upload.qiniu.com/',
-            url: '//up.qbox.me',
+            url: '//upload.qbox.me',
             type: 'post',
             data: formData,
             processData: false,
