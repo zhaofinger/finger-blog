@@ -1,7 +1,7 @@
 {
   "name": "finger-blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "zhaofinger blog",
   "scripts": {
     "lint": "eslint *.js server/**",
     "dev": "export NODE_ENV=development && nodemon --harmony ./server/app.js",
