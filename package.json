@@ -38,7 +38,7 @@
     "koa-views": "^6.0.2",
     "marked": "^0.6.2",
     "mysql": "^2.13.0",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "nunjucks": "^3.0.1",
     "qiniu": "^7.1.1",
     "validator": "^8.0.0"
