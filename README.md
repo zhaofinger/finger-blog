@@ -1,22 +1,34 @@
-# finger-blog
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-![预览图](./preview.png)
+## Getting Started
 
-finger-blog 是一个基于 koa2 mysql的网络博客应用.
+First, run the development server:
 
-## Installation
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-本应用依赖于 node.js(>= 7.6.0) 以及 mysql 数据库.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. 克隆仓库: `git clone git@github.com:zhaofinger/finger-blog.git`.
-2. 进入仓库根目录运行 `yarn` 安装依赖.
-3. 打开根目录下的 `config.example.js` 复制一份 `config.js` 根据自己的数据库配置以及其他修改配置文件.
-4. 本地开发模式: 运行 `yarn run dev` , 然后打开浏览器输入 `http://localhost:1024`.
-5. 部署服务器: 依次运行 `yarn run deploy_setup` 以及 `yarn run deploy`, 具体操作可查看[使用pm2+nginx部署koa2(https)](https://www.zhaofinger.com/detail/5).
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-## Scripts
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-* `dev`: 本地开发
-* `deploy_setup`: deploy setup
-* `deploy`: 部署线上
-* `lint`: eslint
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
