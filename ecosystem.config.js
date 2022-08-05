@@ -1,3 +1,5 @@
+const config = require('./config').deployConfig;
+
 module.exports = {
   /**
    * Application configuration section
@@ -26,12 +28,14 @@ module.exports = {
       user: 'root',
       host: [
         {
-          host: '67.218.154.219',
-          port: '26275'
+          user: config.user,
+          host: config.host,
+          port: config.port,
+          key: config.key,
         }
       ],
       ref: 'origin/master',
-      repo: 'git@github.com:zhaofinger/finger-blog.git',
+      repo: 'git@github.com:wjjwkwindy/finger-blog.git',
       path: '/var/www/finger-blog',
       'post-deploy': 'yarn && pm2 reload ecosystem.config.js --env production'
     }

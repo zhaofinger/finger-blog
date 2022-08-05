@@ -1,8 +1,8 @@
 const config = require('../../config').databaseConfig;
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: config.HOST,
   user: config.USERNAME,
   password: config.PASSWORD,
   database: config.DATABASE
