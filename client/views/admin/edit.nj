@@ -70,7 +70,7 @@
 {% block script %}
   <script src='//cdnjs.cloudflare.com/ajax/libs/marked/0.3.7/marked.min.js'></script>
   <script src='/js/file-upload.js'></script>
-  <script src='/lib/editormd/editormd.min.js'></script>
+  {# <script src='/lib/editormd/editormd.min.js'></script> #}
   <script>
     var markdown = {
       isOpenPreview: false,
@@ -127,7 +127,11 @@
 
       // 新建文章分类
       var newTypeEl = $('.new-type-input');
-      $('#type').change(function() {
+      var typeEl = $('#type');
+      if(typeEl.val() === 'new'){
+        newTypeEl.fadeIn();
+      }
+      typeEl.change(function() {
         var val = $(this).children('option:selected').val();
         if (val === 'new') {
           newTypeEl.fadeIn();
@@ -139,6 +143,11 @@
       // 提交文章内容
       $('.article-operate-btn button').click(function(e) {
         $(window).off('beforeunload');
+        // 判断新建分类是否填写了
+        if($('.newTypeInput').css('display')==='block' && $('#newTypeInput').val() === ''){
+          alert('请填写新建分类的名称')
+          return;
+        }
         // 暂存 提交
         $('#status').val($(this).hasClass('save') ? 0 : 1);
         $('#article').submit();
