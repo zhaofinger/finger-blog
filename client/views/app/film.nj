@@ -12,15 +12,16 @@
     var isLoad = false;
     var $noMore = $('.no-more-tip');
 
-    var getFilmlist = function() {
-      if (isLoad) return;
+    var getFilmlist = function () {
+      if (isLoad) 
+        return;
       $loadTip.show();
       isLoad = true;
       $.ajax({
         url: '/api/article/film-list?num=6&start=' + nowPage,
         type: 'get',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
           $loadTip.hide();
           isLoad = false;
           if (data.status === 200) {
@@ -30,28 +31,22 @@
               noMore = true;
               $noMore.show();
             }
-            data.data.filmList.forEach(function(item) {
-              var itemHtml =
-                $("<li class='film-item'>" +
-                  "<span class='time'>" + item.created_at + "</span>" +
-                  "<img class='cover' src='" + item.cover + "' alt='" + item.title + "'>" +
-                  "<div class='desc'>" +
-                    "<h2>" + item.title + "</h2>" +
-                    "<p class='comment'>" + item.desc + "</p>" +
-                    "<a href='" + item.external_link + "' class='douban' target='_blank'>豆瓣</a>" +
-                  "</div>" +
-                "</li>");
-              $filmList.append(itemHtml);
-            });
+            data
+              .data
+              .filmList
+              .forEach(function (item) {
+                var itemHtml = $("<li class='film-item'>" + "<span class='time'>" + item.created_at + "</span>" + "<img class='cover' src='" + item.cover + "' alt='" + item.title + "'>" + "<div class='desc'>" + "<h2>" + item.title + "</h2>" + "<p class='comment'>" + item.desc + "</p>" + "<a href='" + item.external_link + "' class='douban' target='_blank'>豆瓣</a>" + "</div>" + "</li>");
+                $filmList.append(itemHtml);
+              });
             $('.film-list').viewer('destroy');
             $('.film-list').viewer();
-          } else {
-          }
+          } else {}
         }
       });
     };
     $(window).scroll(function () {
-      if (noMore) return;
+      if (noMore) 
+        return;
       var $currentWindow = $(window);
       var windowHeight = $currentWindow.height();
       var scrollTop = $currentWindow.scrollTop();
@@ -62,7 +57,6 @@
     });
 
     $('.film-list').viewer();
-
   </script>
 {% endblock %}
 

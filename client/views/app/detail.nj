@@ -7,11 +7,15 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.css" rel="stylesheet">
 
   <style>
-    #header, #content, #footer {
+    #content,
+    #footer,
+    #header {
       width: 800px;
     }
     @media (max-width: 800px) {
-      #header, #content, #footer {
+      #content,
+      #footer,
+      #header {
         width: 90%;
       }
     }
@@ -23,15 +27,22 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.js"></script>
   <script src="/js/prism.js"></script>
   <script>
-    $(function() {
-      var id = location.pathname.split('/').pop();
-      var hasReadArticle = window.localStorage.getItem('hasReadArticle') || '';
+    $(function () {
+      var id = location
+        .pathname
+        .split('/')
+        .pop();
+      var hasReadArticle = window
+        .localStorage
+        .getItem('hasReadArticle') || '';
       // 浏览量
       if (hasReadArticle.split(';').indexOf(id) === -1) {
-        $.post('/api/article/view-count/' + id, function(data) {
+        $.post('/api/article/view-count/' + id, function (data) {
           if (data.status) {
             $('.views').text(data.data.viewCount);
-            window.localStorage.setItem('hasReadArticle', hasReadArticle + ';' + id);
+            window
+              .localStorage
+              .setItem('hasReadArticle', hasReadArticle + ';' + id);
           }
         });
       }
@@ -54,9 +65,7 @@
   </script>
 {% endblock %}
 
-
-{% block header %}
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
   {# 文章内容 #}

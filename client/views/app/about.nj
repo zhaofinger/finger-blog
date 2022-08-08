@@ -4,8 +4,7 @@
 {% endblock %}
 {% block script %}
   <script src="/js/prism.js"></script>
-  <script>
-  </script>
+  <script></script>
 {% endblock %}
 
 {% block content %}

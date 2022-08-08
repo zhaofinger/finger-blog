@@ -8,6 +8,5 @@
 {% endblock %}
 
 {% block script %}
-  <script>
-  </script>
+  <script></script>
 {% endblock %}

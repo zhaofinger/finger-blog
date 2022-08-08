@@ -1,7 +1,6 @@
 {% extends "app/layout.nj" %}
 
-{% block header %}
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
   <div id='index'>
@@ -22,13 +21,13 @@
     </div>
   </div>
 {% endblock %}
-{% block footer %}
-{% endblock %}
-
+{% block footer %}{% endblock %}
 
 {% block style %}
   <style>
-    html, body, #content {
+    #content,
+    body,
+    html {
       width: 100%;
       height: 100%;
       margin: 0;
@@ -43,6 +42,5 @@
 {% endblock %}
 
 {% block script %}
-  <script>
-  </script>
+  <script></script>
 {% endblock %}
