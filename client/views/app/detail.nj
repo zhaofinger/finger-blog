@@ -48,19 +48,6 @@
       }
       // 图片浏览
       $('.photo-content').viewer();
-      // 评论
-      var gitalk = new Gitalk({
-        clientID: '6a127e9c3a2377ff1350',
-        clientSecret: 'beb80770736d1ae3dd1e94f1cacbd9d3dc423941',
-        repo: 'finger-blog',
-        owner: 'zhaofinger',
-        admin: ['zhaofinger'],
-        id: location.pathname,
-        distractionFreeMode: false,
-        title: "{{ articleDetail.title }}",
-        body: `文章地址：${location.href}`
-      });
-      gitalk.render('gitalk-container');
     });
   </script>
 {% endblock %}
@@ -116,6 +103,4 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script> #}
   </article>
-  {# 评论 #}
-  <div id="gitalk-container"></div>
 {% endblock %}

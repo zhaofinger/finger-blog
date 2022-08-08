@@ -41,7 +41,8 @@
 /* footer */
 #footer {
   width: 600px;
-  margin: 80px auto 40px auto;
+  margin: 80px auto 0 auto;
+  padding-bottom: 40px;
   color: #bac1cc;
 }
 #footer .link-area {
@@ -385,7 +386,7 @@
 
 /* 关于 */
 #about pre {
-  margin-left: 60px;
+  padding-left: 0;
 }
 
 /* 蒙罗币 */
