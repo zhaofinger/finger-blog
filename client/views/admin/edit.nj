@@ -68,7 +68,7 @@
 {% endblock %}
 
 {% block script %}
-  <script src='//cdnjs.cloudflare.com/ajax/libs/marked/0.3.7/marked.min.js'></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/marked/4.0.18/marked.min.js" integrity="sha512-6MhVG3FdJSogKdAFmdGWvJ/QCBTPhs0dd3ad89H+ZVGJ721bOo2CTlaiG4Ov6l422KGQStYrfOD4HASBvO6sZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src='/js/file-upload.js'></script>
   {# <script src='/lib/editormd/editormd.min.js'></script> #}
   <script>
@@ -77,8 +77,11 @@
       isFullScreen: false,
       init: function($markdownInput, $markdownResult, $markdownRender, $preview, $fullscreen, $wrapper) {
         var _this = this;
+        var result = marked.parse($markdownInput.val());
+        $markdownResult.val(result);
+
         $markdownInput.on('input', function(val) {
-          var result = marked($(this).val());
+          var result = marked.parse($(this).val());
           if (_this.isOpenPreview) {
             $markdownRender.html(result);
           }
@@ -88,7 +91,7 @@
           _this.isOpenPreview = !_this.isOpenPreview;
           if (_this.isOpenPreview) {
 
-            $markdownRender.html(marked($markdownInput.val()));
+            $markdownRender.html(marked.parse($markdownInput.val()));
 
             $(this).text('退出预览');
             $markdownRender.show();
