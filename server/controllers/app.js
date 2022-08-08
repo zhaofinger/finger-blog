@@ -9,7 +9,7 @@ module.exports = {
    * @param {*} ctx
    */
   async index(ctx) {
-    let title = '赵的拇指';
+    let title = '北极羊驼';
     const nowPage = 'index';
 
     await ctx.render('app/index', {
@@ -21,7 +21,7 @@ module.exports = {
    * @param {*} ctx
    */
   async article(ctx) {
-    const title = '赵的拇指-文章列表';
+    const title = '北极羊驼-文章列表';
     const nowPage = 'article';
 
     // 获取当前页码
@@ -56,7 +56,7 @@ module.exports = {
    * @param {*} ctx
    */
   async type(ctx) {
-    const title = '赵的拇指-文章列表';
+    const title = '北极羊驼-文章列表';
     const nowPage = 'type';
     const articleType = await article.getArticleTypes();
 
@@ -108,7 +108,7 @@ module.exports = {
    * @param {*} ctx
    */
   async photo(ctx) {
-    const title = '赵的拇指-摄影';
+    const title = '北极羊驼-摄影';
     const nowPage = 'photo';
 
     // 获取当前页码
@@ -138,7 +138,7 @@ module.exports = {
    * @param {*} ctx
    */
   async film(ctx) {
-    const title = '赵的拇指-电影';
+    const title = '北极羊驼-电影';
     const nowPage = 'film';
 
     // 获取当前页码
@@ -162,7 +162,7 @@ module.exports = {
    * @param {*} ctx
    */
   async about(ctx) {
-    const title = '赵的拇指-关于';
+    const title = '北极羊驼-关于';
     const nowPage = 'about';
     await ctx.render('app/about', {
       title, nowPage
@@ -173,7 +173,7 @@ module.exports = {
    * @param {*} ctx
    */
   async notFound(ctx) {
-    const title = '赵的拇指';
+    const title = '北极羊驼';
     const nowPage = '404';
     await ctx.render('app/404', {
       title, nowPage

@@ -4,10 +4,10 @@
     <title>{{ title }}</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta name="baidu-site-verification" content="r4wDvCvyLz"/>
-    <meta name='description' content='赵的拇指的博客'>
-    <meta name='author' content='赵的拇指'>
-    <meta name='designer' content='赵的拇指'>
-    <meta name='keywords' content='赵的拇指,博客,代码,前端,前端开发,JavaScript,CSS,摄影,散打,跑步,设计'>
+    <meta name='description' content='北极羊驼的博客'>
+    <meta name='author' content='北极羊驼'>
+    <meta name='designer' content='北极羊驼'>
+    <meta name='keywords' content='北极羊驼,博客,代码,前端,前端开发,JavaScript,CSS,摄影,设计,数码'>
     <link rel='shortcut icon' href='/img/finger.png'>
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css'>
     <link rel='stylesheet' href='/style/app/base.css'>
@@ -22,7 +22,7 @@
         <img src='/img/finger.png' class='logo'>
         <div class='word'>
           <a href='/' class='title' nounder>
-            <h1>赵的拇指</h1>
+            <h1>北极羊驼</h1>
           </a>
           <div class='menu'>
             <a href='/article' class='{{ "active" if nowPage == "article" }}'>文&nbsp;章</a>

@@ -74,7 +74,7 @@
       <h2 class='article-title'>{{ articleDetail.title }}</h2>
       <div class='article-meta'>
         <span>By</span>
-        <a class='author' href='/'>赵的拇指</a>
+        <a class='author' href='/'>北极羊驼</a>
         <span>At</span>
         <span class='datetime'>{{ articleDetail.created_at }}</span>
         {% if articleDetail.is_photo != 1 %}

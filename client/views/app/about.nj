@@ -14,11 +14,11 @@
       <pre>
 <code class="lang-javascript">
 const me = {
-  name: '赵海波',
-  nickname: 'zhaofinger',
+  name: '王俊杰',
+  nickname: 'wjjwkwindy',
   sex: 'male',
-  college: '常熟理工学院(CIT)',
-  mail: 'zhaohaibo1994@gmail.com',
+  college: '电子科技大学成都学院',
+  mail: 'wjjwkwindy@gmail.com',
   introduction: '一只野生前端',
   motto: 'Less is more.'
 };
@@ -30,9 +30,10 @@ const me = {
       <pre>
 <code class="lang-javascript">
 const site = {
-  name: 'zhaofinger blog',
-  language: 'JavaScript',
-  frame: 'koa2'
+  name: 'wjjwkwindy's blog',
+  templating_language: 'Nunjucks',
+  frame: 'Koa2',
+  database: 'MySQL'
 };
 </code>
       </pre>

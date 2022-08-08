@@ -15,7 +15,7 @@
   {% block header %}
     <header id='header'>
       <nav>
-        <a href='/admin/list'><h1>赵的拇指</h1></a>
+        <a href='/admin/list'><h1>北极羊驼</h1></a>
         <a href='/admin/list'>文章列表</a>
         <a href='/admin/edit'>新文章</a>
         <a href='/admin/photo'>新照片</a>

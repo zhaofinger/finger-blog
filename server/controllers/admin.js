@@ -22,7 +22,7 @@ module.exports = {
     if (ctx.session && ctx.session.isLogin) {
       ctx.redirect('./list');
     }
-    const title = '赵的拇指管理后台';
+    const title = '北极羊驼管理后台';
     if (ctx.method === 'GET') {
       await ctx.render('admin/login', {
         title
@@ -60,7 +60,7 @@ module.exports = {
       username: username,
       email: 'zhbqsj@126.com',
       password: bcrypt.hashSync(pwd, salt),
-      nickname: '赵的拇指',
+      nickname: '北极羊驼',
       created_at: (new Date()).getTime(),
       updated_at: (new Date()).getTime()
     };
@@ -71,7 +71,7 @@ module.exports = {
   async index(ctx) {
     isLogin(ctx);
 
-    const title = '赵的拇指管理后台';
+    const title = '北极羊驼管理后台';
     const userInfo = ctx.session;
     await ctx.render('admin/index', {
       title, userInfo
@@ -84,7 +84,7 @@ module.exports = {
     // 获取当前页码
     let nowPageIndex = ctx.request.query.page || 1;
     const num = 10;
-    const title = '赵的拇指管理后台-文章列表';
+    const title = '北极羊驼管理后台-文章列表';
     // 文章列表
     const articleList = await article.getArticleList({start: (nowPageIndex - 1) * num, end: num}, null, false);
     // 文章总页数
@@ -102,7 +102,7 @@ module.exports = {
     if (ctx.method === 'GET') {
       const userInfo = await user.getUserInfo(ctx.session.userId);
       // 获取当前页码
-      const title = '赵的拇指管理后台-用户';
+      const title = '北极羊驼管理后台-用户';
       // 现在页数
       await ctx.render('admin/user', {
         title, userInfo
