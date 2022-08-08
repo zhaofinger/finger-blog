@@ -1,7 +1,6 @@
 {% extends "app/layout.nj" %}
 
 {% block style %}
-  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
   <link rel='stylesheet' href='/style/app/markdown.css'>
   <link rel='stylesheet' href='/style/app/prism.css'>
   <link href="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.css" rel="stylesheet">
@@ -23,7 +22,6 @@
 {% endblock %}
 
 {% block script %}
-  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/imageviewer/1.0.0/viewer.min.js"></script>
   <script src="/js/prism.js"></script>
   <script>
