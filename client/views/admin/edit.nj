@@ -128,6 +128,15 @@
         $('.markdown-wrapper')
       );
 
+      // 编辑器同步滚动
+      $('.markdown-input').on('scroll',function(){
+        var inputScrollPercentage = $(this).scrollTop() / ($(this).prop('scrollHeight') - $(this).innerHeight());
+        var inputScrollPercentageFixed = inputScrollPercentage.toFixed(2);
+
+        var renderScrollDistance = ($('.markdown-body').prop('scrollHeight') - $('.markdown-body').innerHeight()) * inputScrollPercentageFixed;
+        $('.markdown-body').scrollTop(renderScrollDistance);
+      })
+
       // 新建文章分类
       var newTypeEl = $('.new-type-input');
       var typeEl = $('#type');
