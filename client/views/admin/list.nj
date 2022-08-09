@@ -15,7 +15,7 @@
       {% for item in articleList %}
         <tr class='article-item'>
           <td>{{ item.id }}</td>
-          <td>{{ "[摄影] " if item.is_photo else "" }}{{ "🎬 " if item.is_film else "" }}{{ item.title }}</td>
+          <td><a href="/detail/{{ item.id }}" target="_blank">{{ "[摄影] " if item.is_photo else "" }}{{ "🎬 " if item.is_film else "" }}{{ item.title }}</a></td>
           <td>{{  "已发布" if item.is_publish else "未发布" }}</td>
           <td>{{ item.view_count }}</td>
           <td>
