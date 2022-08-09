@@ -83,12 +83,14 @@
         {{ articleDetail.content_render | safe }}
       </div>
     {% endif %}
+    {% if labelArr %}
     <ul class='article-label-list'>
       <span class='label-title'>标签：</span>
       {% for item in labelArr %}
         <li>#{{ item }}</li>
       {% endfor %}
     </ul>
+    {% endif %}
 
     {# <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"
