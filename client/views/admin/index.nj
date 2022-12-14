@@ -1,9 +1,0 @@
-{% extends "admin/layout.nj" %}
-
-{% block content %}
-  {# <h1>{{ userInfo.username }}</h1> #}
-  <div class='admin-nav'>
-    <a href='/admin/edit'><button>新文章</button></a>
-    <a href='/admin/list'><button>文章列表</button></a>
-  </div>
-{% endblock %}
