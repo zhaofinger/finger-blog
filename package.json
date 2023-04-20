@@ -39,7 +39,7 @@
     "marked": "^0.6.2",
     "mysql": "^2.13.0",
     "nodemailer": "^4.6.8",
-    "nunjucks": "^3.0.1",
+    "nunjucks": "^3.2.4",
     "qiniu": "^7.1.1",
     "validator": "^8.0.0"
   },
