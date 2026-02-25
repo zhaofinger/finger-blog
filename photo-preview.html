@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery Preview - 小马</title>
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      min-height: 100vh;
+    }
+
+    /* Photo Header */
+    .photo-header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      margin: 0 0 40px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-title {
+      font-size: 2.5em;
+      font-weight: 300;
+      margin: 0 0 15px;
+      letter-spacing: 3px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .photo-title-icon {
+      display: inline-block;
+      margin-right: 10px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .photo-desc {
+      font-size: 1.1em;
+      opacity: 0.8;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Floating shapes */
+    .photo-header::before,
+    .photo-header::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+
+    .photo-header::before {
+      width: 300px;
+      height: 300px;
+      background: #e94560;
+      top: -100px;
+      right: -100px;
+      animation: float-slow 20s ease-in-out infinite;
+    }
+
+    .photo-header::after {
+      width: 200px;
+      height: 200px;
+      background: #00d9ff;
+      bottom: -50px;
+      left: -50px;
+      animation: float-slow 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes float-slow {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 1024px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); padding: 0 20px; }
+    }
+
+    @media (max-width: 640px) {
+      .photo-grid { grid-template-columns: 1fr; padding: 0 15px; }
+    }
+
+    /* Photo Card */
+    .photo-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f5f5f5;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .photo-card:nth-child(1) { animation-delay: 0.1s; }
+    .photo-card:nth-child(2) { animation-delay: 0.15s; }
+    .photo-card:nth-child(3) { animation-delay: 0.2s; }
+    .photo-card:nth-child(4) { animation-delay: 0.25s; }
+    .photo-card:nth-child(5) { animation-delay: 0.3s; }
+    .photo-card:nth-child(6) { animation-delay: 0.35s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .photo-card:nth-child(odd) {
+      aspect-ratio: 3/4;
+    }
+
+    .photo-card:nth-child(even) {
+      aspect-ratio: 4/3;
+    }
+
+    .photo-card:nth-child(3n) {
+      aspect-ratio: 1/1;
+    }
+
+    /* Photo Image Wrapper */
+    .photo-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Photo Image */
+    .photo-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .photo-card:hover .photo-image {
+      transform: scale(1.08);
+    }
+
+    /* Multi-image Badge */
+    .photo-count {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 2;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Photo Overlay */
+    .photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 20px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+      color: #fff;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 3;
+    }
+
+    .photo-card:hover .photo-overlay {
+      transform: translateY(0);
+    }
+
+    .photo-overlay-title {
+      margin: 0 0 8px;
+      font-size: 1.2em;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .photo-overlay-date {
+      font-size: 0.9em;
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .photo-view-btn {
+      background: #fff;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.95em;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .photo-view-btn:hover {
+      background: #e94560;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Skeleton Loader */
+    .photo-skeleton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      z-index: 1;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Sample Images */
+    .sample-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .sample-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .sample-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .sample-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+    .sample-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+    .sample-6 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+
+    /* Lightbox Preview */
+    .lightbox-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox-preview.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -60px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.5em;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    /* Note */
+    .preview-note {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .preview-note code {
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="photo-header">
+    <h1 class="photo-title">
+      <span class="photo-title-icon">📷</span>
+      摄影
+    </h1>
+    <p class="photo-desc">记录生活中的光影瞬间，每一帧都是时光的礼物</p>
+  </div>
+
+  <!-- Photo Grid -->
+  <div class="photo-grid">
+    <!-- Photo 1 -->
+    <div class="photo-card" onclick="openLightbox(1)">
+      <div class="photo-image-wrapper">
+        <div class="photo-image sample-1"></div>
+        <div class="photo-count">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <path d="M21 15l-5-5L5 21"></path>
+          </svg>
+          <span>5</span>
+        </div>
+        
+        <div class="photo-overlay">
+          <h3 class="photo-overlay-title">城市夜景</h3>
+          <time class="photo-overlay-date">2026-02-25</time>
+          <button class="photo-view-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>查看</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 2 -->
+    <div class="photo-card" onclick="openLightbox(2)">
+      <div class="photo-image-wrapper">
+        <div class="photo-image sample-2"></div>
+        <div class="photo-overlay">
+          <h3 class="photo-overlay-title">日落大道</h3>
+          <time class="photo-overlay-date">2026-02-24</time>
+          <button class="photo-view-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>查看</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 3 -->
+    <div class="photo-card" onclick="openLightbox(3)">
+      <div class="photo-image-wrapper">
+        <div class="photo-image sample-3"></div>
+        <div class="photo-count">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <path d="M21 15l-5-5L5 21"></path>
+          </svg>
+          <span>3</span>
+        </div>
+        
+        <div class="photo-overlay">
+          <h3 class="photo-overlay-title">海边漫步</h3>
+          <time class="photo-overlay-date">2026-02-23</time>
+          <button class="photo-view-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>查看</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 4 -->
+    <div class="photo-card" onclick="openLightbox(4)">
+      <div class="photo-image-wrapper">
+        <div class="photo-image sample-4"></div>
+        <div class="photo-overlay">
+          <h3 class="photo-overlay-title">森林秘境</h3>
+          <time class="photo-overlay-date">2026-02-22</time>
+          <button class="photo-view-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>查看</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 5 -->
+    <div class="photo-card" onclick="openLightbox(5)">
+      <div class="photo-image-wrapper">
+        <div class="photo-image sample-5"></div>
+        <div class="photo-count">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <path d="M21 15l-5-5L5 21"></path>
+          </svg>
+          <span>8</span>
+        </div>
+        
+        <div class="photo-overlay">
+          <h3 class="photo-overlay-title">复古咖啡馆</h3>
+          <time class="photo-overlay-date">2026-02-21</time>
+          <button class="photo-view-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>查看</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo 6 -->
+    <div class="photo-card" onclick="openLightbox(6)">
+      <div class="photo-image-wrapper">
+        <div class="photo-image sample-6"></div>
+        <div class="photo-overlay">
+          <h3 class="photo-overlay-title">春日樱花</h3>
+          <time class="photo-overlay-date">2026-02-20</time>
+          <button class="photo-view-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span>查看</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox-preview" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content">
+      <button class="lightbox-close">✕</button>
+      <img class="lightbox-image" id="lightboxImg" src="" alt="">
+    </div>
+  </div>
+
+  <!-- Note -->
+  <div class="preview-note">
+    <p>这是 Photo 页面的静态预览</p>
+    <p>实际功能包括：懒加载、Skeleton 动画、键盘导航、触屏滑动等</p>
+  </div>
+
+  <script>
+    function openLightbox(id) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = `https://picsum.photos/seed/${id}/1200/800`;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>

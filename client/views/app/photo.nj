@@ -1,20 +1,1109 @@
 {% extends "app/layout.nj" %}
 
 {% block content %}
-  <ul class='photo-list'>
-    {% for item in photoList %}
-      <li class='photo-item'>
-        <a href='/detail/{{ item.id }}' class='title-content'>
-          <div class='img-wrapper' style='background: url("{{ item.cover }}") center center /cover' alt=''></div>
-          <h2 class='title'>{{ item.title }}</h2>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+<!-- Photo Gallery Header -->
+<div class="photo-header">
+  <div class="photo-header-content">
+    <h1 class="photo-title">
+      <span class="photo-title-icon">📷</span>
+      摄影
+    </h1>
+    <p class="photo-desc">记录生活中的光影瞬间，每一帧都是时光的礼物</p>
+  </div>
+  <div class="photo-header-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+</div>
+
+<!-- Photo Grid -->
+<div class="photo-grid" id="photoGrid">
+  {% for item in photoList %}
+    {% set images = item.content_render.split('||') if item.content_render else [item.cover] %}
+    <div class="photo-card" data-id="{{ item.id }}" style="--index: {{ loop.index }}">
+      <div class="photo-image-wrapper">
+        <!-- Skeleton loader -->
+        <div class="photo-skeleton">
+          <div class="skeleton-shimmer"></div>
+        </div>
+
+        <!-- Lazy loaded image -->
+        <img
+          class="photo-image lazy-load"
+          data-src="{{ item.cover }}"
+          data-full-images="{{ item.content_render }}"
+          alt="{{ item.title }}"
+        >
+
+        <!-- Multi-image badge -->
+        {% if images.length > 1 %}
+          <div class="photo-count">
+            <svg class="photo-count-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <path d="M21 15l-5-5L5 21"></path>
+            </svg>
+            <span class="photo-count-text">{{ images.length }}</span>
+          </div>
+        {% endif %}
+
+        <!-- Hover overlay -->
+        <div class="photo-overlay">
+          <div class="photo-overlay-content">
+            <h3 class="photo-overlay-title">{{ item.title }}</h3>
+            <time class="photo-overlay-date">{{ item.created_at }}</time>
+            <div class="photo-overlay-actions">
+              <button class="photo-view-btn" onclick="event.stopPropagation(); photoGallery.open({{ item.id }})">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span>查看</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- Empty state -->
+{% if photoList.length === 0 %}
+  <div class="photo-empty">
+    <div class="photo-empty-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <path d="M21 15l-5-5L5 21"></path>
+      </svg>
+    </div>
+    <p class="photo-empty-text">暂无照片</p>
+    <p class="photo-empty-sub">去后台添加一些摄影作品吧</p>
+  </div>
+{% endif %}
+
+<!-- Pagination -->
+{% if photoList.length > 0 %}
   {% include "app/_page.nj" %}
+{% endif %}
+
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-backdrop" onclick="photoGallery.close()"></div>
+  <div class="lightbox-loader">
+    <div class="loader-spinner"></div>
+  </div>
+  <button class="lightbox-close" onclick="photoGallery.close()" aria-label="关闭">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+  <button class="lightbox-nav lightbox-prev" onclick="photoGallery.prev()" aria-label="上一张">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+  <button class="lightbox-nav lightbox-next" onclick="photoGallery.next()" aria-label="下一张">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+  <div class="lightbox-content">
+    <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    <div class="lightbox-info">
+      <h3 class="lightbox-title" id="lightboxTitle"></h3>
+      <div class="lightbox-meta">
+        <div class="lightbox-counter">
+          <span id="lightboxCurrent">1</span>
+          <span class="counter-separator">/</span>
+          <span id="lightboxTotal">1</span>
+        </div>
+        <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block style %}
+<style>
+/* ============================================
+   PHOTO GALLERY - Unsplash/Instagram Style
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  --photo-gap: 24px;
+  --photo-border-radius: 16px;
+  --photo-transition: cubic-bezier(0.4, 0, 0.2, 1);
+  --photo-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --photo-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --photo-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+/* Photo Header */
+.photo-header {
+  position: relative;
+  text-align: center;
+  padding: 60px 20px 50px;
+  margin: -20px -20px 40px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.photo-header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.photo-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.photo-title-icon {
+  font-size: 0.9em;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.photo-desc {
+  font-size: 1.15em;
+  opacity: 0.75;
+  margin: 0;
+  font-weight: 400;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Animated background shapes */
+.photo-header-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  left: -80px;
+  animation: pulse 10s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 30%;
+  background: rgba(255, 255, 255, 0.02);
+  animation: pulse 12s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.03; }
+  50% { transform: scale(1.1); opacity: 0.06; }
+}
+
+/* ============================================
+   MASONRY GRID LAYOUT
+   ============================================ */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--photo-gap);
+  padding: 0 10px 40px;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 0 30px;
+  }
+
+  :root {
+    --photo-gap: 16px;
+  }
+}
+
+/* ============================================
+   PHOTO CARD
+   ============================================ */
+
+.photo-card {
+  position: relative;
+  border-radius: var(--photo-border-radius);
+  overflow: hidden;
+  background: #f5f5f5;
+  box-shadow: var(--photo-shadow-sm);
+  transition: all 0.4s var(--photo-transition);
+  opacity: 0;
+  animation: cardEnter 0.6s var(--photo-transition) forwards;
+  animation-delay: calc(var(--index, 0) * 0.08s);
+  aspect-ratio: 1;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.photo-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--photo-shadow-lg);
+  z-index: 10;
+}
+
+/* Card with varying aspect ratios for masonry feel */
+.photo-card:nth-child(3n+2) {
+  aspect-ratio: 3/4;
+}
+
+.photo-card:nth-child(5n+3) {
+  aspect-ratio: 4/3;
+}
+
+@media (max-width: 640px) {
+  .photo-card,
+  .photo-card:nth-child(3n+2),
+  .photo-card:nth-child(5n+3) {
+    aspect-ratio: 1;
+  }
+}
+
+/* Photo Image Wrapper */
+.photo-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ============================================
+   SKELETON LOADING ANIMATION
+   ============================================ */
+
+.photo-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 50%, #f0f0f0 100%);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================
+   PHOTO IMAGE
+   ============================================ */
+
+.photo-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s var(--photo-transition), opacity 0.5s ease;
+  opacity: 0;
+}
+
+.photo-image.loaded {
+  opacity: 1;
+}
+
+.photo-image.loaded + .photo-skeleton {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.photo-card:hover .photo-image {
+  transform: scale(1.08);
+}
+
+/* ============================================
+   MULTI-IMAGE BADGE
+   ============================================ */
+
+.photo-count {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.photo-count-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.photo-card:hover .photo-count {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+/* ============================================
+   HOVER OVERLAY
+   ============================================ */
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    transparent 70%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s var(--photo-transition);
+  z-index: 3;
+}
+
+.photo-card:hover .photo-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-overlay-content {
+  width: 100%;
+  transform: translateY(20px);
+  transition: transform 0.4s var(--photo-transition) 0.05s;
+}
+
+.photo-card:hover .photo-overlay-content {
+  transform: translateY(0);
+}
+
+.photo-overlay-title {
+  margin: 0 0 6px;
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.photo-overlay-date {
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.photo-overlay-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.photo-view-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a2e;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.photo-view-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.photo-view-btn:hover {
+  background: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.photo-empty {
+  text-align: center;
+  padding: 100px 20px;
+  color: #999;
+}
+
+.photo-empty-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  opacity: 0.4;
+}
+
+.photo-empty-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.photo-empty-text {
+  font-size: 1.5em;
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #666;
+}
+
+.photo-empty-sub {
+  font-size: 1em;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s var(--photo-transition);
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.lightbox-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.lightbox.loading .lightbox-loader {
+  opacity: 1;
+}
+
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.lightbox-close svg {
+  width: 24px;
+  height: 24px;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.lightbox-nav svg {
+  width: 28px;
+  height: 28px;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+@media (max-width: 768px) {
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox-close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+    top: auto;
+    bottom: 100px;
+    transform: none;
+  }
+
+  .lightbox-nav:hover {
+    transform: scale(1.1);
+  }
+
+  .lightbox-prev {
+    left: auto;
+    right: 80px;
+  }
+
+  .lightbox-next {
+    right: 20px;
+  }
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.4s var(--photo-transition);
+}
+
+.lightbox.active .lightbox-image.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lightbox-info {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s var(--photo-transition) 0.1s;
+}
+
+.lightbox.active .lightbox-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lightbox-title {
+  margin: 0 0 12px;
+  font-size: 1.25em;
+  font-weight: 500;
+}
+
+.lightbox-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-counter {
+  font-size: 0.95em;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counter-separator {
+  opacity: 0.5;
+}
+
+/* Thumbnails */
+.lightbox-thumbnails {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 4px;
+  scrollbar-width: none;
+}
+
+.lightbox-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+.lightbox-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+}
+
+.lightbox-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lightbox-thumb:hover,
+.lightbox-thumb.active {
+  opacity: 1;
+  border-color: #fff;
+  transform: scale(1.05);
+}
+
+/* ============================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .skeleton-shimmer {
+    animation: none;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.photo-view-btn:focus-visible,
+.lightbox-close:focus-visible,
+.lightbox-nav:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar when lightbox is open */
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* Image loading placeholder */
+.photo-image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
+  z-index: 0;
+}
+</style>
 {% endblock %}
 
 {% block script %}
-  <script>
-  </script>
+<script>
+/**
+ * Photo Gallery - Unsplash/Instagram Style Gallery
+ * Features: Masonry grid, lazy loading, lightbox, touch/swipe support
+ */
+
+// Lazy Loading with Intersection Observer
+const lazyLoader = {
+  observer: null,
+
+  init() {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.loadImage(entry.target);
+            this.observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: '100px 0px',
+        threshold: 0.01
+      }
+    );
+
+    document.querySelectorAll('.lazy-load').forEach(img => {
+      this.observer.observe(img);
+    });
+  },
+
+  loadImage(img) {
+    const src = img.dataset.src;
+    if (!src) return;
+
+    const tempImg = new Image();
+    tempImg.onload = () => {
+      img.src = src;
+      img.classList.add('loaded');
+
+      // Add fade-in effect for skeleton
+      const skeleton = img.parentElement.querySelector('.photo-skeleton');
+      if (skeleton) {
+        skeleton.style.opacity = '0';
+        setTimeout(() => skeleton.remove(), 300);
+      }
+    };
+    tempImg.onerror = () => {
+      img.classList.add('error');
+      console.error('Failed to load image:', src);
+    };
+    tempImg.src = src;
+  }
+};
+
+// Lightbox Gallery
+const photoGallery = {
+  lightbox: null,
+  lightboxImage: null,
+  lightboxTitle: null,
+  currentImages: [],
+  currentIndex: 0,
+  currentId: null,
+  thumbnails: null,
+  touchStartX: 0,
+  touchEndX: 0,
+
+  init() {
+    this.lightbox = document.getElementById('lightbox');
+    this.lightboxImage = document.getElementById('lightboxImage');
+    this.lightboxTitle = document.getElementById('lightboxTitle');
+    this.thumbnails = document.getElementById('lightboxThumbnails');
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+    // Touch/swipe support
+    this.lightbox.addEventListener('touchstart', (e) => {
+      this.touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    this.lightbox.addEventListener('touchend', (e) => {
+      this.touchEndX = e.changedTouches[0].screenX;
+      this.handleSwipe();
+    }, { passive: true });
+
+    // Prevent image drag
+    this.lightboxImage.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // Click card to open (not just button)
+    document.querySelectorAll('.photo-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.photo-view-btn')) {
+          const id = card.dataset.id;
+          if (id) this.open(parseInt(id));
+        }
+      });
+    });
+  },
+
+  open(photoId) {
+    const card = document.querySelector(`[data-id="${photoId}"]`);
+    if (!card) return;
+
+    const img = card.querySelector('.photo-image');
+    const title = card.querySelector('.photo-overlay-title')?.textContent || '';
+    const fullImagesStr = img?.dataset.fullImages;
+
+    this.currentImages = fullImagesStr
+      ? fullImagesStr.split('||').filter(url => url.trim())
+      : [img?.dataset.src].filter(Boolean);
+    this.currentIndex = 0;
+    this.currentId = photoId;
+
+    this.updateLightbox(title);
+    this.renderThumbnails();
+    this.lightbox.classList.add('active');
+    document.body.classList.add('lightbox-open');
+
+    // Preload next image
+    this.preloadImage(1);
+  },
+
+  close() {
+    this.lightbox.classList.remove('active');
+    document.body.classList.remove('lightbox-open');
+    this.lightboxImage.classList.remove('loaded');
+
+    setTimeout(() => {
+      this.currentImages = [];
+      this.currentIndex = 0;
+      this.currentId = null;
+      this.thumbnails.innerHTML = '';
+    }, 300);
+  },
+
+  next() {
+    if (this.currentImages.length <= 1) return;
+    this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
+    this.updateLightbox();
+    this.updateThumbnails();
+    this.preloadImage(1);
+  },
+
+  prev() {
+    if (this.currentImages.length <= 1) return;
+    this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
+    this.updateLightbox();
+    this.updateThumbnails();
+    this.preloadImage(-1);
+  },
+
+  updateLightbox(title) {
+    const img = this.lightboxImage;
+    const titleEl = document.getElementById('lightboxTitle');
+    const currentEl = document.getElementById('lightboxCurrent');
+    const totalEl = document.getElementById('lightboxTotal');
+
+    // Show loader
+    img.classList.remove('loaded');
+    this.lightbox.classList.add('loading');
+
+    // Load new image
+    const newImg = new Image();
+    newImg.onload = () => {
+      img.src = this.currentImages[this.currentIndex];
+      this.lightbox.classList.remove('loading');
+      // Small delay for smooth transition
+      requestAnimationFrame(() => {
+        img.classList.add('loaded');
+      });
+    };
+    newImg.src = this.currentImages[this.currentIndex];
+
+    // Update info
+    if (title) titleEl.textContent = title;
+    currentEl.textContent = this.currentIndex + 1;
+    totalEl.textContent = this.currentImages.length;
+
+    // Update nav buttons visibility
+    const prevBtn = this.lightbox.querySelector('.lightbox-prev');
+    const nextBtn = this.lightbox.querySelector('.lightbox-next');
+    const showNav = this.currentImages.length > 1;
+    prevBtn.style.display = showNav ? 'flex' : 'none';
+    nextBtn.style.display = showNav ? 'flex' : 'none';
+  },
+
+  renderThumbnails() {
+    if (this.currentImages.length <= 1) {
+      this.thumbnails.innerHTML = '';
+      return;
+    }
+
+    this.thumbnails.innerHTML = this.currentImages.map((src, i) => `
+      <div class="lightbox-thumb ${i === this.currentIndex ? 'active' : ''}" data-index="${i}">
+        <img src="${src}" alt="">
+      </div>
+    `).join('');
+
+    // Add click handlers
+    this.thumbnails.querySelectorAll('.lightbox-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        this.currentIndex = parseInt(thumb.dataset.index);
+        this.updateLightbox();
+        this.updateThumbnails();
+      });
+    });
+  },
+
+  updateThumbnails() {
+    this.thumbnails.querySelectorAll('.lightbox-thumb').forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === this.currentIndex);
+      if (i === this.currentIndex) {
+        thumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    });
+  },
+
+  preloadImage(offset) {
+    const index = (this.currentIndex + offset + this.currentImages.length) % this.currentImages.length;
+    const img = new Image();
+    img.src = this.currentImages[index];
+  },
+
+  handleKeydown(e) {
+    if (!this.lightbox.classList.contains('active')) return;
+
+    switch(e.key) {
+      case 'Escape':
+        this.close();
+        break;
+      case 'ArrowLeft':
+        this.prev();
+        break;
+      case 'ArrowRight':
+        this.next();
+        break;
+    }
+  },
+
+  handleSwipe() {
+    const diff = this.touchStartX - this.touchEndX;
+    const threshold = 50;
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        this.next();
+      } else {
+        this.prev();
+      }
+    }
+  }
+};
+
+// Performance: Pause animations when tab is hidden
+document.addEventListener('visibilitychange', () => {
+  const skeletons = document.querySelectorAll('.skeleton-shimmer');
+  skeletons.forEach(el => {
+    el.style.animationPlayState = document.hidden ? 'paused' : 'running';
+  });
+});
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  lazyLoader.init();
+  photoGallery.init();
+});
+</script>
 {% endblock %}
