@@ -119,7 +119,9 @@ module.exports = {
     let photoList = await article.getPhotoList({start: (nowPageIndex - 1) * num, end: num});
     photoList = photoList.map(item => {
       item.created_at = timeFormat(item.created_at);
-      item.cover = IMG_PRE + item.content_render.split('||')[0];
+      const images = item.content_render.split('||');
+      item.cover = IMG_PRE + images[0];
+      item.full_images = images.map(img => IMG_PRE + img).join('||');
       return item;
     });
 

@@ -20,7 +20,7 @@
 <!-- Photo Grid -->
 <div class="photo-grid" id="photoGrid">
   {% for item in photoList %}
-    {% set images = item.content_render.split('||') if item.content_render else [item.cover] %}
+    {% set images = item.full_images.split('||') if item.full_images else [item.cover] %}
     <div class="photo-card" data-id="{{ item.id }}" style="--index: {{ loop.index }}">
       <div class="photo-image-wrapper">
         <!-- Skeleton loader -->
@@ -32,7 +32,7 @@
         <img
           class="photo-image lazy-load"
           data-src="{{ item.cover }}"
-          data-full-images="{{ item.content_render }}"
+          data-full-images="{{ item.full_images }}"
           alt="{{ item.title }}"
         >
 
